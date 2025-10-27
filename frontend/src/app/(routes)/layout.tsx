@@ -1,4 +1,5 @@
 import Footer from "@/components/layout/Footer";
+import MenuNavigation from "@/components/layout/MenuNavigation";
 import Navbar from "@/components/layout/Navbar";
 import React from "react";
 
@@ -10,6 +11,7 @@ function RoutesLayout({ children }: RoutesLayoutProps) {
   return (
     <>
       <Navbar />
+      <MenuNavigation />
       <main>{children}</main>
       <Footer />
     </>
