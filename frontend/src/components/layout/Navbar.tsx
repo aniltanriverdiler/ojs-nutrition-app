@@ -37,7 +37,7 @@ import { Badge } from "../ui/badge";
 
 const Navbar = () => {
   return (
-    <header className="bg-white my-5 px-4 sm:px-8 md:px-12 lg:px-24 xl:px-56">
+    <header className="bg-white my-5 px-4 sm:px-4 md:px-12 lg:px-24 xl:px-56">
       <div className="container flex items-center justify-between mx-auto max-w-7xl">
         <Link href="/">
           <Image
@@ -46,12 +46,13 @@ const Navbar = () => {
             width={171}
             height={38}
             priority
+            className="mr-5 md:mr-0"
           />
         </Link>
 
         <nav className="flex items-center gap-2 sm:gap-4 lg:gap-5">
           {/* SearchBar */}
-          <div className="hidden md:block">
+          <div className="hidden sm:block">
             <InputGroup className="h-10">
               <InputGroupInput
                 placeholder="Aradığınız ürünü yazınız."
@@ -72,7 +73,7 @@ const Navbar = () => {
           <Button
             variant="ghost"
             size="icon"
-            className="md:hidden"
+            className="sm:hidden"
             aria-label="Search"
           >
             <SearchIcon className="w-5 h-5" />

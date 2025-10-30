@@ -3,7 +3,6 @@ import {
   NavigationMenu,
   NavigationMenuContent,
   NavigationMenuItem,
-  NavigationMenuLink,
   NavigationMenuList,
   NavigationMenuTrigger,
 } from "@/components/ui/navigation-menu";
@@ -12,7 +11,7 @@ import Link from "next/link";
 
 const MenuNavigation = () => {
   return (
-    <div className="flex flex-row mx-auto py-1 gap-30 bg-black text-white justify-center">
+    <div className="flex flex-row py-1 gap-31 bg-black text-white justify-center pr-7 pl-1">
       {/* Protein Navigation Menu */}
       <div>
         <NavigationMenu className="[&_div.absolute]:-left-[100px] [&_div.absolute]:translate-x-1/3">

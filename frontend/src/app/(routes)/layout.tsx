@@ -10,10 +10,12 @@ interface RoutesLayoutProps {
 function RoutesLayout({ children }: RoutesLayoutProps) {
   return (
     <>
-      <Navbar />
-      <MenuNavigation />
-      <main>{children}</main>
-      <Footer />
+      <div className="flex flex-col min-h-screen">
+        <Navbar />
+        <MenuNavigation />
+        <main className="flex-1">{children}</main>
+        <Footer />
+      </div>
     </>
   );
 }
