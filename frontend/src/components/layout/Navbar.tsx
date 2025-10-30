@@ -37,7 +37,7 @@ import { Badge } from "../ui/badge";
 
 const Navbar = () => {
   return (
-    <header className="bg-white my-5 px-4 sm:px-4 md:px-12 lg:px-24 xl:px-56">
+    <header className="hidden md:block bg-white my-5 px-4 sm:px-4 md:px-12 lg:px-24 xl:px-56">
       <div className="container flex items-center justify-between mx-auto max-w-7xl">
         <Link href="/">
           <Image
@@ -52,7 +52,7 @@ const Navbar = () => {
 
         <nav className="flex items-center gap-2 sm:gap-4 lg:gap-5">
           {/* SearchBar */}
-          <div className="hidden sm:block">
+          <div className="hidden md:block">
             <InputGroup className="h-10">
               <InputGroupInput
                 placeholder="Aradığınız ürünü yazınız."
@@ -73,7 +73,7 @@ const Navbar = () => {
           <Button
             variant="ghost"
             size="icon"
-            className="sm:hidden"
+            className="md:hidden"
             aria-label="Search"
           >
             <SearchIcon className="w-5 h-5" />
@@ -133,7 +133,7 @@ const Navbar = () => {
                 </Badge>
               </Button>
             </SheetTrigger>
-            <SheetContent side="right" className="w-full sm:max-w-lg">
+            <SheetContent side="right" className="w-full lg:max-w-lg">
               <SheetHeader>
                 <SheetTitle className="text-2xl text-center font-bold">
                   Sepetim

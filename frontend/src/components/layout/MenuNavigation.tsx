@@ -8,13 +8,14 @@ import {
 } from "@/components/ui/navigation-menu";
 import Image from "next/image";
 import Link from "next/link";
+import { CATEGORIES } from '@/lib/constants/categories';
 
 const MenuNavigation = () => {
   return (
-    <div className="flex flex-row py-1 gap-31 bg-black text-white justify-center pr-7 pl-1">
+    <div className="hidden md:flex flex-row py-1 md:gap-2 lg:gap-10 xl:gap-10 2xl:gap-31 bg-black text-white justify-center pr-7 pl-1">
       {/* Protein Navigation Menu */}
       <div>
-        <NavigationMenu className="[&_div.absolute]:-left-[100px] [&_div.absolute]:translate-x-1/3">
+        <NavigationMenu className="2xl:[&_div.absolute]:-left-[100px] 2xl:[&_div.absolute]:translate-x-1/3 xl:[&_div.absolute]:-left-[5px] xl:[&_div.absolute]:translate-x-1/3 lg:[&_div.absolute]:-left-[60px] lg:[&_div.absolute]:translate-x-1/3">
           <NavigationMenuList className="flex-wrap">
             <NavigationMenuItem>
               <NavigationMenuTrigger className="font-bold bg-black! text-white! hover:bg-black! hover:text-white! focus:bg-black! focus:text-white! data-[state=open]:bg-black! data-[state=open]:text-white! data-[state=open]:hover:bg-black! data-[state=open]:hover:text-white! cursor-pointer">
@@ -279,7 +280,7 @@ const MenuNavigation = () => {
                   <div className="flex flex-row gap-20 pt-5 pl-5">
                     <div className="flex flex-col gap-2">
                       <h4 className="font-bold">PROTEİN</h4>
-                      <Link href="/" className="text-sm font-extrabold">
+                      <Link href={`/products/${CATEGORIES.PROTEIN}`} className="text-sm font-extrabold">
                         PROTEİNLER
                       </Link>
                       <Link href="/" className="text-sm font-semibold">
@@ -606,7 +607,7 @@ const MenuNavigation = () => {
                   <div className="flex flex-row gap-20 pt-5 pl-5">
                     <div className="flex flex-col gap-2">
                       <h4 className="font-bold">SPOR GIDALARI</h4>
-                      <Link href="/" className="text-sm font-extrabold">
+                      <Link href={`/products/${CATEGORIES.SPORTS_NUTRITION}`} className="text-sm font-extrabold">
                         AMİNO ASİTLER
                       </Link>
                       <Link href="/" className="text-sm font-semibold">
@@ -893,7 +894,7 @@ const MenuNavigation = () => {
                   <div className="flex flex-row gap-20 pt-5 pl-5 pb-5">
                     <div className="flex flex-col gap-2">
                       <h4 className="font-bold">SAĞLIK</h4>
-                      <Link href="/" className="text-sm font-extrabold">
+                      <Link href={`/products/${CATEGORIES.HEALTH}`} className="text-sm font-extrabold">
                         FONKSİYONEL GIDALAR
                       </Link>
                       <Link href="/" className="text-sm font-semibold">
@@ -1256,7 +1257,7 @@ const MenuNavigation = () => {
                   <div className="flex flex-row gap-20 pt-5 pl-5">
                     <div className="flex flex-col gap-2">
                       <h4 className="font-bold">GIDA</h4>
-                      <Link href="/" className="text-sm font-extrabold">
+                      <Link href={`/products/${CATEGORIES.FOOD}`} className="text-sm font-extrabold">
                         GIDA ÜRÜNLERİ
                       </Link>
                       <Link href="/" className="text-sm font-semibold">
@@ -1559,7 +1560,7 @@ const MenuNavigation = () => {
                   <div className="flex flex-row gap-12 pt-5 pl-5">
                     <div className="flex flex-col gap-2">
                       <h4 className="font-bold">VİTAMİN</h4>
-                      <Link href="/" className="text-sm font-extrabold">
+                      <Link href={`/products/${CATEGORIES.VITAMIN}`} className="text-sm font-extrabold">
                         ÖZEL FORMÜL ÜRÜNLER
                       </Link>
                       <Link href="/" className="text-sm font-semibold">
