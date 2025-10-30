@@ -741,7 +741,7 @@ const MenuNavigation = () => {
                   <div className="flex flex-col gap-5 bg-gray-300 p-5 pr-0 w-[350px]">
                     <h4 className="text-lg font-bold ml-3">EN ÇOK SATANLAR</h4>
                     <Link href="/products/1">
-                      {/* Creatine Section */}
+                      {/* Greens & Superfoods Section */}
                       <div className="flex flex-row gap-2 items-center">
                         <Image
                           src="/images/gold-whey.png"
@@ -750,7 +750,7 @@ const MenuNavigation = () => {
                           height={70}
                         />
                         <div className="flex flex-col">
-                          <p className="font-semibold">CREATİNE</p>
+                          <p className="font-semibold">GREENS & SUPERFOODS</p>
                           <div className="flex flex-row items-center">
                             <Image
                               src="/icons/star-sharp-svg.svg"
@@ -790,7 +790,7 @@ const MenuNavigation = () => {
                       </div>
                     </Link>
                     <Link href="/products/2">
-                      {/* Pre-Workout Supreme Section */}
+                      {/* Green Detox+ Section */}
                       <div className="flex flex-row gap-2 items-center">
                         <Image
                           src="/images/gold-whey.png"
@@ -799,7 +799,7 @@ const MenuNavigation = () => {
                           height={70}
                         />
                         <div className="flex flex-col">
-                          <p className="font-semibold">PRE-WORKOUT SUPREME</p>
+                          <p className="font-semibold">GREEN DETOX+</p>
                           <div className="flex flex-row items-center">
                             <Image
                               src="/icons/star-sharp-svg.svg"
@@ -839,7 +839,7 @@ const MenuNavigation = () => {
                       </div>
                     </Link>
 
-                    {/* Cream of Rice Section */}
+                    {/* Collagen Section */}
                     <Link href="/products/3">
                       <div className="flex flex-row gap-2 items-center">
                         <Image
@@ -849,7 +849,7 @@ const MenuNavigation = () => {
                           height={70}
                         />
                         <div className="flex flex-col">
-                          <p className="font-semibold">CREAM OF RICE</p>
+                          <p className="font-semibold">COLLAGEN</p>
                           <div className="flex flex-row items-center">
                             <Image
                               src="/icons/star-sharp-svg.svg"
@@ -888,222 +888,98 @@ const MenuNavigation = () => {
                         </div>
                       </div>
                     </Link>
-
-                    <Link href="/products/4">
-                      {/* BCAA+ Section */}
-                      <div className="flex flex-row gap-2 items-center">
-                        <Image
-                          src="/images/gold-whey.png"
-                          alt="Protein 1"
-                          width={70}
-                          height={70}
-                        />
-                        <div className="flex flex-col">
-                          <p className="font-semibold">BCAA+</p>
-                          <div className="flex flex-row items-center">
-                            <Image
-                              src="/icons/star-sharp-svg.svg"
-                              alt="Star"
-                              width={16}
-                              height={16}
-                            />
-                            <Image
-                              src="/icons/star-sharp-svg.svg"
-                              alt="Star"
-                              width={16}
-                              height={16}
-                            />
-                            <Image
-                              src="/icons/star-sharp-svg.svg"
-                              alt="Star"
-                              width={16}
-                              height={16}
-                            />
-                            <Image
-                              src="/icons/star-sharp-svg.svg"
-                              alt="Star"
-                              width={16}
-                              height={16}
-                            />
-                            <Image
-                              src="/icons/star-sharp-svg.svg"
-                              alt="Star"
-                              width={16}
-                              height={16}
-                            />
-                            <p className="ml-2 text-sm font-semibold text-gray-800">
-                              2182 Yorum
-                            </p>
-                          </div>
-                        </div>
-                      </div>
-                    </Link>
-
-                    <Link href="/products/5">
-                      {/* L-Carnitine Section */}
-                      <div className="flex flex-row gap-2 items-center">
-                        <Image
-                          src="/images/gold-whey.png"
-                          alt="Protein 1"
-                          width={70}
-                          height={70}
-                        />
-                        <div className="flex flex-col">
-                          <p className="font-semibold">L-CARNITINE</p>
-                          <div className="flex flex-row items-center">
-                            <Image
-                              src="/icons/star-sharp-svg.svg"
-                              alt="Star"
-                              width={16}
-                              height={16}
-                            />
-                            <Image
-                              src="/icons/star-sharp-svg.svg"
-                              alt="Star"
-                              width={16}
-                              height={16}
-                            />
-                            <Image
-                              src="/icons/star-sharp-svg.svg"
-                              alt="Star"
-                              width={16}
-                              height={16}
-                            />
-                            <Image
-                              src="/icons/star-sharp-svg.svg"
-                              alt="Star"
-                              width={16}
-                              height={16}
-                            />
-                            <Image
-                              src="/icons/star-sharp-svg.svg"
-                              alt="Star"
-                              width={16}
-                              height={16}
-                            />
-                            <p className="ml-2 text-sm font-semibold text-gray-800">
-                              2562 Yorum
-                            </p>
-                          </div>
-                        </div>
-                      </div>
-                    </Link>
                   </div>
 
-                  {/* Amino Acids Section */}
-                  <div className="flex flex-row gap-20 pt-5 pl-5">
+                  {/* Functional Supplements Section */}
+                  <div className="flex flex-row gap-20 pt-5 pl-5 pb-5">
                     <div className="flex flex-col gap-2">
-                      <h4 className="font-bold">SPOR GIDALARI</h4>
+                      <h4 className="font-bold">SAĞLIK</h4>
                       <Link href="/" className="text-sm font-extrabold">
-                        AMİNO ASİTLER
+                        FONKSİYONEL GIDALAR
                       </Link>
                       <Link href="/" className="text-sm font-semibold">
-                        Creatine
+                        Collagen
+                      </Link>
+                      <Link href="/" className="text-sm font-semibold">
+                        Deep Sleep
+                      </Link>
+                      <Link href="/" className="text-sm font-semibold">
+                        Protein Coffee
+                      </Link>
+                      <Link href="/" className="text-sm font-semibold">
+                        Protein Meal
+                      </Link>
+                      <Link href="/" className="text-sm font-semibold">
+                        Probiyotik
+                      </Link>
+                      <Link href="/" className="text-sm font-semibold">
+                        Collagen Coffee
+                      </Link>
+                      <Link href="/" className="text-sm font-semibold">
+                        Digestion
+                      </Link>
+                      <Link href="/" className="text-sm font-semibold">
+                        Tatlandırıcılar
+                      </Link>
+                      <Link href="/" className="text-sm font-semibold">
+                        MCT Oil
+                      </Link>
+                      <Link href="/" className="text-sm font-semibold">
+                        Inulin
+                      </Link>
+                    </div>
+                    {/* Greens & Superfoods Products Section */}
+                    <div className="flex flex-col gap-2 mt-[30px]">
+                      <Link href="/" className="text-sm font-extrabold">
+                        BİTKİ TOZLARI
+                      </Link>
+                      <Link href="/" className="text-sm font-semibold">
+                        Greens & Superfoods
+                      </Link>
+                      <Link href="/" className="text-sm font-semibold">
+                        Green Detox+
+                      </Link>
+                      <Link href="/" className="text-sm font-semibold">
+                        Red Detox
+                      </Link>
+                      <Link href="/" className="text-sm font-semibold">
+                        Brokoli Tozu
+                      </Link>
+                      <Link href="/" className="text-sm font-semibold">
+                        Maca Kökü Tozu
+                      </Link>
+                      <Link href="/" className="text-sm font-semibold">
+                        Spirulina Tozu
+                      </Link>
+                      <Link href="/" className="text-sm font-semibold">
+                        Ispanak Tozu
+                      </Link>
+                      <Link href="/" className="text-sm font-semibold">
+                        Maydanoz Tozu
+                      </Link>
+                    </div>
+                    {/* Weight Loss Products Section */}
+                    <div className="flex flex-col gap-2 mt-[30px]">
+                      <Link href="/" className="text-sm font-extrabold">
+                        ZAYIFLAMA
                       </Link>
                       <Link href="/" className="text-sm font-semibold">
                         L-Carnitine
                       </Link>
                       <Link href="/" className="text-sm font-semibold">
-                        Creatine Creapure
-                      </Link>
-                      <Link href="/" className="text-sm font-semibold">
-                        BCAA
-                      </Link>
-                      <Link href="/" className="text-sm font-semibold">
-                        Glutamine
-                      </Link>
-                      <Link href="/" className="text-sm font-semibold">
-                        EAA
-                      </Link>
-                      <Link href="/" className="text-sm font-semibold">
-                        Arginine
-                      </Link>
-                      <Link href="/" className="text-sm font-semibold">
-                        Taurine
-                      </Link>
-                      <Link href="/" className="text-sm font-semibold">
-                        Leucine
-                      </Link>
-                    </div>
-                    {/* Pre-Workout Products Section */}
-                    <div className="flex flex-col gap-2 mt-[30px]">
-                      <Link href="/" className="text-sm font-extrabold">
-                        PRE-WORKOUT
-                      </Link>
-                      <Link href="/" className="text-sm font-semibold">
-                        Pre-Workout Supreme
-                      </Link>
-                      <Link href="/" className="text-sm font-semibold">
-                        HydroPrime
-                      </Link>
-                      <Link href="/" className="text-sm font-semibold">
                         Thermo Burner
                       </Link>
                       <Link href="/" className="text-sm font-semibold">
-                        Heavy Duty Pre-Workout
-                      </Link>
-                      <Link href="/" className="text-sm font-semibold">
-                        Hydration
-                      </Link>
-                      <Link href="/" className="text-sm font-semibold">
-                        Citrulline
-                      </Link>
-                      <Link href="/" className="text-sm font-semibold">
-                        Supreme Pump
-                      </Link>
-                      <Link href="/" className="text-sm font-semibold">
-                        Beta-Alanine
-                      </Link>
-                      <Link href="/" className="text-sm font-semibold">
-                        Betaine
-                      </Link>
-                    </div>
-                    {/* Carbohydrates Products Section */}
-                    <div className="flex flex-col gap-2 mt-[30px]">
-                      <Link href="/" className="text-sm font-extrabold">
-                        KARBONHİDRATLAR
-                      </Link>
-                      <Link href="/" className="text-sm font-semibold">
-                        Pirinç Kreması
-                      </Link>
-                      <Link href="/" className="text-sm font-semibold">
-                        Mass Gainer
-                      </Link>
-                      <Link href="/" className="text-sm font-semibold">
-                        Maltodekstrin
-                      </Link>
-                      <Link href="/" className="text-sm font-semibold">
-                        Dekstroz
-                      </Link>
-                      <Link href="/" className="text-sm font-semibold">
-                        Vegan Gainer
-                      </Link>
-                    </div>
-                    {/* Other Supplements Products Section */}
-                    <div className="flex flex-col gap-2 mt-[30px]">
-                      <Link href="/" className="text-sm font-extrabold">
-                        DİĞER
-                      </Link>
-                      <Link href="/" className="text-sm font-semibold">
-                        Ultra Focus
-                      </Link>
-                      <Link href="/" className="text-sm font-semibold">
-                        Gamer Hack
-                      </Link>
-                      <Link href="/" className="text-sm font-semibold">
-                        Intra Workout
-                      </Link>
-                      <Link href="/" className="text-sm font-semibold">
-                        Elektrolit Blend
-                      </Link>
-                      <Link href="/" className="text-sm font-semibold">
-                        Hydration
+                        L-Carnitine Shot
                       </Link>
                       <Link href="/" className="text-sm font-semibold">
                         CLA
                       </Link>
                       <Link href="/" className="text-sm font-semibold">
-                        Protein Meal
+                        Hunger Buster
+                      </Link>
+                      <Link href="/" className="text-sm font-semibold">
+                        CLA+
                       </Link>
                     </div>
                   </div>
@@ -1419,14 +1295,454 @@ const MenuNavigation = () => {
 
       {/* Vitamins & Supplements Navigation Menu */}
       <div>
-        <NavigationMenu>
-          <NavigationMenuList>
+        <NavigationMenu className="[&_div.absolute]:-left-[275px] [&_div.absolute]:-translate-x-1/2">
+          <NavigationMenuList className="flex-wrap">
             <NavigationMenuItem>
               <NavigationMenuTrigger className="font-bold bg-black! text-white! hover:bg-black! hover:text-white! focus:bg-black! focus:text-white! data-[state=open]:bg-black! data-[state=open]:text-white! data-[state=open]:hover:bg-black! data-[state=open]:hover:text-white! cursor-pointer">
                 VİTAMİN
               </NavigationMenuTrigger>
-              <NavigationMenuContent>
-                <NavigationMenuLink>Link</NavigationMenuLink>
+              <NavigationMenuContent className="p-0 md:left-1/2 md:-translate-x-1/2">
+                <div className="grid grid-cols-[350px_1fr] gap-6 lg:w-[1400px]">
+                  {/* Best Sellers Section */}
+                  <div className="flex flex-col gap-5 bg-gray-300 p-5 pr-0 w-[350px]">
+                    <h4 className="text-lg font-bold ml-3">EN ÇOK SATANLAR</h4>
+                    <Link href="/products/1">
+                      {/* Multivitamin Section */}
+                      <div className="flex flex-row gap-2 items-center">
+                        <Image
+                          src="/images/gold-whey.png"
+                          alt="Protein 1"
+                          width={70}
+                          height={70}
+                        />
+                        <div className="flex flex-col">
+                          <p className="font-semibold">MULTİVİTAMİN</p>
+                          <div className="flex flex-row items-center">
+                            <Image
+                              src="/icons/star-sharp-svg.svg"
+                              alt="Star"
+                              width={16}
+                              height={16}
+                            />
+                            <Image
+                              src="/icons/star-sharp-svg.svg"
+                              alt="Star"
+                              width={16}
+                              height={16}
+                            />
+                            <Image
+                              src="/icons/star-sharp-svg.svg"
+                              alt="Star"
+                              width={16}
+                              height={16}
+                            />
+                            <Image
+                              src="/icons/star-sharp-svg.svg"
+                              alt="Star"
+                              width={16}
+                              height={16}
+                            />
+                            <Image
+                              src="/icons/star-sharp-svg.svg"
+                              alt="Star"
+                              width={16}
+                              height={16}
+                            />
+                            <p className="ml-2 text-sm font-semibold text-gray-800">
+                              20055 Yorum
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                    </Link>
+                    <Link href="/products/2">
+                      {/* Omega-3 Section */}
+                      <div className="flex flex-row gap-2 items-center">
+                        <Image
+                          src="/images/gold-whey.png"
+                          alt="Protein 1"
+                          width={70}
+                          height={70}
+                        />
+                        <div className="flex flex-col">
+                          <p className="font-semibold">OMEGA-3</p>
+                          <div className="flex flex-row items-center">
+                            <Image
+                              src="/icons/star-sharp-svg.svg"
+                              alt="Star"
+                              width={16}
+                              height={16}
+                            />
+                            <Image
+                              src="/icons/star-sharp-svg.svg"
+                              alt="Star"
+                              width={16}
+                              height={16}
+                            />
+                            <Image
+                              src="/icons/star-sharp-svg.svg"
+                              alt="Star"
+                              width={16}
+                              height={16}
+                            />
+                            <Image
+                              src="/icons/star-sharp-svg.svg"
+                              alt="Star"
+                              width={16}
+                              height={16}
+                            />
+                            <Image
+                              src="/icons/star-sharp-svg.svg"
+                              alt="Star"
+                              width={16}
+                              height={16}
+                            />
+                            <p className="ml-2 text-sm font-semibold text-gray-800">
+                              1597 Yorum
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                    </Link>
+
+                    {/* Thermo Burner Section */}
+                    <Link href="/products/3">
+                      <div className="flex flex-row gap-2 items-center">
+                        <Image
+                          src="/images/gold-whey.png"
+                          alt="Protein 1"
+                          width={70}
+                          height={70}
+                        />
+                        <div className="flex flex-col">
+                          <p className="font-semibold">THERMO BURNER</p>
+                          <div className="flex flex-row items-center">
+                            <Image
+                              src="/icons/star-sharp-svg.svg"
+                              alt="Star"
+                              width={16}
+                              height={16}
+                            />
+                            <Image
+                              src="/icons/star-sharp-svg.svg"
+                              alt="Star"
+                              width={16}
+                              height={16}
+                            />
+                            <Image
+                              src="/icons/star-sharp-svg.svg"
+                              alt="Star"
+                              width={16}
+                              height={16}
+                            />
+                            <Image
+                              src="/icons/star-sharp-svg.svg"
+                              alt="Star"
+                              width={16}
+                              height={16}
+                            />
+                            <Image
+                              src="/icons/star-sharp-svg.svg"
+                              alt="Star"
+                              width={16}
+                              height={16}
+                            />
+                            <p className="ml-2 text-sm font-semibold text-gray-800">
+                              1686 Yorum
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                    </Link>
+
+                    <Link href="/products/4">
+                      {/* ZMA Section */}
+                      <div className="flex flex-row gap-2 items-center">
+                        <Image
+                          src="/images/gold-whey.png"
+                          alt="Protein 1"
+                          width={70}
+                          height={70}
+                        />
+                        <div className="flex flex-col">
+                          <p className="font-semibold">ZMA</p>
+                          <div className="flex flex-row items-center">
+                            <Image
+                              src="/icons/star-sharp-svg.svg"
+                              alt="Star"
+                              width={16}
+                              height={16}
+                            />
+                            <Image
+                              src="/icons/star-sharp-svg.svg"
+                              alt="Star"
+                              width={16}
+                              height={16}
+                            />
+                            <Image
+                              src="/icons/star-sharp-svg.svg"
+                              alt="Star"
+                              width={16}
+                              height={16}
+                            />
+                            <Image
+                              src="/icons/star-sharp-svg.svg"
+                              alt="Star"
+                              width={16}
+                              height={16}
+                            />
+                            <Image
+                              src="/icons/star-sharp-svg.svg"
+                              alt="Star"
+                              width={16}
+                              height={16}
+                            />
+                            <p className="ml-2 text-sm font-semibold text-gray-800">
+                              2182 Yorum
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                    </Link>
+
+                    <Link href="/products/5">
+                      {/* T-Prime Section */}
+                      <div className="flex flex-row gap-2 items-center">
+                        <Image
+                          src="/images/gold-whey.png"
+                          alt="Protein 1"
+                          width={70}
+                          height={70}
+                        />
+                        <div className="flex flex-col">
+                          <p className="font-semibold">T-PRİME</p>
+                          <div className="flex flex-row items-center">
+                            <Image
+                              src="/icons/star-sharp-svg.svg"
+                              alt="Star"
+                              width={16}
+                              height={16}
+                            />
+                            <Image
+                              src="/icons/star-sharp-svg.svg"
+                              alt="Star"
+                              width={16}
+                              height={16}
+                            />
+                            <Image
+                              src="/icons/star-sharp-svg.svg"
+                              alt="Star"
+                              width={16}
+                              height={16}
+                            />
+                            <Image
+                              src="/icons/star-sharp-svg.svg"
+                              alt="Star"
+                              width={16}
+                              height={16}
+                            />
+                            <Image
+                              src="/icons/star-sharp-svg.svg"
+                              alt="Star"
+                              width={16}
+                              height={16}
+                            />
+                            <p className="ml-2 text-sm font-semibold text-gray-800">
+                              2562 Yorum
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                    </Link>
+                  </div>
+
+                  {/* Special Formulas Section */}
+                  <div className="flex flex-row gap-12 pt-5 pl-5">
+                    <div className="flex flex-col gap-2">
+                      <h4 className="font-bold">VİTAMİN</h4>
+                      <Link href="/" className="text-sm font-extrabold">
+                        ÖZEL FORMÜL ÜRÜNLER
+                      </Link>
+                      <Link href="/" className="text-sm font-semibold">
+                        Thermo Burner
+                      </Link>
+                      <Link href="/" className="text-sm font-semibold">
+                        LVR
+                      </Link>
+                      <Link href="/" className="text-sm font-semibold">
+                        KDNY
+                      </Link>
+                      <Link href="/" className="text-sm font-semibold">
+                        T-Prime
+                      </Link>
+                      <Link href="/" className="text-sm font-semibold">
+                        Hunger Buster
+                      </Link>
+                      <Link href="/" className="text-sm font-semibold">
+                        Beauty Formula
+                      </Link>
+                      <Link href="/" className="text-sm font-semibold">
+                        Relax
+                      </Link>
+                      <Link href="/" className="text-sm font-semibold">
+                        Focus Formula
+                      </Link>
+                      <Link href="/" className="text-sm font-semibold">
+                        Gamer Multivitamin
+                      </Link>
+                      <Link href="/" className="text-sm font-semibold">
+                        GDA
+                      </Link>
+                      <Link href="/" className="text-sm font-semibold">
+                        C-Blocker
+                      </Link>
+                      <Link href="/" className="text-sm font-semibold">
+                        Sleep Formula
+                      </Link>
+                    </div>
+                    {/* Popular Supplements Section */}
+                    <div className="flex flex-col gap-2 mt-[30px]">
+                      <Link href="/" className="text-sm font-extrabold">
+                        POPÜLER TAKVİYELER
+                      </Link>
+                      <Link href="/" className="text-sm font-semibold">
+                        ZMA
+                      </Link>
+                      <Link href="/" className="text-sm font-semibold">
+                        Thermo Burner
+                      </Link>
+                      <Link href="/" className="text-sm font-semibold">
+                        Omega-3
+                      </Link>
+                      <Link href="/" className="text-sm font-semibold">
+                        Multivitamin
+                      </Link>
+                      <Link href="/" className="text-sm font-semibold">
+                        C Vitamini Efervesan
+                      </Link>
+                      <Link href="/" className="text-sm font-semibold">
+                        Kafein
+                      </Link>
+                      <Link href="/" className="text-sm font-semibold">
+                        Collagen + Hyluronic
+                      </Link>
+                      <Link href="/" className="text-sm font-semibold">
+                        Asit
+                      </Link>
+                      <Link href="/" className="text-sm font-semibold">
+                        Glikozamin Kondroitin
+                      </Link>
+                      <Link href="/" className="text-sm font-semibold">
+                        MSM
+                      </Link>
+                    </div>
+                    {/* Vitamins Products Section */}
+                    <div className="flex flex-col gap-2 mt-[30px]">
+                      <Link href="/" className="text-sm font-extrabold">
+                        VİTAMİNLER
+                      </Link>
+                      <Link href="/" className="text-sm font-semibold">
+                        C Vitamini
+                      </Link>
+                      <Link href="/" className="text-sm font-semibold">
+                        B Vitamini
+                      </Link>
+                      <Link href="/" className="text-sm font-semibold">
+                        D Vitamini
+                      </Link>
+                      <Link href="/" className="text-sm font-semibold">
+                        K Vitamini
+                      </Link>
+                    </div>
+                    {/* Minerals Products Section */}
+                    <div className="flex flex-col gap-2 mt-[30px]">
+                      <Link href="/" className="text-sm font-extrabold">
+                        MİNERALLER
+                      </Link>
+                      <Link href="/" className="text-sm font-semibold">
+                        Magnezyum
+                      </Link>
+                      <Link href="/" className="text-sm font-semibold">
+                        Demir
+                      </Link>
+                      <Link href="/" className="text-sm font-semibold">
+                        Krom
+                      </Link>
+                      <Link href="/" className="text-sm font-semibold">
+                        Selenyum
+                      </Link>
+                    </div>
+                    {/* Botanical Supplements Products Section */}
+                    <div className="flex flex-col gap-2 mt-[30px]">
+                      <Link href="/" className="text-sm font-extrabold">
+                        BİTKİSEL ÜRÜNLER
+                      </Link>
+                      <Link href="/" className="text-sm font-semibold">
+                        Green Detox+
+                      </Link>
+                      <Link href="/" className="text-sm font-semibold">
+                        Milk Thistle
+                      </Link>
+                      <Link href="/" className="text-sm font-semibold">
+                        Tribulus Terrestris
+                      </Link>
+                      <Link href="/" className="text-sm font-semibold">
+                        Saw Palmetto
+                      </Link>
+                      <Link href="/" className="text-sm font-semibold">
+                        L-Theanine
+                      </Link>
+                      <Link href="/" className="text-sm font-semibold">
+                        Panax Ginseng
+                      </Link>
+                      <Link href="/" className="text-sm font-semibold">
+                        5-HTP
+                      </Link>
+                      <Link href="/" className="text-sm font-semibold">
+                        L-Tyrosine
+                      </Link>
+                      <Link href="/" className="text-sm font-semibold">
+                        Rhodiola Rosea
+                      </Link>
+                      <Link href="/" className="text-sm font-semibold">
+                        Ginkgo Biloba
+                      </Link>
+                      <Link href="/" className="text-sm font-semibold">
+                        Beta Glukan
+                      </Link>
+                    </div>
+                    {/* Other Vitamins Section */}
+                    <div className="flex flex-col gap-2 mt-[30px]">
+                      <Link href="/" className="text-sm font-extrabold">
+                        DİĞER
+                      </Link>
+                      <Link href="/" className="text-sm font-semibold">
+                        CLA
+                      </Link>
+                      <Link href="/" className="text-sm font-semibold">
+                        Bromelain
+                      </Link>
+                      <Link href="/" className="text-sm font-semibold">
+                        Koenzim Q10
+                      </Link>
+                      <Link href="/" className="text-sm font-semibold">
+                        Alpha GPC
+                      </Link>
+                      <Link href="/" className="text-sm font-semibold">
+                        Glutatyon
+                      </Link>
+                      <Link href="/" className="text-sm font-semibold">
+                        NMN
+                      </Link>
+                      <Link href="/" className="text-sm font-semibold">
+                        Hyaluronik Asit
+                      </Link>
+                      <Link href="/" className="text-sm font-semibold">
+                        Laktoz
+                      </Link>
+                    </div>
+                  </div>
+                </div>
               </NavigationMenuContent>
             </NavigationMenuItem>
           </NavigationMenuList>
@@ -1434,19 +1750,10 @@ const MenuNavigation = () => {
       </div>
 
       {/* All Supplements Navigation Menu */}
-      <div>
-        <NavigationMenu>
-          <NavigationMenuList>
-            <NavigationMenuItem>
-              <NavigationMenuTrigger className="font-bold bg-black! text-white! hover:bg-black! hover:text-white! focus:bg-black! focus:text-white! data-[state=open]:bg-black! data-[state=open]:text-white! data-[state=open]:hover:bg-black! data-[state=open]:hover:text-white! cursor-pointer">
-                TÜM ÜRÜNLER
-              </NavigationMenuTrigger>
-              <NavigationMenuContent>
-                <NavigationMenuLink>Link</NavigationMenuLink>
-              </NavigationMenuContent>
-            </NavigationMenuItem>
-          </NavigationMenuList>
-        </NavigationMenu>
+      <div className="flex justify-center items-center">
+        <Link href="/products" className="text-sm font-bold">
+          TÜM ÜRÜNLER
+        </Link>
       </div>
     </div>
   );
