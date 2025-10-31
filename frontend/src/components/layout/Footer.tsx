@@ -171,7 +171,7 @@ const Footer = () => {
         </div>
       </div>
       <div>
-        <p className="text-[#999999] text-sm text-start ml-15 lg:ml-25 xl:ml-16 2xl:ml-54 mb-8">
+        <p className="text-[#999999] text-sm text-start ml-15 lg:ml-25 xl:ml-16 2xl:ml-54 pb-8">
           Copyright © - Tüm Hakları Saklıdır.
         </p>
       </div>

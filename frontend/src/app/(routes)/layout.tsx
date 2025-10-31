@@ -1,6 +1,8 @@
 import Footer from "@/components/layout/Footer";
+import FooterMobile from "@/components/layout/FooterMobile";
 import MenuNavigation from "@/components/layout/MenuNavigation";
 import Navbar from "@/components/layout/Navbar";
+import NavbarMobile from "@/components/layout/NavbarMobile";
 import React from "react";
 
 interface RoutesLayoutProps {
@@ -11,10 +13,24 @@ function RoutesLayout({ children }: RoutesLayoutProps) {
   return (
     <>
       <div className="flex flex-col min-h-screen">
-        <Navbar />
-        <MenuNavigation />
+        {/* Desktop/Tablet Layout */}
+        <div className="hidden md:block">
+          <Navbar />
+          <MenuNavigation />
+        </div>
+        {/* Mobile Navbar Layout */}
+        <div className="md:hidden">
+          <NavbarMobile />
+        </div>
         <main className="flex-1">{children}</main>
-        <Footer />
+        {/* Desktop/Tablet Footer Layout */}
+        <div className="hidden md:block">
+          <Footer />
+        </div>
+        {/* Mobile Footer Layout */}
+        <div className="md:hidden">
+          <FooterMobile />
+        </div>
       </div>
     </>
   );
