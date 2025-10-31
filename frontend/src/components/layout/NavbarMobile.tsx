@@ -159,7 +159,10 @@ const NavbarMobile = () => {
                       />
                     </Button>
 
-                    <Link href="/products" className="py-3 font-bold uppercase">
+                    <Link
+                      href="/products"
+                      className="ml-4 pb-3 text-xl font-bold uppercase"
+                    >
                       Tüm Ürünler
                     </Link>
                   </nav>
@@ -190,13 +193,14 @@ const NavbarMobile = () => {
                       Tüm {CATEGORY_NAMES[CATEGORIES.PROTEIN]} Ürünleri
                     </Link>
 
+                    {/* Proteins Section */}
                     <Link
                       href={`/products/${CATEGORIES.PROTEIN}`}
                       className="font-semibold text-xl"
                     >
                       Proteinler
                     </Link>
-                    {/* Example protein product links (static) */}
+                    {/* Protein powders links */}
                     <Link href="/products/1" className="text-md text-gray-800">
                       Whey Protein
                     </Link>
@@ -219,6 +223,7 @@ const NavbarMobile = () => {
                       Soya Proteini
                     </Link>
 
+                    {/* Protein Products Section */}
                     <Link
                       href={`/products/${CATEGORIES.PROTEIN}`}
                       className="font-semibold text-xl"
@@ -268,18 +273,299 @@ const NavbarMobile = () => {
                     >
                       Tüm {CATEGORY_NAMES[CATEGORIES.SPORTS_NUTRITION]}
                     </Link>
+
+                    {/* Amino Acids Section */}
+                    <Link
+                      href={`/products/${CATEGORIES.SPORTS_NUTRITION}`}
+                      className="font-semibold text-xl"
+                    >
+                      Amino Asitler
+                    </Link>
                     <Link href="/products/14" className="text-md text-gray-800">
                       Creatine
                     </Link>
                     <Link href="/products/15" className="text-md text-gray-800">
-                      BCAA
+                      L-Carnitine
                     </Link>
                     <Link href="/products/16" className="text-md text-gray-800">
+                      Creatine Creapure
+                    </Link>
+                    <Link href="/products/17" className="text-md text-gray-800">
+                      BCAA
+                    </Link>
+                    <Link href="/products/18" className="text-md text-gray-800">
+                      Glutamine
+                    </Link>
+                    <Link href="/products/19" className="text-md text-gray-800">
+                      EAA
+                    </Link>
+                    <Link href="/products/20" className="text-md text-gray-800">
+                      Arginine
+                    </Link>
+                    <Link href="/products/21" className="text-md text-gray-800">
+                      Taurine
+                    </Link>
+                    <Link href="/products/22" className="text-md text-gray-800">
+                      Leucine
+                    </Link>
+
+                    {/* Pre-Workout Section */}
+                    <Link
+                      href={`/products/${CATEGORIES.SPORTS_NUTRITION}`}
+                      className="font-semibold text-xl"
+                    >
                       Pre-Workout
+                    </Link>
+                    <Link href="/products/23" className="text-md text-gray-800">
+                      Pre-Workout Supreme
+                    </Link>
+                    <Link href="/products/24" className="text-md text-gray-800">
+                      HydroPrime
+                    </Link>
+                    <Link href="/products/25" className="text-md text-gray-800">
+                      Thermo Burner
+                    </Link>
+                    <Link href="/products/26" className="text-md text-gray-800">
+                      Heavy Duty Pre-Workout
+                    </Link>
+                    <Link href="/products/27" className="text-md text-gray-800">
+                      Hydration
+                    </Link>
+                    <Link href="/products/28" className="text-md text-gray-800">
+                      Citrulline
+                    </Link>
+                    <Link href="/products/29" className="text-md text-gray-800">
+                      Supreme Pump
+                    </Link>
+                    <Link href="/products/30" className="text-md text-gray-800">
+                      Beta-Alanine
+                    </Link>
+                    <Link href="/products/31" className="text-md text-gray-800">
+                      Betaine
+                    </Link>
+
+                    {/* Carbohydrates Section */}
+                    <Link
+                      href={`/products/${CATEGORIES.SPORTS_NUTRITION}`}
+                      className="font-semibold text-xl"
+                    >
+                      Karbonhidratlar
+                    </Link>
+                    <Link href="/products/32" className="text-md text-gray-800">
+                      Pirinç Kreması
+                    </Link>
+                    <Link href="/products/33" className="text-md text-gray-800">
+                      Mass Gainer
+                    </Link>
+                    <Link href="/products/34" className="text-md text-gray-800">
+                      Maltodekstrin
+                    </Link>
+                    <Link href="/products/35" className="text-md text-gray-800">
+                      Dekstroz
+                    </Link>
+                    <Link href="/products/36" className="text-md text-gray-800">
+                      Vegan Gainer
+                    </Link>
+
+                    {/* Other Products Section */}
+                    <Link
+                      href={`/products/${CATEGORIES.SPORTS_NUTRITION}`}
+                      className="font-semibold text-xl"
+                    >
+                      Diğer Ürünler
+                    </Link>
+                    <Link href="/products/37" className="text-md text-gray-800">
+                      Ultra Focus
+                    </Link>
+                    <Link href="/products/38" className="text-md text-gray-800">
+                      Gamer Hack
+                    </Link>
+                    <Link href="/products/39" className="text-md text-gray-800">
+                      Intra Workout
+                    </Link>
+                    <Link href="/products/40" className="text-md text-gray-800">
+                      Elektrolit Blend
+                    </Link>
+                    <Link href="/products/41" className="text-md text-gray-800">
+                      Hydration
+                    </Link>
+                    <Link href="/products/42" className="text-md text-gray-800">
+                      CLA
+                    </Link>
+                    <Link href="/products/43" className="text-md text-gray-800">
+                      Protein Meal
                     </Link>
                   </nav>
                 </div>
-                {/* HEALTH PANEL */}
+
+                {/* HEALTH & WELLNESS PANEL */}
+                <div className="min-w-[20rem] sm:min-w-[24rem] p-6">
+                  <div className="flex items-center gap-2 mb-4">
+                    <Button
+                      variant="outline"
+                      className="w-8 h-8"
+                      onClick={() => setPanel("root")}
+                      aria-label="Geri"
+                    >
+                      <ChevronLeftIcon className="w-4 h-4" />
+                    </Button>
+                    <h2 className="text-xl font-bold">
+                      {CATEGORY_NAMES[CATEGORIES.HEALTH]}
+                    </h2>
+                  </div>
+                  <nav className="flex flex-col gap-2">
+                    <Link
+                      href={`/products/${CATEGORIES.HEALTH}`}
+                      className="font-semibold text-xl"
+                    >
+                      Tüm {CATEGORY_NAMES[CATEGORIES.HEALTH]}
+                    </Link>
+
+                    {/* Functional Foods Section */}
+                    <Link
+                      href={`/products/${CATEGORIES.HEALTH}`}
+                      className="font-semibold text-xl"
+                    >
+                      Fonksiyonel Gıdalar
+                    </Link>
+                    <Link href="/products/44" className="text-md text-gray-800">
+                      Collagen
+                    </Link>
+                    <Link href="/products/45" className="text-md text-gray-800">
+                      Deep Sleep
+                    </Link>
+                    <Link href="/products/46" className="text-md text-gray-800">
+                      Protein Coffee
+                    </Link>
+                    <Link href="/products/47" className="text-md text-gray-800">
+                      Protein Meal
+                    </Link>
+                    <Link href="/products/48" className="text-md text-gray-800">
+                      Probiyotik
+                    </Link>
+                    <Link href="/products/49" className="text-md text-gray-800">
+                      Collagen Coffee
+                    </Link>
+                    <Link href="/products/50" className="text-md text-gray-800">
+                      Digestion
+                    </Link>
+                    <Link href="/products/51" className="text-md text-gray-800">
+                      Tatlandırıcılar
+                    </Link>
+                    <Link href="/products/52" className="text-md text-gray-800">
+                      Mct Oil
+                    </Link>
+                    <Link href="/products/53" className="text-md text-gray-800">
+                      Inulin
+                    </Link>
+
+                    {/* Plant Powders Section */}
+                    <Link
+                      href={`/products/${CATEGORIES.HEALTH}`}
+                      className="font-semibold text-xl"
+                    >
+                      Biti Tozları
+                    </Link>
+                    <Link href="/products/54" className="text-md text-gray-800">
+                      Greens & Superfoods
+                    </Link>
+                    <Link href="/products/55" className="text-md text-gray-800">
+                      Green Detox+
+                    </Link>
+                    <Link href="/products/56" className="text-md text-gray-800">
+                      Red Detox
+                    </Link>
+                    <Link href="/products/57" className="text-md text-gray-800">
+                      Brokoli Tozu
+                    </Link>
+                    <Link href="/products/58" className="text-md text-gray-800">
+                      Maca Kökü Tozu
+                    </Link>
+                    <Link href="/products/59" className="text-md text-gray-800">
+                      Spirulina Tozu
+                    </Link>
+                    <Link href="/products/60" className="text-md text-gray-800">
+                      Ispanak Tozu
+                    </Link>
+                    <Link href="/products/61" className="text-md text-gray-800">
+                      Maydanoz Tozu
+                    </Link>
+
+                    {/* Weight Loss Section */}
+                    <Link
+                      href={`/products/${CATEGORIES.HEALTH}`}
+                      className="font-semibold text-xl"
+                    >
+                      Zayıflama
+                    </Link>
+                    <Link href="/products/62" className="text-md text-gray-800">
+                      L-Carnitine
+                    </Link>
+                    <Link href="/products/63" className="text-md text-gray-800">
+                      Thermo Burner
+                    </Link>
+                    <Link href="/products/64" className="text-md text-gray-800">
+                      L-Carnitine Shot
+                    </Link>
+                    <Link href="/products/65" className="text-md text-gray-800">
+                      CLA
+                    </Link>
+                    <Link href="/products/66" className="text-md text-gray-800">
+                      Hunger Buster
+                    </Link>
+                    <Link href="/products/67" className="text-md text-gray-800">
+                      CLA+
+                    </Link>
+                  </nav>
+                </div>
+
+                {/* FOOD PANEL */}
+                <div className="min-w-[20rem] sm:min-w-[24rem] p-6">
+                  <div className="flex items-center gap-2 mb-4">
+                    <Button
+                      variant="outline"
+                      className="w-8 h-8"
+                      onClick={() => setPanel("root")}
+                      aria-label="Geri"
+                    >
+                      <ChevronLeftIcon className="w-4 h-4" />
+                    </Button>
+                    <h2 className="text-xl font-bold">
+                      {CATEGORY_NAMES[CATEGORIES.FOOD]}
+                    </h2>
+                  </div>
+                  <nav className="flex flex-col gap-2">
+                    <Link
+                      href={`/products/${CATEGORIES.FOOD}`}
+                      className="font-semibold text-xl"
+                    >
+                      Tüm {CATEGORY_NAMES[CATEGORIES.FOOD]} Ürünleri
+                    </Link>
+
+                    {/* Food Section */}
+                    <Link href="/products/68" className="text-md text-gray-800">
+                      Pirinç Kreması
+                    </Link>
+                    <Link href="/products/69" className="text-md text-gray-800">
+                      Protein Bar
+                    </Link>
+                    <Link href="/products/70" className="text-md text-gray-800">
+                      Fıstık Ezmeleri
+                    </Link>
+                    <Link href="/products/71" className="text-md text-gray-800">
+                      Düşük Kalorili Soslar
+                    </Link>
+                    <Link href="/products/72" className="text-md text-gray-800">
+                      Baharatlar
+                    </Link>
+                    <Link href="/products/73" className="text-md text-gray-800">
+                      Tatlandırıcılar
+                    </Link>
+                    <Link href="/products/74" className="text-md text-gray-800">
+                      Sprey Zeytinyağı
+                    </Link>
+                  </nav>
+                </div>
               </div>
             </div>
           </SheetContent>
