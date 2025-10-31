@@ -37,7 +37,7 @@ import { Badge } from "../ui/badge";
 
 const Navbar = () => {
   return (
-    <header className="hidden md:block bg-white my-5 px-4 sm:px-4 md:px-12 lg:px-24 xl:px-56">
+    <header className="hidden md:block bg-white my-5 px-4 sm:px-4 md:px-12 lg:px-24 xl:px-18 2xl:px-56">
       <div className="container flex items-center justify-between mx-auto max-w-7xl">
         <Link href="/">
           <Image

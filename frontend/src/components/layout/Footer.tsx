@@ -4,12 +4,12 @@ import React from "react";
 
 const Footer = () => {
   return (
-    <footer className="relative bg-[#222222] text-gray-300 text-center">
-      <div className="grid grid-cols-2 py-10">
+    <footer className="hidden md:block relative bg-[#222222] text-gray-300 text-center">
+      <div className="grid grid-cols-2 gap-4 sm:gap-6 md:gap-8 lg:gap-12 xl:gap-16 items-start py-10 xl:max-w-6xl 2xl:max-w-7xl xl:mx-auto xl:px-0">
         {/* Rating and Text Section */}
-        <div className="flex flex-col gap-3 justify-center items-center">
+        <div className="col-span-1 flex flex-col gap-3 justify-center items-center xl:items-start">
           {/* Rating Section */}
-          <div className="flex flex-row gap-1 items-center mr-48">
+          <div className="flex flex-row gap-1 items-center lg:mr-12 md:mr-5 xl:mr-0">
             <Image
               src="/icons/star-sharp-svg.svg"
               alt="Star"
@@ -42,22 +42,22 @@ const Footer = () => {
             />
             <p className="text-white text-xl">(475.000+)</p>
           </div>
-          <div className="flex flex-col items-start space-y-1 text-white text-3xl font-bold ml-10">
+          <div className="flex flex-col items-start space-y-1 text-white lg:text-xl xl:text-3xl font-bold mr-5 sm:ml-9 md:mr-10 lg:ml-14 xl:ml-0">
             <p>LABORATUVAR TESTLİ ÜRÜNLER</p>
             <p>AYNI GÜN & ÜCRETSİZ KARGO</p>
             <p>MEMNUNİYET GARANTİSİ</p>
           </div>
         </div>
-        <p className="text-white text-xl font-semibold text-start mt-10 mr-68">
-          475.000'den fazla ürün yorumumuza dayanarak, ürünlerimizi seveceğinize
-          eminiz. Eğer herhangi bir sebeple memnun kalmazsan, ürün koşullarına
-          göre en uygun çözümü sunmaya hazırız.
+        <p className="col-span-1 self-start text-white text-start sm:text-sm md:text-base lg:text-lg xl:text-xl 2xl:text-[22px] font-semibold mt-1 lg:mt-4 xl:mt-8 2xl:mt-10 mr-14 md:mr-10 lg:mr-18 xl:mr-0 2xl:mr-10">
+          475.000&apos;den fazla ürün yorumumuza dayanarak, ürünlerimizi
+          seveceğinize eminiz. Eğer herhangi bir sebeple memnun kalmazsan, ürün
+          koşullarına göre en uygun çözümü sunmaya hazırız.
         </p>
       </div>
 
-      <div className="grid grid-cols-3 py-10">
+      <div className="grid grid-cols-3 xl:gap-46 2xl:gap-0 py-10">
         {/* OJS Nutrition Contact Section */}
-        <div className="flex flex-col gap-3 justify-center items-center">
+        <div className="flex flex-col gap-3 xl:mr-10 2xl:mr-0 justify-center items-center">
           <Link href="/" className="mb-4">
             <Image
               src="/icons/logo-white-svg.svg"
@@ -128,7 +128,7 @@ const Footer = () => {
             <Link href="/" className="font-medium">
               Paketler
             </Link>
-            <Link href="/" className="font-medium">
+            <Link href="/" className="font-medium sm:text-start">
               Lansmana Özel Fırsatlar
             </Link>
           </div>
@@ -171,7 +171,9 @@ const Footer = () => {
         </div>
       </div>
       <div>
-        <p className="text-[#999999] text-sm text-start ml-54 mb-8">Copyright © - Tüm Hakları Saklıdır.</p>
+        <p className="text-[#999999] text-sm text-start ml-15 lg:ml-25 xl:ml-16 2xl:ml-54 mb-8">
+          Copyright © - Tüm Hakları Saklıdır.
+        </p>
       </div>
     </footer>
   );
