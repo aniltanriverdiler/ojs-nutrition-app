@@ -47,23 +47,37 @@ const NavbarMobile = () => {
           <SheetTrigger>
             <TextAlignJustify className="w-7 h-7" />
           </SheetTrigger>
-          <SheetContent side="left" className="w-80 sm:w-96 p-0">
-            <div className="relative overflow-hidden">
+          <SheetContent
+            side="left"
+            className="w-80 sm:w-96 p-0 flex flex-col h-screen"
+          >
+            <div className="relative overflow-hidden flex-1">
               <div
-                className="flex transition-transform duration-300 ease-in-out"
+                className="flex transition-transform duration-300 ease-in-out h-full"
                 style={{
                   transform: `translateX(-${getIndex(panel) * 100}%)`,
                 }}
               >
                 {/* ROOT PANEL */}
-                <div className="min-w-[20rem] sm:min-w-[24rem] p-4">
-                  <SheetHeader className="mb-2">
-                    <SheetTitle className="text-2xl font-bold">
-                      OJS NUTRITION
+                <div className="min-w-[20rem] sm:min-w-[24rem] flex flex-col h-full p-1">
+                  <SheetHeader className="mb-2 shrink-0">
+                    <SheetTitle className="flex items-center gap-2">
+                      <Image
+                        src="/icons/ojs-svg.svg"
+                        alt="OJS"
+                        width={47}
+                        height={20}
+                      />
+                      <Image
+                        src="/icons/nutrition-svg.svg"
+                        alt="NUTRITION"
+                        width={120}
+                        height={30}
+                      />
                     </SheetTitle>
                   </SheetHeader>
 
-                  <nav className="flex flex-col gap-5">
+                  <nav className="flex flex-col gap-5 overflow-y-auto flex-1 pr-2">
                     {/* Navigate to protein submenu */}
                     <Button
                       className="bg-transparent text-black text-xl py-3 pl-2 font-bold uppercase"
@@ -159,18 +173,34 @@ const NavbarMobile = () => {
                       />
                     </Button>
 
-                    <Link
-                      href="/products"
-                      className="ml-4 pb-3 text-xl font-bold uppercase"
-                    >
-                      Tüm Ürünler
+                    {/* All Products Section */}
+                    <Link href="/products" className="px-3">
+                      <Button className="w-full bg-black text-white hover:bg-black/90 text-lg font-bold uppercase py-6">
+                        TÜM ÜRÜNLERİ İNCELE
+                      </Button>
                     </Link>
+
+                    {/* Account and Contact Section */}
+                    <div className="flex flex-col gap-2 px-3">
+                      <Link href="/auth/login" className="font-bold text-lg">
+                        ÜYE GİRİŞİ
+                      </Link>
+                      <Link href="/auth/register" className="font-bold text-lg">
+                        ÜYE OL
+                      </Link>
+                      <Link href="/contact" className="font-bold text-lg">
+                        MÜŞTERİ YORUMLARI
+                      </Link>
+                      <Link href="/contact" className="font-bold text-lg">
+                        İLETİŞİM
+                      </Link>
+                    </div>
                   </nav>
                 </div>
 
                 {/* PROTEIN PANEL */}
-                <div className="min-w-[20rem] sm:min-w-[24rem] p-6">
-                  <div className="flex items-center gap-2 mb-4">
+                <div className="min-w-[20rem] sm:min-w-[24rem] p-6 flex flex-col h-full">
+                  <div className="flex items-center gap-2 mb-4 shrink-0">
                     <Button
                       variant="outline"
                       className="w-8 h-8"
@@ -185,7 +215,7 @@ const NavbarMobile = () => {
                     </h2>
                   </div>
 
-                  <nav className="flex flex-col gap-2">
+                  <nav className="flex flex-col gap-2 overflow-y-auto flex-1 pr-2">
                     <Link
                       href={`/products/${CATEGORIES.PROTEIN}`}
                       className="font-semibold text-xl"
@@ -252,8 +282,8 @@ const NavbarMobile = () => {
                 </div>
 
                 {/* SPORTS NUTRITION PANEL */}
-                <div className="min-w-[20rem] sm:min-w-[24rem] p-6">
-                  <div className="flex items-center gap-2 mb-4">
+                <div className="min-w-[20rem] sm:min-w-[24rem] p-6 flex flex-col h-full">
+                  <div className="flex items-center gap-2 mb-4 shrink-0">
                     <Button
                       variant="outline"
                       className="w-8 h-8"
@@ -266,7 +296,7 @@ const NavbarMobile = () => {
                       {CATEGORY_NAMES[CATEGORIES.SPORTS_NUTRITION]}
                     </h2>
                   </div>
-                  <nav className="flex flex-col gap-2">
+                  <nav className="flex flex-col gap-2 overflow-y-auto flex-1 pr-1">
                     <Link
                       href={`/products/${CATEGORIES.SPORTS_NUTRITION}`}
                       className="font-semibold text-xl"
@@ -399,8 +429,8 @@ const NavbarMobile = () => {
                 </div>
 
                 {/* HEALTH & WELLNESS PANEL */}
-                <div className="min-w-[20rem] sm:min-w-[24rem] p-6">
-                  <div className="flex items-center gap-2 mb-4">
+                <div className="min-w-[20rem] sm:min-w-[24rem] p-6 flex flex-col h-full">
+                  <div className="flex items-center gap-2 mb-4 shrink-0">
                     <Button
                       variant="outline"
                       className="w-8 h-8"
@@ -413,7 +443,7 @@ const NavbarMobile = () => {
                       {CATEGORY_NAMES[CATEGORIES.HEALTH]}
                     </h2>
                   </div>
-                  <nav className="flex flex-col gap-2">
+                  <nav className="flex flex-col gap-2 overflow-y-auto flex-1 pr-1">
                     <Link
                       href={`/products/${CATEGORIES.HEALTH}`}
                       className="font-semibold text-xl"
@@ -520,8 +550,8 @@ const NavbarMobile = () => {
                 </div>
 
                 {/* FOOD PANEL */}
-                <div className="min-w-[20rem] sm:min-w-[24rem] p-6">
-                  <div className="flex items-center gap-2 mb-4">
+                <div className="min-w-[20rem] sm:min-w-[24rem] p-6 flex flex-col h-full">
+                  <div className="flex items-center gap-2 mb-4 shrink-0">
                     <Button
                       variant="outline"
                       className="w-8 h-8"
@@ -534,7 +564,7 @@ const NavbarMobile = () => {
                       {CATEGORY_NAMES[CATEGORIES.FOOD]}
                     </h2>
                   </div>
-                  <nav className="flex flex-col gap-2">
+                  <nav className="flex flex-col gap-2 overflow-y-auto flex-1 pr-1">
                     <Link
                       href={`/products/${CATEGORIES.FOOD}`}
                       className="font-semibold text-xl"
@@ -563,6 +593,298 @@ const NavbarMobile = () => {
                     </Link>
                     <Link href="/products/74" className="text-md text-gray-800">
                       Sprey Zeytinyağı
+                    </Link>
+                  </nav>
+                </div>
+
+                {/* VITAMIN PANEL */}
+                <div className="min-w-[20rem] sm:min-w-[24rem] p-6 flex flex-col h-full">
+                  <div className="flex items-center gap-2 mb-4 shrink-0">
+                    <Button
+                      variant="outline"
+                      className="w-8 h-8"
+                      onClick={() => setPanel("root")}
+                      aria-label="Geri"
+                    >
+                      <ChevronLeftIcon className="w-4 h-4" />
+                    </Button>
+                    <h2 className="text-xl font-bold">
+                      {CATEGORY_NAMES[CATEGORIES.VITAMIN]}
+                    </h2>
+                  </div>
+                  <nav className="flex flex-col gap-2 overflow-y-auto flex-1 pr-1">
+                    <Link
+                      href={`/products/${CATEGORIES.VITAMIN}`}
+                      className="font-semibold text-xl"
+                    >
+                      Tüm {CATEGORY_NAMES[CATEGORIES.VITAMIN]} Ürünleri
+                    </Link>
+
+                    {/* Special Formulas Section */}
+                    <Link
+                      href={`/products/${CATEGORIES.VITAMIN}`}
+                      className="font-semibold text-xl"
+                    >
+                      Özel Formül Ürünler
+                    </Link>
+                    <Link href="/products/75" className="text-md text-gray-800">
+                      Thermo Burner
+                    </Link>
+                    <Link href="/products/76" className="text-md text-gray-800">
+                      LVR
+                    </Link>
+                    <Link href="/products/77" className="text-md text-gray-800">
+                      KDNY
+                    </Link>
+                    <Link href="/products/78" className="text-md text-gray-800">
+                      T-Prime
+                    </Link>
+                    <Link href="/products/79" className="text-md text-gray-800">
+                      Hunger Buster
+                    </Link>
+                    <Link href="/products/80" className="text-md text-gray-800">
+                      Beauty Formula
+                    </Link>
+                    <Link href="/products/81" className="text-md text-gray-800">
+                      Relax
+                    </Link>
+                    <Link href="/products/82" className="text-md text-gray-800">
+                      Focus Formula
+                    </Link>
+                    <Link href="/products/83" className="text-md text-gray-800">
+                      Gamer Multivitamin
+                    </Link>
+                    <Link href="/products/84" className="text-md text-gray-800">
+                      GDA
+                    </Link>
+                    <Link href="/products/85" className="text-md text-gray-800">
+                      C-Blocker
+                    </Link>
+                    <Link href="/products/86" className="text-md text-gray-800">
+                      Sleep Formula
+                    </Link>
+
+                    {/* Popular Formulas Section */}
+                    <Link
+                      href={`/products/${CATEGORIES.VITAMIN}`}
+                      className="font-semibold text-xl"
+                    >
+                      Popüler Takviyeler
+                    </Link>
+                    <Link href="/products/87" className="text-md text-gray-800">
+                      ZMA
+                    </Link>
+                    <Link href="/products/88" className="text-md text-gray-800">
+                      Thermo Burner
+                    </Link>
+                    <Link href="/products/89" className="text-md text-gray-800">
+                      Omega-3
+                    </Link>
+                    <Link href="/products/90" className="text-md text-gray-800">
+                      Multivitamin
+                    </Link>
+                    <Link href="/products/91" className="text-md text-gray-800">
+                      C Vitamini Efervesan
+                    </Link>
+                    <Link href="/products/92" className="text-md text-gray-800">
+                      Kafein
+                    </Link>
+                    <Link href="/products/93" className="text-md text-gray-800">
+                      Collagen + Hyluronic
+                    </Link>
+                    <Link href="/products/94" className="text-md text-gray-800">
+                      Asit
+                    </Link>
+                    <Link href="/products/95" className="text-md text-gray-800">
+                      Glikozamin Kondroitin
+                    </Link>
+                    <Link href="/products/96" className="text-md text-gray-800">
+                      MSM
+                    </Link>
+
+                    {/* Vitamins Section */}
+                    <Link
+                      href={`/products/${CATEGORIES.VITAMIN}`}
+                      className="font-semibold text-xl"
+                    >
+                      VİTAMİNLER
+                    </Link>
+                    <Link href="/products/97" className="text-md text-gray-800">
+                      C Vitamini
+                    </Link>
+                    <Link href="/products/98" className="text-md text-gray-800">
+                      B Vitamini
+                    </Link>
+                    <Link href="/products/99" className="text-md text-gray-800">
+                      D Vitamini
+                    </Link>
+                    <Link
+                      href="/products/100"
+                      className="text-md text-gray-800"
+                    >
+                      K Vitamini
+                    </Link>
+
+                    {/* Minerals Section */}
+                    <Link
+                      href={`/products/${CATEGORIES.VITAMIN}`}
+                      className="font-semibold text-xl"
+                    >
+                      MİNERALLER
+                    </Link>
+                    <Link
+                      href="/products/101"
+                      className="text-md text-gray-800"
+                    >
+                      Magnezyum
+                    </Link>
+                    <Link
+                      href="/products/102"
+                      className="text-md text-gray-800"
+                    >
+                      Demir
+                    </Link>
+                    <Link
+                      href="/products/103"
+                      className="text-md text-gray-800"
+                    >
+                      Krom
+                    </Link>
+                    <Link
+                      href="/products/104"
+                      className="text-md text-gray-800"
+                    >
+                      Selenyum
+                    </Link>
+
+                    {/* Botanical Supplements Section */}
+                    <Link
+                      href={`/products/${CATEGORIES.VITAMIN}`}
+                      className="font-semibold text-xl"
+                    >
+                      BİTKİSEL ÜRÜNLER
+                    </Link>
+                    <Link
+                      href="/products/105"
+                      className="text-md text-gray-800"
+                    >
+                      Green Detox+
+                    </Link>
+                    <Link
+                      href="/products/106"
+                      className="text-md text-gray-800"
+                    >
+                      Milk Thistle
+                    </Link>
+                    <Link
+                      href="/products/107"
+                      className="text-md text-gray-800"
+                    >
+                      Tribulus Terrestris
+                    </Link>
+                    <Link
+                      href="/products/108"
+                      className="text-md text-gray-800"
+                    >
+                      Saw Palmetto
+                    </Link>
+                    <Link
+                      href="/products/109"
+                      className="text-md text-gray-800"
+                    >
+                      L-Theanine
+                    </Link>
+                    <Link
+                      href="/products/110"
+                      className="text-md text-gray-800"
+                    >
+                      Panax Ginseng
+                    </Link>
+                    <Link
+                      href="/products/111"
+                      className="text-md text-gray-800"
+                    >
+                      5-HTP
+                    </Link>
+                    <Link
+                      href="/products/112"
+                      className="text-md text-gray-800"
+                    >
+                      L-Tyrosine
+                    </Link>
+                    <Link
+                      href="/products/113"
+                      className="text-md text-gray-800"
+                    >
+                      Rhodiola Rosea
+                    </Link>
+                    <Link
+                      href="/products/114"
+                      className="text-md text-gray-800"
+                    >
+                      Ginkgo Biloba
+                    </Link>
+                    <Link
+                      href="/products/115"
+                      className="text-md text-gray-800"
+                    >
+                      Beta Glukan
+                    </Link>
+
+                    {/* Other Supplements Section */}
+                    <Link
+                      href={`/products/${CATEGORIES.VITAMIN}`}
+                      className="font-semibold text-xl"
+                    >
+                      DİĞER ÜRÜNLER
+                    </Link>
+                    <Link
+                      href="/products/116"
+                      className="text-md text-gray-800"
+                    >
+                      CLA
+                    </Link>
+                    <Link
+                      href="/products/117"
+                      className="text-md text-gray-800"
+                    >
+                      Bromelain
+                    </Link>
+                    <Link
+                      href="/products/118"
+                      className="text-md text-gray-800"
+                    >
+                      Koenzim Q10
+                    </Link>
+                    <Link
+                      href="/products/119"
+                      className="text-md text-gray-800"
+                    >
+                      Alpha GPC
+                    </Link>
+                    <Link
+                      href="/products/120"
+                      className="text-md text-gray-800"
+                    >
+                      Glutatyon
+                    </Link>
+                    <Link
+                      href="/products/121"
+                      className="text-md text-gray-800"
+                    >
+                      NMN
+                    </Link>
+                    <Link
+                      href="/products/122"
+                      className="text-md text-gray-800"
+                    >
+                      Hyaluronik Asit
+                    </Link>
+                    <Link
+                      href="/products/123"
+                      className="text-md text-gray-800"
+                    >
+                      Laktoz
                     </Link>
                   </nav>
                 </div>
