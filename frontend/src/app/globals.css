@@ -120,3 +120,38 @@
     @apply bg-background text-foreground;
   }
 }
+
+.swiper-button-prev,
+.swiper-button-next {
+  background-color: #fff !important;
+  padding: 8px !important;
+  width: 30px !important;
+  height: 30px !important;
+  border-radius: 999px !important;
+  box-shadow: 0 0 10px rgba(92, 115, 160, 0.2) !important;
+  color: #4F4F4F !important;
+  -webkit-border-radius: 999px !important;
+  -moz-border-radius: 999px !important;
+  -ms-border-radius: 999px !important;
+  -o-border-radius: 999px !important;
+}
+
+.swiper {
+  padding-bottom: 24px;
+}
+
+.swiper-pagination {
+  position: static !important; 
+  margin-top: 8px !important; 
+}
+
+.swiper-pagination-bullet {
+  background-color: #cbd5e1 !important;
+  opacity: 1 !important;
+}
+
+.swiper-pagination-bullet-active {
+  background-color: #4F4F4F !important;
+  width: 12px !important;
+  height: 12px !important;
+}
