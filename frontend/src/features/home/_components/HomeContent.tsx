@@ -532,6 +532,19 @@ const HomeContent = () => {
           </Link>
         </div>
       </div>
+
+      {/* Home Content Motivation Banner Section */}
+      <div className="my-8">
+        <div className="relative overflow-hidden">
+          <Image
+            src="/images/motivation-banner.png"
+            alt="Kampanya Banner"
+            width={1920}
+            height={480}
+            priority
+          />
+        </div>
+      </div>
     </>
   );
 };
