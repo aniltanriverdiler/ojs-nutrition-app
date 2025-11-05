@@ -373,7 +373,7 @@ export const mockProductsDetails: ProductsDetailsResponse = {
       id: "3",
       name: "WHEY PROTEIN",
       slug: "whey-protein",
-      short_explanation: "En Saf Whey",
+      short_explanation: "EN ÇOK TERCİH EDİLEN PROTEİN TAKVİYESİ",
       explanation: {
         usage:
           "Antrenman sonrası ve sabah uyandığında, su veya süt ile karıştırarak tüketilmesini öneririz. 1 ölçek (yaklaşık 25 gram) ürünü 200 ml su veya süt ile karıştırarak tüketebilirsiniz.\n\nÖnemli Not: Ürünün köpürmesi doğaldır ve köpüğün geçmesi için birkaç dakika bekletmek yeterlidir.\n\nBunun dışında ihtiyacına göre pratik ve lezzetli bir şekilde gün içerisinde protein tüketmek için idealdir. Bu şekilde günde 1-4 servis kullanılabilir.\n\nNe kadar az sıvı kullanırsan tadı o kadar yoğun olacaktır. Damak tadına göre koyacağın sıvı miktarını ayarlayabilirsin.",
@@ -919,7 +919,7 @@ export const mockProductsDetails: ProductsDetailsResponse = {
           is_available: true,
         },
       ],
-      comment_count: 0,
+      comment_count: 10869,
       average_star: 0,
     },
     {
