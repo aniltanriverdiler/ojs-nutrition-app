@@ -1,12 +1,13 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import { getProductById } from "@/lib/dummy/products";
 import Image from "next/image";
 import { notFound } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Check } from "lucide-react";
+import { Check, ShoppingCartIcon } from "lucide-react";
 import { useProductVariants } from "../hooks/use-product-variants";
+import { MinusIcon, PlusIcon } from "lucide-react";
 
 interface ProductDetailProps {
   id: string;
@@ -21,6 +22,19 @@ export default function ProductDetail({ id }: ProductDetailProps) {
     notFound();
   }
 
+  // Quantity state management
+  const [quantity, setQuantity] = useState<number>(1);
+
+  // Increment quantity
+  const increaseQuantity = () => {
+    setQuantity((prev: number) => prev + 1);
+  };
+
+  // Decrement quantity with minimum value of 1
+  const decreaseQuantity = () => {
+    setQuantity((prev: number) => (prev > 1 ? prev - 1 : 1));
+  };
+
   // Use the useProductVariants hook to get the product variants
   const {
     selectedVariant,
@@ -33,11 +47,14 @@ export default function ProductDetail({ id }: ProductDetailProps) {
     isSizeAvailable,
   } = useProductVariants(product.variants || []);
 
-  // Get the selected variant
-  const price = selectedVariant?.price?.discounted_price ?? selectedVariant?.price?.total_price;
-  const crossed = selectedVariant?.price?.discounted_price ? selectedVariant?.price?.total_price : null;
+  // Calculate price values from selected variant
+  const price =
+    selectedVariant?.price?.discounted_price ??
+    selectedVariant?.price?.total_price;
+  const crossed = selectedVariant?.price?.discounted_price
+    ? selectedVariant?.price?.total_price
+    : null;
   const discountPerc = selectedVariant?.price?.discount_percentage;
-  const photo = selectedVariant?.photo_src;
 
   return (
     <div className="container mx-auto my-5 max-w-7xl grid grid-cols-2 gap-10">
@@ -154,8 +171,42 @@ export default function ProductDetail({ id }: ProductDetailProps) {
               })}
             </div>
 
-            
+            {/*  Product Price  */}
+            <div className="flex items-center gap-3 mt-8">
+              <div className="text-4xl font-bold text-gray-900">{price} TL</div>
+              {crossed && (
+                <>
+                  <div className="text-xl text-gray-400 line-through">
+                    {crossed} TL
+                  </div>
+                  {discountPerc ? <span> %{discountPerc} İNDİRİM</span> : null}
+                </>
+              )}
+            </div>
 
+            {/*  Product Add to Cart Button  */}
+            <div className="flex flex-row items-center gap-3 mt-8">
+              {/* Quantity Button */}
+              <div className="flex flex-row items-center gap-2"> 
+               <Button variant="outline" size="icon" onClick={decreaseQuantity} disabled={quantity === 1} className="rounded-r none border-r cursor-pointer">
+                <MinusIcon className="w-4 h-4" />
+               </Button>
+
+               <div className="px-4 py-2 min-w-[60px] text-center font-semibold text-lg border-x">
+                   {quantity}
+               </div>
+
+               <Button variant="outline" size="icon" onClick={increaseQuantity} disabled={quantity === 1} className="rounded-l-none border-l cursor-pointer">
+                <PlusIcon className="w-4 h-4" />
+               </Button>
+
+              </div>
+
+              {/* Add to Cart Button */}
+              <div>
+                <Button className="w-full h-12 text-base cursor-pointer"><ShoppingCartIcon className="w-4 h-4" /> SEPETE EKLE</Button>
+              </div>
+            </div>
 
           </div>
         </div>

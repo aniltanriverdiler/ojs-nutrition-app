@@ -991,6 +991,424 @@ export const mockProductsDetails: ProductsDetailsResponse = {
       comment_count: 0,
       average_star: 0,
     },
+    {
+      id: "2",
+      name: "WHEY ISOLATE",
+      slug: "whey-isolate",
+      short_explanation: "%90 PROTEİNLİ EN SAF WHEY",
+      explanation: {
+        usage:
+          "Antrenman sonrası ve sabah uyandığında, su veya süt ile karıştırarak tüketilmesini öneririz. 1 ölçek (yaklaşık 25 gram) ürünü 200 ml su veya süt ile karıştırarak tüketebilirsiniz.\n\nÖnemli Not: Ürünün köpürmesi doğaldır ve köpüğün geçmesi için birkaç dakika bekletmek yeterlidir.",
+        features:
+          "Whey Isolate, en saf protein formudur. Laktoz ve yağ içeriği minimal seviyededir. Hızlı sindirimi sayesinde antrenman sonrası toparlanma için idealdir.",
+        description:
+          "%90 protein içeriği ile en saf whey protein kaynağıdır. İzole edilmiş formu sayesinde laktoz intoleransı olanlar için de uygundur.\n\n- Yüksek protein içeriği\n- Düşük karbonhidrat ve yağ\n- Hızlı sindirim\n- Lezzetli aromalar",
+        nutritional_content: {
+          ingredients: [
+            {
+              aroma: "Bisküvi",
+              value:
+                "Whey Proteini İzolatı (Süt), Aroma Verici, Tatlandırıcı: Sukraloz, Emülgatör: Ayçiçek Lesitini",
+            },
+            {
+              aroma: "Çikolata",
+              value:
+                "Whey Proteini İzolatı (Süt), Aroma Verici, Yağı Azaltılmış Kakao, Tatlandırıcı: Sukraloz, Emülgatör: Ayçiçek Lesitini",
+            },
+            {
+              aroma: "Çilek",
+              value:
+                "Whey Proteini İzolatı (Süt), Aroma Verici, Renklendirici: Pancar Kökü Kırmızısı, Tatlandırıcı: Sukraloz, Emülgatör: Ayçiçek Lesitini",
+            },
+          ],
+          nutrition_facts: {
+            ingredients: [
+              {
+                name: "Enerji",
+                amounts: ["380 kj | 90 kcal"],
+              },
+              {
+                name: "Protein",
+                amounts: ["22 g"],
+              },
+              {
+                name: "Karbonhidrat",
+                amounts: ["1 g"],
+              },
+              {
+                name: "Yağ",
+                amounts: ["0.5 g"],
+              },
+            ],
+            portion_sizes: ["25 g servis için"],
+          },
+          amino_acid_facts: {
+            ingredients: [
+              {
+                name: "Lösin (BCAA)",
+                amounts: ["5.5 g"],
+              },
+              {
+                name: "İzolösin (BCAA)",
+                amounts: ["3.2 g"],
+              },
+              {
+                name: "Valin (BCAA)",
+                amounts: ["2.8 g"],
+              },
+            ],
+            portion_sizes: ["100 g"],
+          },
+        },
+      },
+      main_category_id: "38fb5754-3068-4490-a12a-169fa564c675",
+      sub_category_id: "04c9618e-553a-43cd-a72e-b646215d23e5",
+      tags: ["VEJETARYEN", "GLUTENSİZ"],
+      variants: [
+        {
+          id: "whey-isolate-400",
+          size: {
+            gram: 400,
+            pieces: 1,
+            total_services: 16,
+          },
+          aroma: "Bisküvi",
+          price: {
+            profit: null,
+            total_price: 749,
+            discounted_price: null,
+            price_per_servings: 46.81,
+            discount_percentage: null,
+          },
+          photo_src: "/media/whey-isolate_400_biscuit.webp",
+          is_available: true,
+        },
+      ],
+      comment_count: 0,
+      average_star: 0,
+    },
+    {
+      id: "12",
+      name: "CREATINE",
+      slug: "creatine",
+      short_explanation: "EN POPÜLER SPORCU TAKVİYESİ",
+      explanation: {
+        usage:
+          "Günde 3-5 gram creatine monohidrat kullanımı önerilir. Antrenman öncesi veya sonrası, su veya meyve suyu ile karıştırarak tüketebilirsiniz. İlk hafta yükleme fazı için günde 20 gram (4 x 5 gram) kullanılabilir.",
+        features:
+          "Creatine, kas gücü ve dayanıklılığını artıran en popüler sporcu takviyesidir. Yüksek yoğunluklu antrenmanlarda performansı destekler.",
+        description:
+          "Creatine monohidrat, en çok araştırılmış ve kanıtlanmış sporcu takviyesidir.\n\n- Kas gücü ve dayanıklılığı artırır\n- Yüksek yoğunluklu antrenmanlarda performansı destekler\n- Hızlı enerji üretimi sağlar\n- Toz formu sayesinde kolay tüketim",
+        nutritional_content: {
+          ingredients: [
+            {
+              aroma: null,
+              value: "Creatine Monohidrat",
+            },
+          ],
+          nutrition_facts: {
+            ingredients: [
+              {
+                name: "Enerji",
+                amounts: ["0 kcal"],
+              },
+              {
+                name: "Creatine",
+                amounts: ["5 g"],
+              },
+            ],
+            portion_sizes: ["5 g servis için"],
+          },
+          amino_acid_facts: null,
+        },
+      },
+      main_category_id: "d3cdcefe-eedd-4ee0-a254-b821ed4e2b8c",
+      sub_category_id: "13e12b25-5f83-4d5a-b555-e252c9b39012",
+      tags: ["VEJETARYEN", "GLUTENSİZ"],
+      variants: [
+        {
+          id: "creatine-120",
+          size: {
+            gram: 120,
+            pieces: 1,
+            total_services: 24,
+          },
+          aroma: "Aromasız",
+          price: {
+            profit: null,
+            total_price: 239,
+            discounted_price: null,
+            price_per_servings: 5.97,
+            discount_percentage: null,
+          },
+          photo_src: "/media/creatine_120_.webp",
+          is_available: true,
+        },
+      ],
+      comment_count: 0,
+      average_star: 0,
+    },
+    {
+      id: "14",
+      name: "BCAA 4:1:1",
+      slug: "bcaa-411",
+      short_explanation: "DAHA ÇOK LÖSİN",
+      explanation: {
+        usage:
+          "Antrenman öncesi, sırası veya sonrasında kullanılabilir. 1 ölçek (yaklaşık 5 gram) ürünü 200-300 ml su ile karıştırarak tüketiniz. Antrenman günlerinde 2-3 servis kullanılabilir.",
+        features:
+          "BCAA (Dallı Zincirli Amino Asitler) kas protein sentezini destekler ve yorgunluğu geciktirir. 4:1:1 oranı lösin içeriğini artırır.",
+        description:
+          "BCAA 4:1:1, lösin, izolösin ve valin amino asitlerinin özel bir karışımıdır.\n\n- Kas protein sentezini destekler\n- Antrenman sırasında yorgunluğu geciktirir\n- Kas onarımını hızlandırır\n- Lezzetli elma aroması",
+        nutritional_content: {
+          ingredients: [
+            {
+              aroma: "Elma",
+              value: "Lösin, İzolösin, Valin, Aroma Verici, Tatlandırıcı: Sukraloz",
+            },
+          ],
+          nutrition_facts: {
+            ingredients: [
+              {
+                name: "Enerji",
+                amounts: ["20 kcal"],
+              },
+              {
+                name: "Lösin",
+                amounts: ["2.5 g"],
+              },
+              {
+                name: "İzolösin",
+                amounts: ["1.25 g"],
+              },
+              {
+                name: "Valin",
+                amounts: ["1.25 g"],
+              },
+            ],
+            portion_sizes: ["5 g servis için"],
+          },
+          amino_acid_facts: null,
+        },
+      },
+      main_category_id: "d3cdcefe-eedd-4ee0-a254-b821ed4e2b8c",
+      sub_category_id: "13e12b25-5f83-4d5a-b555-e252c9b39012",
+      tags: ["VEJETARYEN", "GLUTENSİZ"],
+      variants: [
+        {
+          id: "bcaa-411-120",
+          size: {
+            gram: 120,
+            pieces: 1,
+            total_services: 24,
+          },
+          aroma: "Elma",
+          price: {
+            profit: null,
+            total_price: 219,
+            discounted_price: null,
+            price_per_servings: 9.13,
+            discount_percentage: null,
+          },
+          photo_src: "/media/bcaa-411_120_apple.webp",
+          is_available: true,
+        },
+      ],
+      comment_count: 0,
+      average_star: 0,
+    },
+    {
+      id: "15",
+      name: "L-CARNITINE",
+      slug: "l-carnitine",
+      short_explanation: "TOZ FORMU SAYESİNDE KOLAY TÜKETİM",
+      explanation: {
+        usage:
+          "Günde 1-2 gram L-Carnitine kullanımı önerilir. Antrenman öncesi veya sabah aç karnına, su veya meyve suyu ile karıştırarak tüketebilirsiniz.",
+        features:
+          "L-Carnitine, yağ asitlerinin mitokondriye taşınmasında rol oynar ve enerji üretimine katkıda bulunur.",
+        description:
+          "L-Carnitine, vücutta doğal olarak bulunan bir amino asit türevidir.\n\n- Yağ metabolizmasını destekler\n- Enerji üretimine katkıda bulunur\n- Toz formu sayesinde kolay tüketim\n- Lezzetli elma aroması",
+        nutritional_content: {
+          ingredients: [
+            {
+              aroma: "Elma",
+              value: "L-Carnitine L-Tartrat, Aroma Verici, Tatlandırıcı: Sukraloz",
+            },
+          ],
+          nutrition_facts: {
+            ingredients: [
+              {
+                name: "Enerji",
+                amounts: ["10 kcal"],
+              },
+              {
+                name: "L-Carnitine",
+                amounts: ["1 g"],
+              },
+            ],
+            portion_sizes: ["2 g servis için"],
+          },
+          amino_acid_facts: null,
+        },
+      },
+      main_category_id: "d3cdcefe-eedd-4ee0-a254-b821ed4e2b8c",
+      sub_category_id: "13e12b25-5f83-4d5a-b555-e252c9b39012",
+      tags: ["VEJETARYEN", "GLUTENSİZ"],
+      variants: [
+        {
+          id: "l-carnitine-150",
+          size: {
+            gram: 150,
+            pieces: 1,
+            total_services: 75,
+          },
+          aroma: "Elma",
+          price: {
+            profit: null,
+            total_price: 399,
+            discounted_price: null,
+            price_per_servings: 7.98,
+            discount_percentage: null,
+          },
+          photo_src: "/media/l-carnitine_150_apple.webp",
+          is_available: true,
+        },
+      ],
+      comment_count: 0,
+      average_star: 0,
+    },
+    {
+      id: "16",
+      name: "GLUTAMINE",
+      slug: "glutamine",
+      short_explanation: "KASTA EN ÇOK BULUNAN AMİNO ASİT",
+      explanation: {
+        usage:
+          "Günde 5-10 gram glutamine kullanımı önerilir. Antrenman sonrası veya yatmadan önce, su ile karıştırarak tüketebilirsiniz.",
+        features:
+          "Glutamine, kas dokusunda en çok bulunan amino asittir. Kas onarımı ve bağışıklık sistemi için önemlidir.",
+        description:
+          "Glutamine, vücutta en çok bulunan amino asittir ve birçok önemli fonksiyona sahiptir.\n\n- Kas onarımını destekler\n- Bağışıklık sistemini güçlendirir\n- Sindirim sistemi sağlığını destekler\n- Aromasız, kolay tüketim",
+        nutritional_content: {
+          ingredients: [
+            {
+              aroma: null,
+              value: "L-Glutamine",
+            },
+          ],
+          nutrition_facts: {
+            ingredients: [
+              {
+                name: "Enerji",
+                amounts: ["16 kcal"],
+              },
+              {
+                name: "Glutamine",
+                amounts: ["5 g"],
+              },
+            ],
+            portion_sizes: ["5 g servis için"],
+          },
+          amino_acid_facts: null,
+        },
+      },
+      main_category_id: "d3cdcefe-eedd-4ee0-a254-b821ed4e2b8c",
+      sub_category_id: "13e12b25-5f83-4d5a-b555-e252c9b39012",
+      tags: ["VEJETARYEN", "GLUTENSİZ"],
+      variants: [
+        {
+          id: "glutamine-120",
+          size: {
+            gram: 120,
+            pieces: 1,
+            total_services: 24,
+          },
+          aroma: "Aromasız",
+          price: {
+            profit: null,
+            total_price: 199,
+            discounted_price: null,
+            price_per_servings: 8.29,
+            discount_percentage: null,
+          },
+          photo_src: "/media/glutamine_120_.webp",
+          is_available: true,
+        },
+      ],
+      comment_count: 0,
+      average_star: 0,
+    },
+    {
+      id: "10",
+      name: "MASS GAINER",
+      slug: "mass-gainer",
+      short_explanation: "YÜKSEK KALORİLİ PRATİK ÖĞÜN",
+      explanation: {
+        usage:
+          "Günde 1-2 servis kullanılabilir. Antrenman sonrası veya öğün aralarında, su veya süt ile karıştırarak tüketebilirsiniz. 1 ölçek (yaklaşık 100 gram) ürünü 300-400 ml sıvı ile karıştırın.",
+        features:
+          "Mass Gainer, kilo almak ve kas kütlesi artırmak isteyenler için yüksek kalorili bir öğün takviyesidir. Protein ve karbonhidrat içeriği ile hızlı kilo alımını destekler.",
+        description:
+          "Mass Gainer, yüksek kalorili ve besleyici bir öğün takviyesidir.\n\n- Yüksek kalori içeriği\n- Protein ve karbonhidrat karışımı\n- Hızlı kilo alımını destekler\n- Lezzetli çilek aroması",
+        nutritional_content: {
+          ingredients: [
+            {
+              aroma: "Çilek",
+              value:
+                "Maltodekstrin, Whey Proteini Konsantresi (Süt), Kazein Proteini (Süt), Aroma Verici, Renklendirici: Pancar Kökü Kırmızısı, Tatlandırıcı: Sukraloz",
+            },
+          ],
+          nutrition_facts: {
+            ingredients: [
+              {
+                name: "Enerji",
+                amounts: ["1600 kj | 380 kcal"],
+              },
+              {
+                name: "Protein",
+                amounts: ["30 g"],
+              },
+              {
+                name: "Karbonhidrat",
+                amounts: ["60 g"],
+              },
+              {
+                name: "Yağ",
+                amounts: ["5 g"],
+              },
+            ],
+            portion_sizes: ["100 g servis için"],
+          },
+          amino_acid_facts: null,
+        },
+      },
+      main_category_id: "38fb5754-3068-4490-a12a-169fa564c675",
+      sub_category_id: "04c9618e-553a-43cd-a72e-b646215d23e5",
+      tags: ["VEJETARYEN", "GLUTENSİZ"],
+      variants: [
+        {
+          id: "mass-gainer-2500",
+          size: {
+            gram: 2500,
+            pieces: 1,
+            total_services: 25,
+          },
+          aroma: "Çilek",
+          price: {
+            profit: null,
+            total_price: 999,
+            discounted_price: null,
+            price_per_servings: 36.96,
+            discount_percentage: null,
+          },
+          photo_src: "/media/mass-gainer_2500_strawberry.webp",
+          is_available: true,
+        },
+      ],
+      comment_count: 0,
+      average_star: 0,
+    },
   ],
 };
 
@@ -1058,12 +1476,62 @@ export const mockProductsBestSellers: ProductsBestSellersResponse = {
 
 // Get product details by ID
 export function getProductById(id: string): ProductDetail | undefined {
-  return mockProductsDetails.data.find((p) => p.id === id);
+  // First try to find in detailed products
+  const detailedProduct = mockProductsDetails.data.find((p) => p.id === id);
+  if (detailedProduct) {
+    return detailedProduct;
+  }
+
+  // If not found, create a basic ProductDetail from the product list
+  const basicProduct = mockProductsList.data.results.find((p) => p.id === id || p.slug === id);
+  if (basicProduct) {
+    // Convert basic product to ProductDetail format
+    return {
+      id: basicProduct.id,
+      name: basicProduct.name,
+      slug: basicProduct.slug,
+      short_explanation: basicProduct.short_explanation,
+      explanation: {
+        usage: "Kullanım talimatları için ürün etiketi üzerindeki bilgileri takip ediniz.",
+        features: "Yüksek kaliteli hammaddelerden üretilmiştir.",
+        description: basicProduct.short_explanation,
+        nutritional_content: {
+          ingredients: [],
+          nutrition_facts: { ingredients: [], portion_sizes: [] },
+          amino_acid_facts: null,
+        },
+      },
+      main_category_id: "default",
+      sub_category_id: "default", 
+      tags: ["GENEL"],
+      variants: [
+        {
+          id: `${basicProduct.id}-default`,
+          size: { pieces: 1, total_services: 30 },
+          aroma: "Standart",
+          price: basicProduct.price_info,
+          photo_src: basicProduct.photo_src,
+          is_available: true,
+        },
+      ],
+      comment_count: basicProduct.comment_count,
+      average_star: basicProduct.average_star,
+    };
+  }
+
+  return undefined;
 }
 
 // Get product details by slug
 export function getProductBySlug(slug: string): ProductDetail | undefined {
-  return mockProductsDetails.data.find((p) => p.slug === slug);
+  // First try to find in detailed products
+  const detailedProduct = mockProductsDetails.data.find((p) => p.slug === slug);
+  if (detailedProduct) {
+    return detailedProduct;
+  }
+
+  // If not found, try using getProductById with slug (it handles both ID and slug)
+  return getProductById(slug);
 }
 
 // Get all products

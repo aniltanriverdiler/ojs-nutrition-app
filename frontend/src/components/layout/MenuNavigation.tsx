@@ -128,7 +128,7 @@ const MenuNavigation = () => {
                       <h4 className="text-lg font-bold ml-3">
                         EN ÇOK SATANLAR
                       </h4>
-                      <Link href="/products/1">
+                      <Link href="/products/whey-protein">
                         {/* Whey Protein Section */}
                         <div className="flex flex-row gap-2 items-center">
                           <Image
@@ -177,7 +177,7 @@ const MenuNavigation = () => {
                           </div>
                         </div>
                       </Link>
-                      <Link href="/products/2">
+                      <Link href="/products/whey-isolate">
                         {/* Whey Isolate Section */}
                         <div className="flex flex-row gap-2 items-center">
                           <Image
@@ -228,7 +228,7 @@ const MenuNavigation = () => {
                       </Link>
 
                       {/* Mass Gainer Section */}
-                      <Link href="/products/3">
+                      <Link href="/products/mass-gainer">
                         <div className="flex flex-row gap-2 items-center">
                           <Image
                             src="/images/gold-whey.png"
@@ -277,7 +277,7 @@ const MenuNavigation = () => {
                         </div>
                       </Link>
 
-                      <Link href="/products/4">
+                      <Link href="/products/l-carnitine">
                         {/* Protein Bar Section */}
                         <div className="flex flex-row gap-2 items-center">
                           <Image
@@ -327,7 +327,7 @@ const MenuNavigation = () => {
                         </div>
                       </Link>
 
-                      <Link href="/products/5">
+                      <Link href="/products/glutamine">
                         {/* Pea Protein Section */}
                         <div className="flex flex-row gap-2 items-center">
                           <Image
@@ -460,7 +460,7 @@ const MenuNavigation = () => {
                       <h4 className="text-lg font-bold ml-3">
                         EN ÇOK SATANLAR
                       </h4>
-                      <Link href="/products/1">
+                      <Link href="/products/whey-protein">
                         {/* Creatine Section */}
                         <div className="flex flex-row gap-2 items-center">
                           <Image
@@ -509,7 +509,7 @@ const MenuNavigation = () => {
                           </div>
                         </div>
                       </Link>
-                      <Link href="/products/2">
+                      <Link href="/products/creatine">
                         {/* Pre-Workout Supreme Section */}
                         <div className="flex flex-row gap-2 items-center">
                           <Image
@@ -560,7 +560,7 @@ const MenuNavigation = () => {
                       </Link>
 
                       {/* Cream of Rice Section */}
-                      <Link href="/products/3">
+                      <Link href="/products/bcaa-411">
                         <div className="flex flex-row gap-2 items-center">
                           <Image
                             src="/images/gold-whey.png"
@@ -609,7 +609,7 @@ const MenuNavigation = () => {
                         </div>
                       </Link>
 
-                      <Link href="/products/4">
+                      <Link href="/products/l-carnitine">
                         {/* BCAA+ Section */}
                         <div className="flex flex-row gap-2 items-center">
                           <Image
@@ -659,7 +659,7 @@ const MenuNavigation = () => {
                         </div>
                       </Link>
 
-                      <Link href="/products/5">
+                      <Link href="/products/glutamine">
                         {/* L-Carnitine Section */}
                         <div className="flex flex-row gap-2 items-center">
                           <Image
@@ -852,7 +852,7 @@ const MenuNavigation = () => {
                       <h4 className="text-lg font-bold ml-3">
                         EN ÇOK SATANLAR
                       </h4>
-                      <Link href="/products/1">
+                      <Link href="/products/whey-protein">
                         {/* Greens & Superfoods Section */}
                         <div className="flex flex-row gap-2 items-center">
                           <Image
@@ -901,7 +901,7 @@ const MenuNavigation = () => {
                           </div>
                         </div>
                       </Link>
-                      <Link href="/products/2">
+                      <Link href="/products/creatine">
                         {/* Green Detox+ Section */}
                         <div className="flex flex-row gap-2 items-center">
                           <Image
@@ -952,7 +952,7 @@ const MenuNavigation = () => {
                       </Link>
 
                       {/* Collagen Section */}
-                      <Link href="/products/3">
+                      <Link href="/products/bcaa-411">
                         <div className="flex flex-row gap-2 items-center">
                           <Image
                             src="/images/gold-whey.png"
@@ -1120,7 +1120,7 @@ const MenuNavigation = () => {
                       <h4 className="text-lg font-bold ml-3">
                         EN ÇOK SATANLAR
                       </h4>
-                      <Link href="/products/1">
+                      <Link href="/products/whey-protein">
                         {/* Cream of Rice Section */}
                         <div className="flex flex-row gap-2 items-center">
                           <Image
@@ -1169,7 +1169,7 @@ const MenuNavigation = () => {
                           </div>
                         </div>
                       </Link>
-                      <Link href="/products/2">
+                      <Link href="/products/creatine">
                         {/* Protein Bar Section */}
                         <div className="flex flex-row gap-2 items-center">
                           <Image
@@ -1220,7 +1220,7 @@ const MenuNavigation = () => {
                       </Link>
 
                       {/* Peanut Butter Section */}
-                      <Link href="/products/3">
+                      <Link href="/products/bcaa-411">
                         <div className="flex flex-row gap-2 items-center">
                           <Image
                             src="/images/gold-whey.png"
@@ -1269,7 +1269,7 @@ const MenuNavigation = () => {
                         </div>
                       </Link>
 
-                      <Link href="/products/4">
+                      <Link href="/products/l-carnitine">
                         {/* Flavor Powder Section */}
                         <div className="flex flex-row gap-2 items-center">
                           <Image
@@ -1319,7 +1319,7 @@ const MenuNavigation = () => {
                         </div>
                       </Link>
 
-                      <Link href="/products/5">
+                      <Link href="/products/glutamine">
                         {/* Ketchup Section */}
                         <div className="flex flex-row gap-2 items-center">
                           <Image
@@ -1428,7 +1428,7 @@ const MenuNavigation = () => {
                       <h4 className="text-lg font-bold ml-3">
                         EN ÇOK SATANLAR
                       </h4>
-                      <Link href="/products/1">
+                      <Link href="/products/whey-protein">
                         {/* Multivitamin Section */}
                         <div className="flex flex-row gap-2 items-center">
                           <Image
@@ -1477,7 +1477,7 @@ const MenuNavigation = () => {
                           </div>
                         </div>
                       </Link>
-                      <Link href="/products/2">
+                      <Link href="/products/creatine">
                         {/* Omega-3 Section */}
                         <div className="flex flex-row gap-2 items-center">
                           <Image
@@ -1528,7 +1528,7 @@ const MenuNavigation = () => {
                       </Link>
 
                       {/* Thermo Burner Section */}
-                      <Link href="/products/3">
+                      <Link href="/products/bcaa-411">
                         <div className="flex flex-row gap-2 items-center">
                           <Image
                             src="/images/gold-whey.png"
@@ -1577,7 +1577,7 @@ const MenuNavigation = () => {
                         </div>
                       </Link>
 
-                      <Link href="/products/4">
+                      <Link href="/products/l-carnitine">
                         {/* ZMA Section */}
                         <div className="flex flex-row gap-2 items-center">
                           <Image
@@ -1627,7 +1627,7 @@ const MenuNavigation = () => {
                         </div>
                       </Link>
 
-                      <Link href="/products/5">
+                      <Link href="/products/glutamine">
                         {/* T-Prime Section */}
                         <div className="flex flex-row gap-2 items-center">
                           <Image

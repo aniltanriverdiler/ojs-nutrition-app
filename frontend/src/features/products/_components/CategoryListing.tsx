@@ -65,8 +65,6 @@ export default function CategoryListing({ slug }: CategoryListingProps) {
         ) : (
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 mb-4 mx-auto max-w-7xl">
             {products.map((p) => {
-              const stars = Math.round(p.average_star || 0);
-
               return (
                 <div
                   key={p.id}

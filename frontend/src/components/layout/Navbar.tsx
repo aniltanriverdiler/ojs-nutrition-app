@@ -95,7 +95,7 @@ const Navbar = () => {
               <DropdownMenuGroup>
                 <DropdownMenuItem asChild>
                   <Link
-                    href="/login"
+                    href="/auth/login"
                     className="flex items-center gap-2 cursor-pointer"
                   >
                     <UserIcon className="w-4 h-4" />
@@ -106,7 +106,7 @@ const Navbar = () => {
               <DropdownMenuSeparator />
               <DropdownMenuItem asChild>
                 <Link
-                  href="/register"
+                  href="/auth/register"
                   className="flex items-center gap-2 cursor-pointer"
                 >
                   <UserPlusIcon className="w-4 h-4" />

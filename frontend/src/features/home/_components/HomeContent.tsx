@@ -158,7 +158,7 @@ const HomeContent = () => {
         {/* Whey Protein Section */}
         <div className="flex flex-col items-center lg:justify-center">
           <Link
-            href="/products/1"
+            href="/products/whey-protein"
             className="flex flex-col sm:gap-1 items-center"
           >
             <Image
@@ -217,7 +217,7 @@ const HomeContent = () => {
 
         {/* Fitness Package Section */}
         <div className="flex flex-col items-center lg:justify-center">
-          <Link href="/products/1" className="flex flex-col gap-1 items-center">
+          <Link href="/products/creatine" className="flex flex-col gap-1 items-center">
             <div className="relative justify-self-center">
               <Image
                 src="/images/b-capsule.png"
@@ -287,7 +287,7 @@ const HomeContent = () => {
 
         {/* Vitamins Package Section */}
         <div className="flex flex-col items-center justify-center xl:mt-1">
-          <Link href="/products/1" className="flex flex-col gap-1 items-center">
+          <Link href="/products/bcaa-411" className="flex flex-col gap-1 items-center">
             <div className="relative justify-self-center">
               <Image
                 src="/images/betaine.png"
@@ -357,7 +357,7 @@ const HomeContent = () => {
 
         {/* Pre Workout Supreme Section */}
         <div className="flex flex-col items-center lg:justify-center">
-          <Link href="/products/1" className="flex flex-col items-center">
+          <Link href="/products/bcaa-411" className="flex flex-col items-center">
             <Image
               src="/images/bcaa.png"
               alt="All Products"
@@ -415,7 +415,7 @@ const HomeContent = () => {
         {/* Cream of Rice Section */}
         <div className="flex flex-col items-center 2xl:justify-center">
           <Link
-            href="/products/1"
+            href="/products/l-carnitine"
             className="flex flex-col gap-1 lg:gap-1.5 xl:gap-2.5 items-center"
           >
             <Image
@@ -475,7 +475,7 @@ const HomeContent = () => {
         {/* Creatine Section */}
         <div className="flex flex-col items-center 2xl:justify-center">
           <Link
-            href="/products/1"
+            href="/products/glutamine"
             className="flex flex-col gap-1 sm:gap-0 md:gap-1 lg:gap-1.5 xl:gap-1.5 items-center"
           >
             <Image
