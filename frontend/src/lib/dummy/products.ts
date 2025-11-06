@@ -384,42 +384,42 @@ export const mockProductsDetails: ProductsDetailsResponse = {
         nutritional_content: {
           ingredients: [
             {
-              aroma: "Bisküvi Aromalı",
+              aroma: "Bisküvi",
               value:
                 "Whey Proteini Konsantresi (Süt), Aroma Verici, DigeZyme® (Multi-Enzim Karışımı), Tatlandırıcı: Sukraloz, Emülgatör: Ayçiçek Lesitini, B6 Vitamini (Piridoksin HCL)",
             },
             {
-              aroma: "Çikolata Aromalı",
+              aroma: "Çikolata",
               value:
                 "Whey Proteini Konsantresi (Süt), Aroma Verici, Yağı Azaltılmış Kakao, DigeZyme® (Multi-Enzim Karışımı), Tatlandırıcı: Sukraloz, Emülgatör: Ayçiçek Lesitini, B6 Vitamini (Piridoksin HCL)",
             },
             {
-              aroma: "Choco Nut Aromalı",
+              aroma: "Choco Nut",
               value:
                 "Whey Proteini Konsantresi (Süt), Aroma Verici, Yağı Azaltılmış Kakao, DigeZyme® (Multi-Enzim Karışımı), Tatlandırıcı: Sukraloz, Emülgatör: Ayçiçek Lesitini, B6 Vitamini (Piridoksin HCL)",
             },
             {
-              aroma: "Salted Caramel Aromalı",
+              aroma: "Salted Caramel",
               value:
                 "Whey Proteini Konsantresi (Süt), Aroma Verici, Himalaya Tuzu, Renklendirici: Karamel, DigeZyme® (Multi-Enzim Karışımı), Tatlandırıcı: Sukraloz, Emülgatör: Ayçiçek Lesitini, B6 Vitamini (Piridoksin HCL)",
             },
             {
-              aroma: "Hindistan Cevizi Aromalı",
+              aroma: "Hindistan Cevizi",
               value:
                 "Whey Proteini Konsantresi (Süt), Aroma Verici, DigeZyme® (Multi-Enzim Karışımı), Tatlandırıcı: Sukraloz, Emülgatör: Ayçiçek Lesitini, B6 Vitamini (Piridoksin HCL)",
             },
             {
-              aroma: "Muz Aromalı",
+              aroma: "Muz",
               value:
                 "Whey Proteini Konsantresi (Süt), Aroma Verici, DigeZyme® (Multi-Enzim Karışımı), Tatlandırıcı: Sukraloz, Emülgatör: Ayçiçek Lesitini, B6 Vitamini (Piridoksin HCL)",
             },
             {
-              aroma: "Raspberry Cheesecake Aromalı",
+              aroma: "Raspberry Cheesecake",  
               value:
                 "Whey Proteini Konsantresi (Süt), Aroma Verici, Renklendirici: Pancar Kökü Kırmızısı, DigeZyme® (Multi-Enzim Karışımı), Tatlandırıcı: Sukraloz, Emülgatör: Ayçiçek Lesitini, Vanilin, B6 Vitamini (Piridoksin HCL)",
             },
             {
-              aroma: "Çilek Aromalı",
+              aroma: "Çilek",
               value:
                 "Whey Proteini Konsantresi (Süt), Aroma Verici, Renklendirici: Pancar Kökü Kırmızısı, DigeZyme® (Multi-Enzim Karışımı), Tatlandırıcı: Sukraloz, Emülgatör: Ayçiçek Lesitini, B6 Vitamini (Piridoksin HCL)",
             },

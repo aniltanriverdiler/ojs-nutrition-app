@@ -20,7 +20,7 @@ export interface Product {
 }
 
 // Variant Types
-export interface ProductSize {
+export interface ProductVariantSize {
   gram?: number;
   pieces: number;
   total_services: number;
@@ -28,7 +28,7 @@ export interface ProductSize {
 
 export interface ProductVariant {
   id: string;
-  size: ProductSize;
+  size: ProductVariantSize;
   aroma: string;
   price: PriceInfo;
   photo_src: string;
