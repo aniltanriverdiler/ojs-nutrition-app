@@ -29,6 +29,7 @@ export const mockProductsList: ProductsListResponse = {
         photo_src: "/media/whey-isolate_400_biscuit.webp",
         comment_count: 0,
         average_star: 0,
+        expiration_date: "2026-12-31",
         id: "2",
       },
       {
@@ -45,6 +46,7 @@ export const mockProductsList: ProductsListResponse = {
         photo_src: "/media/whey-protein_400_biscuit.webp",
         comment_count: 0,
         average_star: 0,
+        expiration_date: "2026-11-30",
         id: "3",
       },
       {
@@ -61,6 +63,7 @@ export const mockProductsList: ProductsListResponse = {
         photo_src: "/media/pea-protein_400_strawberry.webp",
         comment_count: 0,
         average_star: 0,
+        expiration_date: "2026-10-31",
         id: "4",
       },
       {
@@ -77,6 +80,7 @@ export const mockProductsList: ProductsListResponse = {
         photo_src: "/media/micellar-casein_400_strawberry.webp",
         comment_count: 0,
         average_star: 0,
+        expiration_date: "2026-09-30",
         id: "5",
       },
       {
@@ -93,6 +97,7 @@ export const mockProductsList: ProductsListResponse = {
         photo_src: "/media/egg-white-powder_400_.webp",
         comment_count: 0,
         average_star: 0,
+        expiration_date: "2026-08-31",
         id: "6",
       },
       {
@@ -109,6 +114,7 @@ export const mockProductsList: ProductsListResponse = {
         photo_src: "/media/milk-protein_400_strawberry.webp",
         comment_count: 0,
         average_star: 0,
+        expiration_date: "2026-07-31",
         id: "7",
       },
       {
@@ -125,6 +131,7 @@ export const mockProductsList: ProductsListResponse = {
         photo_src: "/media/soya-protein_400_strawberry.webp",
         comment_count: 0,
         average_star: 0,
+        expiration_date: "2026-06-30",
         id: "8",
       },
       {
@@ -141,6 +148,7 @@ export const mockProductsList: ProductsListResponse = {
         photo_src: "/media/collagen_250_raspberry.webp",
         comment_count: 0,
         average_star: 0,
+        expiration_date: "2026-05-31",
         id: "9",
       },
       {
@@ -157,6 +165,7 @@ export const mockProductsList: ProductsListResponse = {
         photo_src: "/media/mass-gainer_2500_strawberry.webp",
         comment_count: 0,
         average_star: 0,
+        expiration_date: "2026-04-30",
         id: "10",
       },
       {
@@ -173,6 +182,7 @@ export const mockProductsList: ProductsListResponse = {
         photo_src: "/media/vegan-gainer_2500_strawberry.webp",
         comment_count: 0,
         average_star: 0,
+        expiration_date: "2026-03-31",
         id: "11",
       },
       {
@@ -189,6 +199,7 @@ export const mockProductsList: ProductsListResponse = {
         photo_src: "/media/creatine_120_.webp",
         comment_count: 0,
         average_star: 0,
+        expiration_date: "2026-02-28",
         id: "12",
       },
       {
@@ -205,6 +216,7 @@ export const mockProductsList: ProductsListResponse = {
         photo_src: "/media/creatine-creapure_250_.webp",
         comment_count: 0,
         average_star: 0,
+        expiration_date: "2026-01-31",
         id: "13",
       },
       {
@@ -221,6 +233,7 @@ export const mockProductsList: ProductsListResponse = {
         photo_src: "/media/bcaa-411_120_apple.webp",
         comment_count: 0,
         average_star: 0,
+        expiration_date: "2026-12-15",
         id: "14",
       },
       {
@@ -237,6 +250,7 @@ export const mockProductsList: ProductsListResponse = {
         photo_src: "/media/l-carnitine_150_apple.webp",
         comment_count: 0,
         average_star: 0,
+        expiration_date: "2026-11-15",
         id: "15",
       },
       {
@@ -253,6 +267,7 @@ export const mockProductsList: ProductsListResponse = {
         photo_src: "/media/glutamine_120_.webp",
         comment_count: 0,
         average_star: 0,
+        expiration_date: "2026-10-15",
         id: "16",
       },
       {
@@ -269,6 +284,7 @@ export const mockProductsList: ProductsListResponse = {
         photo_src: "/media/eaa_120_apple.webp",
         comment_count: 0,
         average_star: 0,
+        expiration_date: "2026-09-15",
         id: "17",
       },
       {
@@ -285,6 +301,7 @@ export const mockProductsList: ProductsListResponse = {
         photo_src: "/media/arginine_120_.webp",
         comment_count: 0,
         average_star: 0,
+        expiration_date: "2026-08-15",
         id: "18",
       },
       {
@@ -301,6 +318,7 @@ export const mockProductsList: ProductsListResponse = {
         photo_src: "/media/taurine_300_.webp",
         comment_count: 0,
         average_star: 0,
+        expiration_date: "2026-07-15",
         id: "19",
       },
       {
@@ -317,6 +335,7 @@ export const mockProductsList: ProductsListResponse = {
         photo_src: "/media/leucine_300_.webp",
         comment_count: 0,
         average_star: 0,
+        expiration_date: "2026-06-15",
         id: "20",
       },
       {
@@ -333,6 +352,7 @@ export const mockProductsList: ProductsListResponse = {
         photo_src: "/media/heavy-duty-preworkout_300_apple.webp",
         comment_count: 0,
         average_star: 0,
+        expiration_date: "2026-05-15",
         id: "21",
       },
     ],
@@ -360,6 +380,7 @@ export const mockProduct: ProductResponse = {
         photo_src: "/media/egg-white-powder_400_.webp",
         comment_count: 0,
         average_star: 0,
+        expiration_date: "2026-08-31",
         id: "6",
       },
     ],
@@ -921,6 +942,7 @@ export const mockProductsDetails: ProductsDetailsResponse = {
       ],
       comment_count: 10869,
       average_star: 0,
+      expiration_date: "2026-11-30",
     },
     {
       id: "86",
@@ -990,6 +1012,7 @@ export const mockProductsDetails: ProductsDetailsResponse = {
       ],
       comment_count: 0,
       average_star: 0,
+      expiration_date: "2026-10-31",
     },
     {
       id: "2",
@@ -1086,6 +1109,7 @@ export const mockProductsDetails: ProductsDetailsResponse = {
       ],
       comment_count: 0,
       average_star: 0,
+      expiration_date: "2026-12-31",
     },
     {
       id: "12",
@@ -1147,6 +1171,7 @@ export const mockProductsDetails: ProductsDetailsResponse = {
       ],
       comment_count: 0,
       average_star: 0,
+      expiration_date: "2026-12-31",
     },
     {
       id: "14",
@@ -1216,6 +1241,7 @@ export const mockProductsDetails: ProductsDetailsResponse = {
       ],
       comment_count: 0,
       average_star: 0,
+      expiration_date: "2026-11-30",
     },
     {
       id: "15",
@@ -1277,6 +1303,7 @@ export const mockProductsDetails: ProductsDetailsResponse = {
       ],
       comment_count: 0,
       average_star: 0,
+      expiration_date: "2026-10-30",
     },
     {
       id: "16",
@@ -1338,6 +1365,7 @@ export const mockProductsDetails: ProductsDetailsResponse = {
       ],
       comment_count: 0,
       average_star: 0,
+      expiration_date: "2026-09-30",
     },
     {
       id: "10",
@@ -1408,6 +1436,7 @@ export const mockProductsDetails: ProductsDetailsResponse = {
       ],
       comment_count: 0,
       average_star: 0,
+      expiration_date: "2026-08-30",
     },
   ],
 };
@@ -1428,6 +1457,7 @@ export const mockProductsBestSellers: ProductsBestSellersResponse = {
       photo_src: "/media/whey-protein_400_biscuit.webp",
       comment_count: 0,
       average_star: 0,
+      expiration_date: "2026-11-30",
     },
     {
       name: "CREATINE",
@@ -1442,6 +1472,7 @@ export const mockProductsBestSellers: ProductsBestSellersResponse = {
       photo_src: "/media/creatine_120_.webp",
       comment_count: 0,
       average_star: 0,
+      expiration_date: "2026-02-28",
     },
     {
       name: "PRE-WORKOUT SUPREME",
@@ -1456,6 +1487,7 @@ export const mockProductsBestSellers: ProductsBestSellersResponse = {
       photo_src: "/media/preworkout_300_apple.webp",
       comment_count: 0,
       average_star: 0,
+      expiration_date: "2026-05-15",
     },
     {
       name: "CREAM OF RICE",
@@ -1470,6 +1502,7 @@ export const mockProductsBestSellers: ProductsBestSellersResponse = {
       photo_src: "/media/cream-of-rice_1000_chocolate.webp",
       comment_count: 0,
       average_star: 0,
+      expiration_date: "2026-04-30",
     },
   ],
 };
@@ -1516,6 +1549,7 @@ export function getProductById(id: string): ProductDetail | undefined {
       ],
       comment_count: basicProduct.comment_count,
       average_star: basicProduct.average_star,
+      expiration_date: basicProduct.expiration_date ?? "2026-12-31",
     };
   }
 

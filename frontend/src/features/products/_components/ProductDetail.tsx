@@ -8,6 +8,12 @@ import { Badge } from "@/components/ui/badge";
 import { Check, ShoppingCartIcon } from "lucide-react";
 import { useProductVariants } from "../hooks/use-product-variants";
 import { MinusIcon, PlusIcon } from "lucide-react";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
 
 interface ProductDetailProps {
   id: string;
@@ -58,7 +64,7 @@ export default function ProductDetail({ id }: ProductDetailProps) {
   return (
     <div className="container mx-auto mb-5 max-w-7xl grid grid-cols-2 gap-15 pr-20">
       {/* Product Images */}
-      <div>
+      <div className="mb-24">
         <Image
           src="/images/5-htp-lg.png"
           alt={product.name}
@@ -266,6 +272,79 @@ export default function ProductDetail({ id }: ProductDetailProps) {
                 </Button>
               </div>
             </div>
+          </div>
+
+          {/* Product Guarantee , Cargo, Customers */}
+          <div className="flex flex-row items-center gap-2 mt-8 mb-5">
+            <Image
+              src="/images/cargo.png"
+              alt="Cargo"
+              width={162}
+              height={56}
+            />
+            <Image
+              src="/images/customers.png"
+              alt="Customers"
+              width={162}
+              height={56}
+            />
+            <Image
+              src="/images/guarantee.png"
+              alt="Guarantee"
+              width={162}
+              height={56}
+            />
+          </div>
+
+          {/* Product Expiration Date */}
+          <div>
+            <p className="font-semibold text-xs mb-3">
+              Son Kullanma Tarihi: {product.expiration_date}
+            </p>
+          </div>
+
+          {/* Product Description */}
+          <div>
+            <Accordion
+              type="single"
+              collapsible
+              className="w-full"
+              defaultValue="item-1"
+            >
+              <AccordionItem value="item-1">
+                <AccordionTrigger className="text-lg font-bold [&>svg]:size-5 [&>svg]:text-black [&>svg]:font-bold cursor-pointer">
+                  ÖZELLİKLER
+                </AccordionTrigger>
+                <AccordionContent className="flex flex-col gap-4 font-semibold text-balance">
+                  {product.explanation.features}
+                </AccordionContent>
+              </AccordionItem>
+              <AccordionItem value="item-2">
+                <AccordionTrigger className="text-lg font-bold [&>svg]:size-5 [&>svg]:text-black [&>svg]:font-bold cursor-pointer">
+                  BESİN İÇERİĞİ
+                </AccordionTrigger>
+                <AccordionContent className="flex flex-col gap-4 font-semibold text-balance">
+                  {product.explanation.nutritional_content.ingredients.map(
+                    (ingredient, index) => (
+                      <div key={`${ingredient.aroma || "genel"}-${index}`}>
+                        <p>
+                          {ingredient.aroma ? `${ingredient.aroma} - ` : ""}
+                          {ingredient.value}
+                        </p>
+                      </div>
+                    )
+                  )}
+                </AccordionContent>
+              </AccordionItem>
+              <AccordionItem value="item-3">
+                <AccordionTrigger className="text-lg font-bold [&>svg]:size-5 [&>svg]:text-black [&>svg]:font-bold cursor-pointer">
+                  KULLANIM ŞEKLİ
+                </AccordionTrigger>
+                <AccordionContent className="flex flex-col gap-4 font-semibold text-balance">
+                  {product.explanation.usage}
+                </AccordionContent>
+              </AccordionItem>
+            </Accordion>
           </div>
         </div>
       </div>

@@ -17,6 +17,7 @@ export interface Product {
   comment_count: number;
   average_star: number;
   id: string;
+  expiration_date: string;
 }
 
 // Variant Types
@@ -83,6 +84,7 @@ export interface ProductDetail {
   variants: ProductVariant[];
   comment_count: number;
   average_star: number;
+  expiration_date: string;
 }
 
 // API Response Types
@@ -121,6 +123,7 @@ export interface BestSellerProduct {
   photo_src: string;
   comment_count: number;
   average_star: number;
+  expiration_date: string;
 }
 
 export interface ProductsBestSellersResponse {
