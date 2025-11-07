@@ -34,7 +34,7 @@ export const mockProductsList: ProductsListResponse = {
       },
       {
         name: "WHEY PROTEIN",
-        short_explanation: "En Saf Whey",
+        short_explanation: "EN ÇOK TERCİH EDİLEN PROTEİN TAKVİYESİ",
         slug: "whey-protein",
         price_info: {
           profit: null,
@@ -43,7 +43,7 @@ export const mockProductsList: ProductsListResponse = {
           price_per_servings: 31.31,
           discount_percentage: null,
         },
-        photo_src: "/media/whey-protein_400_biscuit.webp",
+        photo_src: "/images/5-htp.png",
         comment_count: 0,
         average_star: 0,
         expiration_date: "2026-11-30",
@@ -196,7 +196,7 @@ export const mockProductsList: ProductsListResponse = {
           price_per_servings: 5.97,
           discount_percentage: null,
         },
-        photo_src: "/media/creatine_120_.webp",
+        photo_src: "/images/c-complex.png",
         comment_count: 0,
         average_star: 0,
         expiration_date: "2026-02-28",
@@ -435,7 +435,7 @@ export const mockProductsDetails: ProductsDetailsResponse = {
                 "Whey Proteini Konsantresi (Süt), Aroma Verici, DigeZyme® (Multi-Enzim Karışımı), Tatlandırıcı: Sukraloz, Emülgatör: Ayçiçek Lesitini, B6 Vitamini (Piridoksin HCL)",
             },
             {
-              aroma: "Raspberry Cheesecake",  
+              aroma: "Raspberry Cheesecake",
               value:
                 "Whey Proteini Konsantresi (Süt), Aroma Verici, Renklendirici: Pancar Kökü Kırmızısı, DigeZyme® (Multi-Enzim Karışımı), Tatlandırıcı: Sukraloz, Emülgatör: Ayçiçek Lesitini, Vanilin, B6 Vitamini (Piridoksin HCL)",
             },
@@ -1189,7 +1189,8 @@ export const mockProductsDetails: ProductsDetailsResponse = {
           ingredients: [
             {
               aroma: "Elma",
-              value: "Lösin, İzolösin, Valin, Aroma Verici, Tatlandırıcı: Sukraloz",
+              value:
+                "Lösin, İzolösin, Valin, Aroma Verici, Tatlandırıcı: Sukraloz",
             },
           ],
           nutrition_facts: {
@@ -1259,7 +1260,8 @@ export const mockProductsDetails: ProductsDetailsResponse = {
           ingredients: [
             {
               aroma: "Elma",
-              value: "L-Carnitine L-Tartrat, Aroma Verici, Tatlandırıcı: Sukraloz",
+              value:
+                "L-Carnitine L-Tartrat, Aroma Verici, Tatlandırıcı: Sukraloz",
             },
           ],
           nutrition_facts: {
@@ -1446,7 +1448,7 @@ export const mockProductsBestSellers: ProductsBestSellersResponse = {
   data: [
     {
       name: "WHEY PROTEIN",
-      short_explanation: "En Saf Whey",
+      short_explanation: "EN ÇOK TERCİH EDİLEN PROTEİN TAKVİYESİ",
       price_info: {
         profit: null,
         total_price: 549,
@@ -1454,7 +1456,7 @@ export const mockProductsBestSellers: ProductsBestSellersResponse = {
         price_per_servings: 31.31,
         discount_percentage: null,
       },
-      photo_src: "/media/whey-protein_400_biscuit.webp",
+      photo_src: "/images/5-htp.png",
       comment_count: 0,
       average_star: 0,
       expiration_date: "2026-11-30",
@@ -1469,10 +1471,40 @@ export const mockProductsBestSellers: ProductsBestSellersResponse = {
         price_per_servings: 5.97,
         discount_percentage: null,
       },
-      photo_src: "/media/creatine_120_.webp",
+      photo_src: "/images/c-complex.png",
       comment_count: 0,
       average_star: 0,
       expiration_date: "2026-02-28",
+    },
+    {
+      name: "FITNESS PAKETİ",
+      short_explanation: "EN POPÜLER ÜRÜNLER BİR ARADA",
+      price_info: {
+        profit: 700,
+        total_price: 1499,
+        discounted_price: 799,
+        price_per_servings: 15.98,
+        discount_percentage: 29,
+      },
+      photo_src: "/images/b-complex.png",
+      comment_count: 76560,
+      average_star: 5,
+      expiration_date: "2026-12-31",
+    },
+    {
+      name: "GÜNLÜK VİTAMİN PAKETİ",
+      short_explanation: "EN SIK TÜKETİLEN TAKVİYELER",
+      price_info: {
+        profit: 168,
+        total_price: 717,
+        discounted_price: 549,
+        price_per_servings: 10.98,
+        discount_percentage: 23,
+      },
+      photo_src: "/images/betaine.png",
+      comment_count: 5013,
+      average_star: 5,
+      expiration_date: "2026-11-30",
     },
     {
       name: "PRE-WORKOUT SUPREME",
@@ -1484,7 +1516,7 @@ export const mockProductsBestSellers: ProductsBestSellersResponse = {
         price_per_servings: 19.95,
         discount_percentage: null,
       },
-      photo_src: "/media/preworkout_300_apple.webp",
+      photo_src: "/images/bcaa.png",
       comment_count: 0,
       average_star: 0,
       expiration_date: "2026-05-15",
@@ -1499,7 +1531,7 @@ export const mockProductsBestSellers: ProductsBestSellersResponse = {
         price_per_servings: 11.95,
         discount_percentage: null,
       },
-      photo_src: "/media/cream-of-rice_1000_chocolate.webp",
+      photo_src: "/images/green-detox.png",
       comment_count: 0,
       average_star: 0,
       expiration_date: "2026-04-30",
@@ -1516,7 +1548,9 @@ export function getProductById(id: string): ProductDetail | undefined {
   }
 
   // If not found, create a basic ProductDetail from the product list
-  const basicProduct = mockProductsList.data.results.find((p) => p.id === id || p.slug === id);
+  const basicProduct = mockProductsList.data.results.find(
+    (p) => p.id === id || p.slug === id
+  );
   if (basicProduct) {
     // Convert basic product to ProductDetail format
     return {
@@ -1525,7 +1559,8 @@ export function getProductById(id: string): ProductDetail | undefined {
       slug: basicProduct.slug,
       short_explanation: basicProduct.short_explanation,
       explanation: {
-        usage: "Kullanım talimatları için ürün etiketi üzerindeki bilgileri takip ediniz.",
+        usage:
+          "Kullanım talimatları için ürün etiketi üzerindeki bilgileri takip ediniz.",
         features: "Yüksek kaliteli hammaddelerden üretilmiştir.",
         description: basicProduct.short_explanation,
         nutritional_content: {
@@ -1535,7 +1570,7 @@ export function getProductById(id: string): ProductDetail | undefined {
         },
       },
       main_category_id: "default",
-      sub_category_id: "default", 
+      sub_category_id: "default",
       tags: ["GENEL"],
       variants: [
         {
@@ -1583,4 +1618,33 @@ export function getProductsByCategoryId(category: string): ProductDetail[] {
   return mockProductsDetails.data.filter(
     (p) => p.main_category_id === category
   );
+}
+
+export function getHomeBestSellers() {
+  return mockProductsBestSellers.data.map((item) => {
+    const related =
+      mockProductsList.data.results.find((p) => p.name === item.name) ?? null;
+
+    const slug = related?.slug ?? item.name.toLowerCase().replace(/\s+/g, "-");
+    const hasDiscount = Boolean(item.price_info.discounted_price);
+
+    return {
+      href: related ? `/products/${related.slug}` : `/products/${slug}`,
+      name: item.name,
+      description: item.short_explanation,
+      price: item.price_info.discounted_price ?? item.price_info.total_price,
+      previousPrice: item.price_info.discounted_price
+        ? item.price_info.total_price
+        : undefined,
+      commentCount: related?.comment_count ?? item.comment_count,
+      imageSrc: item.photo_src,
+      hasDiscount,
+      badge: hasDiscount
+        ? {
+            text: `%${item.price_info.discount_percentage}`,
+            sub: "İNDİRİM",
+          }
+        : undefined,
+    };
+  });
 }

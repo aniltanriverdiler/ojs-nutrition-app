@@ -7,60 +7,11 @@ import "swiper/css/pagination";
 import "swiper/css/navigation";
 import Image from "next/image";
 import { Card, CardContent } from "@/components/ui/card";
+import { getHomeReviews, getReviewsSummary } from "@/lib/dummy/reviews";
 
 const HomeSlider = () => {
-  const reviews = [
-    {
-      id: 1,
-      rating: 5,
-      date: "03/05/2024",
-      title: "Beğendim gayet güzeldi",
-      text: "Ürün gayet güzel ama ekşiliği bir süreden sonra bayabiliyor insanı. Teşekkürler.",
-      author: "Anıl T.",
-      productImage: "/images/gold-whey.png",
-      readMoreHref: "#",
-    },
-    {
-      id: 2,
-      rating: 5,
-      date: "21/06/2024",
-      title: "Hızlı teslimat",
-      text: "Kargom çok hızlı geldi. Tadını da çok beğendim, tekrar alırım.",
-      author: "Elif K.",
-      productImage: "/images/gold-whey.png",
-      readMoreHref: "#",
-    },
-    {
-      id: 3,
-      rating: 4,
-      date: "02/07/2024",
-      title: "Lezzetli",
-      text: "Genel olarak başarılı. Bir tık daha az ekşi olsa mükemmel olurdu.",
-      author: "Mert A.",
-      productImage: "/images/gold-whey.png",
-      readMoreHref: "#",
-    },
-    {
-      id: 4,
-      rating: 5,
-      date: "10/08/2024",
-      title: "Harika deneyim",
-      text: "Paketleme çok özenliydi. Ailecek severek tüketiyoruz.",
-      author: "Selin D.",
-      productImage: "/images/gold-whey.png",
-      readMoreHref: "#",
-    },
-    {
-      id: 5,
-      rating: 5,
-      date: "15/09/2024",
-      title: "Taze ve kaliteli",
-      text: "Gerçekten taze. İçeriği temiz olduğu için gönül rahatlığıyla aldım.",
-      author: "Baran Y.",
-      productImage: "/images/gold-whey.png",
-      readMoreHref: "#",
-    },
-  ];
+  const reviews = getHomeReviews(5);
+  const { totalReviews, averageRating } = getReviewsSummary();
 
   return (
     <section id="home-slider">
@@ -72,17 +23,18 @@ const HomeSlider = () => {
           </h3>
         </div>
         <div className="flex flex-row items-center justify-end">
-          {Array.from({ length: 5 }).map((_, i) => (
+          {Array.from({ length: averageRating }).map((_, i) => (
             <Image
               key={i}
               src="/icons/star-v2.svg"
               alt="Star"
               width={26}
               height={26}
+              priority
             />
           ))}
           <p className="text-sm font-bold text-gray-500 underline ml-2">
-            19845 Yorum
+            {totalReviews} Yorum
           </p>
         </div>
       </div>
@@ -128,6 +80,7 @@ const HomeSlider = () => {
                           alt="Star"
                           width={24}
                           height={24}
+                          priority
                         />
                       ))}
                     </div>
@@ -148,6 +101,7 @@ const HomeSlider = () => {
                         width={84}
                         height={84}
                         className="h-20 w-20 rounded-md border border-gray-400 p-1 object-contain"
+                        priority
                       />
                     )}
                     <p className="text-[15px] leading-7 text-gray-700">

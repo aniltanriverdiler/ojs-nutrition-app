@@ -37,7 +37,7 @@ const HeroSection = () => {
 
     {/* Hero Section Banner */}
     <div>
-      <Image src="/images/hero-desktop-banner.png" alt="Hero Banner" width={1920} height={640} />
+      <Image src="/images/hero-desktop-banner.png" alt="Hero Banner" width={1920} height={640} priority />
     </div>
     </>
   )
