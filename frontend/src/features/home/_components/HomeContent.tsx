@@ -1,6 +1,6 @@
 import Image from "next/image";
 import React from "react";
-import ProductCard from "./ProductCard";
+import ProductCard from "../../../components/shared/ProductCard";
 import { getHomeBestSellers } from "@/lib/dummy/products";
 import CategoryCards from "./CategoryCards";
 import { HOME_CATEGORIES } from "@/lib/constants/homeCategories";
