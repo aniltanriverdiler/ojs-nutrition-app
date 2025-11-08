@@ -133,7 +133,7 @@ export default function ProductDetail({ id }: ProductDetailProps) {
         </Breadcrumb>
       </div>
 
-      <div className="container mx-auto max-w-7xl grid grid-cols-2 gap-15 pr-20">
+      <div className="container mx-auto max-w-7xl grid grid-cols-1 md:grid-cols-2 gap-15 px-4 2xl:px-0 2xl:pr-20">
         {/* Product Images */}
         <div className="mt-8">
           <Image

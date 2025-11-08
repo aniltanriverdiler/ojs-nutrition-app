@@ -34,7 +34,7 @@ const ProductReviews = ({ productId }: ProductReviewsProps) => {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
         {/*Left Side: Average Rating */}
         <div className="flex flex-col gap-2 items-center md:items-start">
-          <p className="text-5xl font-semibold text-gray-800 items-center ml-16">
+          <p className="text-5xl font-semibold text-gray-800 items-center md:ml-16">
             {summary.averageRating}
           </p>
           <div className="flex flex-row items-center gap-1">
@@ -49,7 +49,7 @@ const ProductReviews = ({ productId }: ProductReviewsProps) => {
               />
             ))}
           </div>
-          <p className="text-lg font-semibold text-gray-700 ml-14 mb-6">
+          <p className="text-lg font-semibold text-gray-700 md:ml-14 mb-6">
             {summary.totalReviews.toLocaleString("tr-TR")} YORUM
           </p>
           <Button
