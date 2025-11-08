@@ -1,4 +1,4 @@
-import { Review } from "@/types/reviews";
+import { Review, ReviewsSummary } from "@/types/reviews";
 
 export const mockReviews: Review[] = [
   {
@@ -101,15 +101,241 @@ export const mockReviews: Review[] = [
     productImage: "/images/gold-whey.png",
     readMoreHref: "#",
   },
+  {
+    id: 11,
+    rating: 5,
+    date: "20/11/2024",
+    title: "Çok iyi",
+    text: "Ürünü düzenli kullanıyorum ve sonuçlardan memnunum. Kalite fiyat dengesi mükemmel.",
+    author: "Deniz K.",
+    productImage: "/images/gold-whey.png",
+    readMoreHref: "#",
+  },
+  {
+    id: 12,
+    rating: 4,
+    date: "25/11/2024",
+    title: "Memnun kaldım",
+    text: "İlk defa denedim ve beğendim. Paketleme de çok iyiydi. Tekrar alacağım.",
+    author: "Burak Ç.",
+    productImage: "/images/gold-whey.png",
+    readMoreHref: "#",
+  },
+  {
+    id: 13,
+    rating: 5,
+    date: "01/12/2024",
+    title: "Mükemmel",
+    text: "Ürün gerçekten kaliteli. Hızlı teslimat ve güvenilir satıcı. Teşekkürler.",
+    author: "Gizem Y.",
+    productImage: "/images/gold-whey.png",
+    readMoreHref: "#",
+  },
+  {
+    id: 14,
+    rating: 5,
+    date: "05/12/2024",
+    title: "Harika ürün",
+    text: "İkinci siparişim. İlk aldığımdan beri düzenli kullanıyorum. Çok memnunum.",
+    author: "Onur T.",
+    productImage: "/images/gold-whey.png",
+    readMoreHref: "#",
+  },
+  {
+    id: 15,
+    rating: 4,
+    date: "10/12/2024",
+    title: "İyi kalite",
+    text: "Beklentilerimi karşıladı. Kullanımı kolay ve pratik. Tavsiye ederim.",
+    author: "Seda R.",
+    productImage: "/images/gold-whey.png",
+    readMoreHref: "#",
+  },
+  {
+    id: 16,
+    rating: 5,
+    date: "15/12/2024",
+    title: "Çok başarılı",
+    text: "Ürün gerçekten işe yarıyor. Fiyatına göre çok iyi bir seçim. Tekrar alacağım.",
+    author: "Tolga M.",
+    productImage: "/images/gold-whey.png",
+    readMoreHref: "#",
+  },
+  {
+    id: 17,
+    rating: 3,
+    date: "18/12/2024",
+    title: "Orta seviye",
+    text: "Ürün iyi ama beklentilerim biraz daha yüksekti. Yine de fena değil.",
+    author: "Pınar A.",
+    productImage: "/images/gold-whey.png",
+    readMoreHref: "#",
+  },
+  {
+    id: 18,
+    rating: 5,
+    date: "22/12/2024",
+    title: "Mükemmel kalite",
+    text: "Üçüncü kez alıyorum. Her seferinde aynı kaliteyi görüyorum. Çok memnunum.",
+    author: "Cem N.",
+    productImage: "/images/gold-whey.png",
+    readMoreHref: "#",
+  },
+  {
+    id: 19,
+    rating: 4,
+    date: "28/12/2024",
+    title: "Başarılı ürün",
+    text: "Kullanımı kolay ve etkili. Paketleme de çok özenliydi. Teşekkürler.",
+    author: "Derya Ş.",
+    productImage: "/images/gold-whey.png",
+    readMoreHref: "#",
+  },
+  {
+    id: 20,
+    rating: 5,
+    date: "02/01/2025",
+    title: "Harika deneyim",
+    text: "Ürünü arkadaşım tavsiye etti. Gerçekten çok iyi. Hızlı kargo için de teşekkürler.",
+    author: "Fatih D.",
+    productImage: "/images/gold-whey.png",
+    readMoreHref: "#",
+  },
+  {
+    id: 21,
+    rating: 4,
+    date: "08/01/2025",
+    title: "İyi ürün",
+    text: "Beklentilerimi karşıladı. Kalite fiyat dengesi iyi. Tekrar almayı düşünüyorum.",
+    author: "Nazlı G.",
+    productImage: "/images/gold-whey.png",
+    readMoreHref: "#",
+  },
+  {
+    id: 22,
+    rating: 5,
+    date: "12/01/2025",
+    title: "Çok memnunum",
+    text: "İkinci kez alıyorum. Ürün gerçekten kaliteli ve etkili. Tavsiye ederim.",
+    author: "Kaan P.",
+    productImage: "/images/gold-whey.png",
+    readMoreHref: "#",
+  },
+  {
+    id: 23,
+    rating: 5,
+    date: "18/01/2025",
+    title: "Mükemmel",
+    text: "Ürünü düzenli kullanıyorum ve sonuçlardan çok memnunum. Kesinlikle tekrar alacağım.",
+    author: "Melis H.",
+    productImage: "/images/gold-whey.png",
+    readMoreHref: "#",
+  },
+  {
+    id: 24,
+    rating: 4,
+    date: "22/01/2025",
+    title: "Başarılı",
+    text: "Ürün iyi ama ambalaj biraz daha sağlam olabilirdi. Yine de memnun kaldım.",
+    author: "Arda F.",
+    productImage: "/images/gold-whey.png",
+    readMoreHref: "#",
+  },
+  {
+    id: 25,
+    rating: 5,
+    date: "28/01/2025",
+    title: "Harika kalite",
+    text: "Üçüncü siparişim. Her seferinde aynı kaliteyi görüyorum. Çok güvenilir bir marka.",
+    author: "Ece V.",
+    productImage: "/images/gold-whey.png",
+    readMoreHref: "#",
+  },
+  {
+    id: 26,
+    rating: 4,
+    date: "03/02/2025",
+    title: "İyi deneyim",
+    text: "İlk defa denedim ve beğendim. Kullanımı kolay ve pratik. Tekrar alacağım.",
+    author: "Okan C.",
+    productImage: "/images/gold-whey.png",
+    readMoreHref: "#",
+  },
+  {
+    id: 27,
+    rating: 5,
+    date: "08/02/2025",
+    title: "Çok iyi ürün",
+    text: "Ürün gerçekten kaliteli. Hızlı teslimat ve güvenilir satıcı. Teşekkürler.",
+    author: "İrem U.",
+    productImage: "/images/gold-whey.png",
+    readMoreHref: "#",
+  },
+  {
+    id: 28,
+    rating: 4,
+    date: "12/02/2025",
+    title: "Memnun kaldım",
+    text: "Beklentilerimi karşıladı. Fiyatına göre çok iyi bir kalite. Tavsiye ederim.",
+    author: "Serkan I.",
+    productImage: "/images/gold-whey.png",
+    readMoreHref: "#",
+  },
+  {
+    id: 29,
+    rating: 5,
+    date: "18/02/2025",
+    title: "Mükemmel kalite",
+    text: "İkinci kez alıyorum. İlk aldığımdan beri düzenli kullanıyorum ve çok memnunum.",
+    author: "Burcu Z.",
+    productImage: "/images/gold-whey.png",
+    readMoreHref: "#",
+  },
+  {
+    id: 30,
+    rating: 4,
+    date: "22/02/2025",
+    title: "Başarılı ürün",
+    text: "Ürün beklentilerimi karşıladı. Kullanımı kolay ve etkili. Tekrar almayı düşünüyorum.",
+    author: "Volkan Ö.",
+    productImage: "/images/gold-whey.png",
+    readMoreHref: "#",
+  },
 ];
 
-export function getHomeReviews(limit?: number): Review[] {
-  return limit ? mockReviews.slice(0, limit) : mockReviews;
+export function getReviewsByProductId(
+  productId: string,
+  page: number = 1,
+  limit: number = 10
+): Review[] {
+  // for now, return all reviews (filtering by productId will be done in the API)
+  const start = (page - 1) * limit;
+  const end = start + limit;
+  return mockReviews.slice(start, end);
 }
 
-export function getReviewsSummary() {
+export function getReviewSummary(productId: string): ReviewsSummary {
+  // for now, calculate from mockReviews
+  const productReviews = mockReviews; // API'ye geçince productId'ye göre filtrele
+  
+  const totalReviews = productReviews.length;
+  const averageRating = 
+    productReviews.reduce((sum, r) => sum + r.rating, 0) / totalReviews;
+  
+  // calculate rating distribution
+  const ratingDistribution: { [key: number]: number } = { 5: 0, 4: 0, 3: 0, 2: 0, 1: 0 };
+  productReviews.forEach((review) => {
+    ratingDistribution[review.rating] = (ratingDistribution[review.rating] || 0) + 1;
+  });
+
   return {
-    totalReviews: 19845,
-    averageRating: 5,
+    totalReviews,
+    averageRating: Math.round(averageRating * 10) / 10, // like 4.8
+    ratingDistribution,
   };
+}
+
+export function getTotalPages(productId: string, limit: number = 10): number {
+  const totalReviews = mockReviews.length; // filtering by productId will be done in the API
+  return Math.ceil(totalReviews / limit);
 }

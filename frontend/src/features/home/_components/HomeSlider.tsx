@@ -7,11 +7,15 @@ import "swiper/css/pagination";
 import "swiper/css/navigation";
 import Image from "next/image";
 import { Card, CardContent } from "@/components/ui/card";
-import { getHomeReviews, getReviewsSummary } from "@/lib/dummy/reviews";
+import { getReviewsByProductId, getReviewSummary } from "@/lib/dummy/reviews";
 
-const HomeSlider = () => {
-  const reviews = getHomeReviews(5);
-  const { totalReviews, averageRating } = getReviewsSummary();
+interface HomeSliderProps {
+  productId: string;
+}
+
+const HomeSlider = ({ productId }: HomeSliderProps) => {
+  const reviews = getReviewsByProductId(productId, 1, 5);
+  const summary = getReviewSummary(productId);
 
   return (
     <section id="home-slider">
@@ -23,7 +27,7 @@ const HomeSlider = () => {
           </h3>
         </div>
         <div className="flex flex-row items-center justify-end">
-          {Array.from({ length: averageRating }).map((_, i) => (
+          {Array.from({ length: summary.averageRating }).map((_, i) => (
             <Image
               key={i}
               src="/icons/star-v2.svg"
@@ -34,7 +38,7 @@ const HomeSlider = () => {
             />
           ))}
           <p className="text-sm font-bold text-gray-500 underline ml-2">
-            {totalReviews} Yorum
+            {summary.totalReviews} Yorum
           </p>
         </div>
       </div>

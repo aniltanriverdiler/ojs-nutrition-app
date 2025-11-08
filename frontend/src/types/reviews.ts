@@ -18,4 +18,7 @@ export interface ReviewsResponse {
 export interface ReviewsSummary {
   totalReviews: number;
   averageRating: number;
+  ratingDistribution: {
+    [key: number]: number;
+  };
 }

@@ -15,6 +15,7 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import RecentlyViewedProducts from "./RecentlyViewedProducts";
+import ProductReviews from "./ProductReviews";
 
 interface ProductDetailProps {
   id: string;
@@ -359,6 +360,9 @@ export default function ProductDetail({ id }: ProductDetailProps) {
 
       {/* Recently Viewed Products */}
       <RecentlyViewedProducts currentProductId={id} />
+
+      {/* Product Reviews */}
+      <ProductReviews productId={product.id} />
     </>
   );
 }
