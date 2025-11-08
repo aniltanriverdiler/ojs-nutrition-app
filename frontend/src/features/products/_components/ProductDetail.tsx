@@ -1,6 +1,6 @@
 "use client";
 import React, { useState } from "react";
-import { getProductById } from "@/lib/dummy/products";
+import { getHomeBestSellers, getProductById } from "@/lib/dummy/products";
 import Image from "next/image";
 import { notFound } from "next/navigation";
 import { Button } from "@/components/ui/button";
@@ -14,8 +14,19 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import {
+  Breadcrumb,
+  BreadcrumbList,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  BreadcrumbPage,
+  BreadcrumbSeparator,
+} from "@/components/ui/breadcrumb";
+import { getAllCategories } from "@/lib/dummy/categories";
 import RecentlyViewedProducts from "./RecentlyViewedProducts";
 import ProductReviews from "./ProductReviews";
+import ProductCard from "@/components/shared/ProductCard";
+import Link from "next/link";
 
 interface ProductDetailProps {
   id: string;
@@ -29,6 +40,15 @@ export default function ProductDetail({ id }: ProductDetailProps) {
   if (!product) {
     notFound();
   }
+
+  // Get category information for breadcrumb
+  const allCategories = getAllCategories();
+  const mainCategory = allCategories.find(
+    (cat) => cat.id === product.main_category_id
+  );
+  const subCategory = mainCategory?.children?.find(
+    (child) => child.id === product.sub_category_id
+  );
 
   // Quantity state management
   const [quantity, setQuantity] = useState<number>(1);
@@ -63,8 +83,56 @@ export default function ProductDetail({ id }: ProductDetailProps) {
     ? selectedVariant?.price?.total_price
     : null;
 
+  const bestSellers = getHomeBestSellers();
+
   return (
     <>
+      <div className="container mx-auto max-w-7xl px-4 pt-5">
+        {/* Breadcrumb */}
+        <Breadcrumb>
+          <BreadcrumbList>
+            <BreadcrumbItem>
+              <BreadcrumbLink asChild>
+                <Link href="/" className="font-semibold">
+                  Anasayfa
+                </Link>
+              </BreadcrumbLink>
+            </BreadcrumbItem>
+            {mainCategory && (
+              <>
+                <BreadcrumbSeparator />
+                <BreadcrumbItem>
+                  <BreadcrumbLink asChild>
+                    <Link
+                      href={`/products/${mainCategory.slug}`}
+                      className="font-semibold"
+                    >
+                      {mainCategory.name}
+                    </Link>
+                  </BreadcrumbLink>
+                </BreadcrumbItem>
+              </>
+            )}
+            {subCategory && (
+              <>
+                <BreadcrumbSeparator />
+                <BreadcrumbItem>
+                  <BreadcrumbPage className="font-semibold">
+                    {subCategory.name}
+                  </BreadcrumbPage>
+                </BreadcrumbItem>
+              </>
+            )}
+            <BreadcrumbSeparator />
+            <BreadcrumbItem>
+              <BreadcrumbPage className="font-semibold">
+                {product.name}
+              </BreadcrumbPage>
+            </BreadcrumbItem>
+          </BreadcrumbList>
+        </Breadcrumb>
+      </div>
+
       <div className="container mx-auto max-w-7xl grid grid-cols-2 gap-15 pr-20">
         {/* Product Images */}
         <div className="mt-8">
@@ -363,6 +431,38 @@ export default function ProductDetail({ id }: ProductDetailProps) {
 
       {/* Product Reviews */}
       <ProductReviews productId={product.id} />
+
+      {/* Best Sellers Section */}
+      <section className="mt-5">
+        <h3 className="text-2xl font-bold text-center mb-5">ÇOK SATANLAR</h3>
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-3 xl:grid-cols-6 gap-5 my-10 mx-auto max-w-7xl">
+          {bestSellers.map((card) => (
+            <ProductCard
+              key={card.href}
+              href={card.href}
+              imageSrc={card.imageSrc}
+              name={card.name}
+              description={card.description}
+              price={card.price}
+              previousPrice={card.previousPrice}
+              commentCount={card.commentCount}
+              badge={card.badge}
+            />
+          ))}
+        </div>
+      </section>
+
+      {/* All Products Button */}
+      <div className="flex justify-center mb-5">
+        <Link
+          href={`/products`}
+          className="text-lg font-bold text-center text-gray-800"
+        >
+          <Button className="bg-blue-900 hover:bg-blue-800 text-white text-lg w-[282px] h-[50px] rounded-md cursor-pointer">
+            TÜMÜNÜ GÖR
+          </Button>
+        </Link>
+      </div>
     </>
   );
 }
