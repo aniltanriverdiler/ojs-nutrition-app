@@ -9,10 +9,9 @@ const ProductListPage = () => {
   return (
     <div className="container mx-auto px-4 py-8">
       <div className="mb-8">
-        <h1 className="text-4xl font-bold mb-2">Tüm Ürünler</h1>
-        <p className="text-gray-600 text-lg">
-          Kaliteli beslenme takviyeleri ve spor gıdaları
-        </p>
+        <h1 className="text-4xl font-bold text-center uppercase mb-3">
+          Tüm Ürünler
+        </h1>
       </div>
 
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 mb-4 mx-auto max-w-7xl">
@@ -53,7 +52,9 @@ const ProductListPage = () => {
                 </p>
               </div>
               <p className="text-xl font-bold text-center text-gray-800">
-                {product.price_info.discounted_price || product.price_info.total_price} TL
+                {product.price_info.discounted_price ||
+                  product.price_info.total_price}{" "}
+                TL
               </p>
             </Link>
           </div>

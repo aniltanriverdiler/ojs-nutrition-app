@@ -1,8 +1,8 @@
-import React from 'react'
+import ContactPageForms from '@/features/contact/ContactPageForms';
 
 const ContactPage = () => {
   return (
-    <div>ContactPage</div>
+    <ContactPageForms />
   )
 }
 

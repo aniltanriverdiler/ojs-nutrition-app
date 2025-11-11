@@ -1,3 +1,4 @@
+import { CATEGORIES } from "@/lib/constants/categories";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
@@ -68,13 +69,13 @@ const Footer = () => {
             />
           </Link>
           <div className="flex flex-col items-start ml-12 space-y-2 text-[#999999]">
-            <Link href="/" className="font-medium">
+            <Link href="/contact" className="font-medium">
               İletişim
             </Link>
-            <Link href="/" className="font-medium">
+            <Link href="/about" className="font-medium">
               Hakkımızda
             </Link>
-            <Link href="/" className="font-medium">
+            <Link href="/faq" className="font-medium">
               Sıkça Sorulan Sorular
             </Link>
             <Link href="/" className="font-medium">
@@ -100,29 +101,29 @@ const Footer = () => {
 
         {/* Categories Section */}
         <div className="flex flex-col gap-3 justify-center items-center pr-10">
-          <Link href="/" className="text-xl font-bold text-white mr-5">
+          <Link href="/products" className="text-xl font-bold text-white mr-5">
             Kategoriler
           </Link>
           <div className="flex flex-col items-start ml-12 space-y-2 text-[#999999]">
-            <Link href="/" className="font-medium">
+            <Link href={`/products/${CATEGORIES.PROTEIN}`} className="font-medium">
               Protein
             </Link>
-            <Link href="/" className="font-medium">
+            <Link href={`/products/${CATEGORIES.SPORTS_NUTRITION}`} className="font-medium">
               Spor Gıdaları
             </Link>
-            <Link href="/" className="font-medium">
+            <Link href={`/products/${CATEGORIES.HEALTH}`} className="font-medium">
               Sağlık
             </Link>
-            <Link href="/" className="font-medium">
+            <Link href={`/products/${CATEGORIES.FOOD}`} className="font-medium">
               Gıda
             </Link>
-            <Link href="/" className="font-medium">
+            <Link href={`/products/${CATEGORIES.VITAMIN}`} className="font-medium">
               Vitamin
             </Link>
             <Link href="/" className="font-medium">
               Aksesuar
             </Link>
-            <Link href="/" className="font-medium">
+            <Link href="/products" className="font-medium">
               Tüm Ürünler
             </Link>
             <Link href="/" className="font-medium">
@@ -140,31 +141,31 @@ const Footer = () => {
             Popüler Ürünler
           </Link>
           <div className="flex flex-col items-start mr-2 space-y-2 text-[#999999]">
-            <Link href="/" className="font-medium">
+            <Link href="/products/whey-protein" className="font-medium">
               Whey Protein
             </Link>
-            <Link href="/" className="font-medium">
+            <Link href="/products/cream-of-rice" className="font-medium">
               Cream of Rice
             </Link>
-            <Link href="/" className="font-medium">
+            <Link href="/products/creatine" className="font-medium">
               Creatine
             </Link>
-            <Link href="/" className="font-medium">
+            <Link href="/products/bcaa-411" className="font-medium">
               BCAA+
             </Link>
-            <Link href="/" className="font-medium">
+            <Link href="/products/pre-workout" className="font-medium">
               Pre-Workout
             </Link>
-            <Link href="/" className="font-medium">
+            <Link href="/products/fitness-paketi" className="font-medium">
               Fitness Paketi
             </Link>
-            <Link href="/" className="font-medium">
+            <Link href="/products/collagen" className="font-medium">
               Collagen
             </Link>
-            <Link href="/" className="font-medium">
+            <Link href="/products/gumruk-vitamin-paketi" className="font-medium">
               Günlük Vitamin Paketi
             </Link>
-            <Link href="/" className="font-medium">
+            <Link href="/products/zma" className="font-medium">
               ZMA
             </Link>
           </div>
