@@ -9,10 +9,8 @@ import { Button } from "@/components/ui/button";
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
-  FormLabel,
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
@@ -30,7 +28,7 @@ const contactPageFormSchema = z.object({
 
 type ContactPageFormValues = z.infer<typeof contactPageFormSchema>;
 
-const ContactPageForms = () => {
+const ContactForm = () => {
   // 1. Define your form.
   const form = useForm<ContactPageFormValues>({
     resolver: zodResolver(contactPageFormSchema),
@@ -50,8 +48,7 @@ const ContactPageForms = () => {
   }
 
   return (
-    <section className="container mx-auto max-w-3xl px-4 py-20">
-      <h1 className="text-[45.75px] font-bold text-center mb-5">Bize Ulaşın</h1>
+    <>
       <p className="text-start text-lg text-gray-600 mb-8">
         Bize aşağıdaki iletişim formundan ulaşabilirsiniz.
       </p>
@@ -160,8 +157,8 @@ const ContactPageForms = () => {
           sağlanmaktadır.
         </p>
       </div>
-    </section>
+    </>
   );
 };
 
-export default ContactPageForms;
+export default ContactForm;

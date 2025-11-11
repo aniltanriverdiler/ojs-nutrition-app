@@ -1,4 +1,4 @@
-import ContactPageForms from '@/features/contact/ContactPageForms';
+import ContactPageForms from '@/features/contact/_components/ContactPageForms';
 
 const ContactPage = () => {
   return (
