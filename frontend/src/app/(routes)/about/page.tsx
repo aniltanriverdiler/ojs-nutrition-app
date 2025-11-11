@@ -1,8 +1,13 @@
 import React from 'react'
+import AboutPageText from '@/features/about/_components/AboutPageText';
+import AboutPageReviews from '@/features/about/_components/AboutPageReviews';
 
 const AboutPage = () => {
   return (
-    <div>AboutPage</div>
+    <>
+      <AboutPageText />
+      <AboutPageReviews />
+    </>
   )
 }
 
