@@ -1,20 +1,13 @@
 "use client";
 import React, { useState } from "react";
 import Image from "next/image";
-import { Card, CardContent } from "@/components/ui/card";
-import {
-  Pagination,
-  PaginationContent,
-  PaginationItem,
-  PaginationLink,
-} from "@/components/ui/pagination";
 import {
   getReviewsByProductId,
   getReviewSummary,
   getTotalPages,
 } from "@/lib/dummy/reviews";
 import { Button } from "@/components/ui/button";
-import { ChevronLeftIcon, ChevronRightIcon } from "lucide-react";
+import ReviewsList from "@/components/shared/ReviewsList";
 
 interface ProductReviewsProps {
   productId: string;
@@ -89,102 +82,14 @@ const ProductReviews = ({ productId }: ProductReviewsProps) => {
         </div>
       </div>
 
-      {/* Comments List */}
-      <div className="space-y-4">
-        {reviews.map((review) => (
-          <Card
-            key={review.id}
-            className="w-full border-none bg-gray-100 shadow-md"
-          >
-            <CardContent>
-              <div className="flex flex-row gap-4 items-center w-full">
-                <div className="flex flex-col gap-2 w-full">
-                  <div className="flex flex-row items-center w-full">
-                    <div className="flex flex-row items-center flex-1">
-                      {Array.from({ length: review.rating }).map((_, i) => (
-                        <Image
-                          key={i}
-                          src="/icons/star-v2.svg"
-                          alt="Star"
-                          width={30}
-                          height={30}
-                          priority
-                        />
-                      ))}
-                      <p className="text-xl font-semibold text-gray-800 ml-2">
-                        {review.author}
-                      </p>
-                    </div>
-                    <p className="text-gray-800 font-semibold text-right w-28">
-                      {review.date}
-                    </p>
-                  </div>
-                  <p className="text-xl font-semibold text-gray-800 mt-5">
-                    {" "}
-                    {review.title}{" "}
-                  </p>
-                  <p className="text-gray-700 text-lg">{review.text}</p>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-        ))}
-      </div>
-
-      {/* Pagination Controls */}
-      {totalPages > 1 && (
-        <Pagination className="mt-8">
-          <PaginationContent className="gap-2 sm:gap-3">
-            <PaginationItem>
-              <PaginationLink
-                onClick={() => setCurrentPage((prev) => Math.max(1, prev - 1))}
-                className={
-                  currentPage === 1
-                    ? "pointer-events-none opacity-50"
-                    : "cursor-pointer gap-1 px-2.5 sm:pl-2.5"
-                }
-              >
-                <ChevronLeftIcon className="w-4 h-4" />
-              </PaginationLink>
-            </PaginationItem>
-
-            {Array.from({ length: totalPages }).map((_, i) => {
-              const page = i + 1;
-              const isActive = currentPage === page;
-              return (
-                <PaginationItem key={page}>
-                  <PaginationLink
-                    onClick={() => setCurrentPage(page)}
-                    isActive={isActive}
-                    className={`cursor-pointer ${
-                      isActive
-                        ? "bg-blue-600 text-white hover:bg-blue-700"
-                        : "hover:bg-gray-100"
-                    }`}
-                  >
-                    {page}
-                  </PaginationLink>
-                </PaginationItem>
-              );
-            })}
-
-            <PaginationItem>
-              <PaginationLink
-                onClick={() =>
-                  setCurrentPage((prev) => Math.min(totalPages, prev + 1))
-                }
-                className={
-                  currentPage === totalPages
-                    ? "pointer-events-none opacity-50"
-                    : "cursor-pointer gap-1 px-2.5 sm:pr-2.5"
-                }
-              >
-                <ChevronRightIcon className="w-4 h-4" />
-              </PaginationLink>
-            </PaginationItem>
-          </PaginationContent>
-        </Pagination>
-      )}
+      {/* Reviews List with Pagination */}
+      <ReviewsList
+        reviews={reviews}
+        totalPages={totalPages}
+        currentPage={currentPage}
+        onPageChange={setCurrentPage}
+        limit={limit}
+      />
     </section>
   );
 };

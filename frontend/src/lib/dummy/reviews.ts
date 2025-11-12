@@ -316,7 +316,7 @@ export function getReviewsByProductId(
 
 export function getReviewSummary(productId: string): ReviewsSummary {
   // for now, calculate from mockReviews
-  const productReviews = mockReviews; // API'ye geçince productId'ye göre filtrele
+  const productReviews = mockReviews; 
   
   const totalReviews = productReviews.length;
   const averageRating = 
@@ -338,4 +338,14 @@ export function getReviewSummary(productId: string): ReviewsSummary {
 export function getTotalPages(productId: string, limit: number = 10): number {
   const totalReviews = mockReviews.length; // filtering by productId will be done in the API
   return Math.ceil(totalReviews / limit);
+}
+
+export function getAllReviews(page: number = 1, limit: number = 10): Review[] {
+  const start = (page - 1) * limit;
+  const end = start + limit;
+  return mockReviews.slice(start, end);
+}
+
+export function getTotalPagesForAllReviews(limit: number = 10): number {
+  return Math.ceil(mockReviews.length / limit);
 }
