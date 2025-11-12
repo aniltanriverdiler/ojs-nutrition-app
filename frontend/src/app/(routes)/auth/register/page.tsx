@@ -1,9 +1,8 @@
 import React from 'react'
+import AuthPage from '@/features/auth/_components/AuthPage';
 
 const RegisterPage = () => {
-  return (
-    <div>RegisterPage</div>
-  )
+  return <AuthPage />;
 }
 
 export default RegisterPage;
