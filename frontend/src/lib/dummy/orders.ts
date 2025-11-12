@@ -6,7 +6,7 @@ export const mockOrders: Order[] = [
     orderNumber: "427795",
     orderDate: "31 Mart 2023",
     status: "delivered",
-    statusText: "Teslim Edildi",
+    statusText: "Sipariş Teslim Edildi",
     items: [
       {
         id: "1",
@@ -42,7 +42,7 @@ export const mockOrders: Order[] = [
     orderNumber: "290405",
     orderDate: "14 Aralık 2022",
     status: "delivered",
-    statusText: "Teslim Edildi",
+    statusText: "Sipariş Teslim Edildi",
     items: [
       {
         id: "2-1",

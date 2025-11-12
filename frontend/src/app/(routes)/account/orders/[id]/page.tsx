@@ -1,10 +1,13 @@
-import OrderDetail from '@/features/account/_components/OrderDetail';
-import React from 'react'
+import OrderDetail from "@/features/account/_components/OrderDetail";
 
-const OrderDetailsPage = () => {
-  return (
-    <OrderDetail />
-  )
+interface OrderDetailPageProps {
+  params: Promise<{ id: string }>;
 }
 
-export default OrderDetailsPage;
+const OrderDetailPage = async ({ params }: OrderDetailPageProps) => {
+  const { id } = await params;
+  
+  return <OrderDetail orderId={id} />;
+};
+
+export default OrderDetailPage;
