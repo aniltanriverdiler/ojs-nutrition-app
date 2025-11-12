@@ -12,7 +12,7 @@ export const mockOrders: Order[] = [
         id: "1",
         productId: "1",
         productName: "DEEP SLEEP",
-        productImage: "/images/deep-sleep.png",
+        productImage: "/images/deep-sleep.webp",
         variant: "Boyut: 1 KUTU",
         quantity: 1,
         price: 150,
