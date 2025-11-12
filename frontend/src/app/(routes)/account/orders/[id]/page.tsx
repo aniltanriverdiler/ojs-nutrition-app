@@ -1,8 +1,9 @@
+import OrderDetail from '@/features/account/_components/OrderDetail';
 import React from 'react'
 
 const OrderDetailsPage = () => {
   return (
-    <div>OrderDetailsPage</div>
+    <OrderDetail />
   )
 }
 

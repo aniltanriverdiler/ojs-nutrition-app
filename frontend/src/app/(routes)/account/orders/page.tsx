@@ -1,8 +1,9 @@
+import OrderList from '@/features/account/_components/OrderList';
 import React from 'react'
 
 const OrdersPage = () => {
   return (
-    <div>OrdersPage</div>
+    <OrderList />
   )
 }
 
