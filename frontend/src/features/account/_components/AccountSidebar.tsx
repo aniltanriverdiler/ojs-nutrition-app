@@ -27,7 +27,7 @@ const AccountSidebar = () => {
   const pathname = usePathname();
 
   return (
-    <nav className="flex flex-col gap-2">
+    <nav className="flex flex-row justify-center md:justify-start md:flex-col gap-2">
       {menuItems.map((item) => {
         const Icon = item.icon;
         const isActive =
