@@ -20,7 +20,7 @@ export const mockOrders: Order[] = [
       },
     ],
     address: {
-      recipient: "Uğur İLTER",
+      recipient: "Anıl Tanrıverdiler",
       fullAddress:
         "Barbaros, Nidakule Ataşehir Batı, Begonya Sk. No: 1/2, 34746 Ataşehir/İstanbul",
     },
@@ -76,7 +76,7 @@ export const mockOrders: Order[] = [
       },
     ],
     address: {
-      recipient: "Uğur İLTER",
+      recipient: "Anıl Tanrıverdiler",
       fullAddress:
         "Barbaros, Nidakule Ataşehir Batı, Begonya Sk. No: 1/2, 34746 Ataşehir/İstanbul",
     },
