@@ -71,7 +71,7 @@ const AccountForm = () => {
                   <FormControl>
                     <Input
                       type="text"
-                      className="p-6 bg-gray-50 border border-gray-300 rounded-lg"
+                      className="p-6 bg-gray-50 border border-gray-300 rounded-sm"
                       placeholder="Ad"
                       {...field}
                     />
@@ -80,6 +80,7 @@ const AccountForm = () => {
                 </FormItem>
               )}
             />
+
             {/* Surname Section */}
             <FormField
               control={form.control}
@@ -92,8 +93,8 @@ const AccountForm = () => {
                   <FormControl>
                     <Input
                       type="text"
-                      className="p-6 bg-gray-50 border border-gray-300 rounded-lg"
-                      placeholder="Soyad *"
+                      className="p-6 bg-gray-50 border border-gray-300 rounded-sm"
+                      placeholder="Soyad"
                       {...field}
                     />
                   </FormControl>
@@ -102,6 +103,7 @@ const AccountForm = () => {
               )}
             />
           </div>
+
           {/* Phone Section */}
           <FormField
             control={form.control}
@@ -137,7 +139,7 @@ const AccountForm = () => {
                   <FormControl>
                     <Input
                       type="tel"
-                      className="p-6 bg-gray-50 border border-gray-300 rounded-lg"
+                      className="p-6 bg-gray-50 border border-gray-300 rounded-sm"
                       placeholder="0XXX XXX XX XX"
                       maxLength={14}
                       {...field}
@@ -152,6 +154,7 @@ const AccountForm = () => {
               );
             }}
           />
+
           {/* Email Section */}
           <FormField
             control={form.control}
@@ -164,7 +167,7 @@ const AccountForm = () => {
                 <FormControl>
                   <Input
                     type="email"
-                    className="p-6 bg-gray-50 border border-gray-300 rounded-lg"
+                    className="p-6 bg-gray-50 border border-gray-300 rounded-sm"
                     placeholder="E-Posta"
                     {...field}
                   />
@@ -173,6 +176,7 @@ const AccountForm = () => {
               </FormItem>
             )}
           />
+
           {/* Commercial Consent Section */}
           <div className="flex items-start gap-3">
             <Checkbox id="account-consent" className="mt-1" />
@@ -194,7 +198,8 @@ const AccountForm = () => {
           <div className="flex justify-end">
             <Button
               type="submit"
-              className="w-28 bg-primary text-white font-semibold text-lg py-6 rounded-lg cursor-pointer"
+              variant="outline"
+              className="text-lg font-semibold bg-black hover:bg-black/90 text-white hover:text-white p-7 cursor-pointer"
             >
               KAYDET
             </Button>
@@ -203,7 +208,7 @@ const AccountForm = () => {
       </Form>
 
       {/* Account Deletion Section */}
-      <div className="mt-12 pt-8 border-t border-gray-300">
+      <div className="mt-10 pt-8 border-t border-gray-300 mb-10">
         <h3 className="text-start text-xl text-gray-800 font-bold mb-4">
           Hesap Silme Talebi
         </h3>

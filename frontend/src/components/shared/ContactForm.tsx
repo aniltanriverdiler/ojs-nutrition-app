@@ -66,7 +66,7 @@ const ContactForm = () => {
                   <FormControl>
                     <Input
                       type="text"
-                      className="p-6 bg-gray-50 border border-gray-300 rounded-lg"
+                      className="p-6 bg-gray-50 border border-gray-300 rounded-sm"
                       placeholder="İsim *"
                       {...field}
                     />
@@ -75,6 +75,7 @@ const ContactForm = () => {
                 </FormItem>
               )}
             />
+
             {/* Surname Section */}
             <FormField
               control={form.control}
@@ -84,7 +85,7 @@ const ContactForm = () => {
                   <FormControl>
                     <Input
                       type="text"
-                      className="p-6 bg-gray-50 border border-gray-300 rounded-lg"
+                      className="p-6 bg-gray-50 border border-gray-300 rounded-sm"
                       placeholder="Soyad"
                       {...field}
                     />
@@ -94,6 +95,7 @@ const ContactForm = () => {
               )}
             />
           </div>
+
           {/* Email Section */}
           <FormField
             control={form.control}
@@ -103,7 +105,7 @@ const ContactForm = () => {
                 <FormControl>
                   <Input
                     type="email"
-                    className="p-6 bg-gray-50 border border-gray-300 rounded-lg"
+                    className="p-6 bg-gray-50 border border-gray-300 rounded-sm"
                     placeholder="E-Posta"
                     {...field}
                   />
@@ -112,6 +114,7 @@ const ContactForm = () => {
               </FormItem>
             )}
           />
+
           {/* Message Section */}
           <FormField
             control={form.control}
@@ -120,7 +123,7 @@ const ContactForm = () => {
               <FormItem>
                 <FormControl>
                   <Textarea
-                    className="h-36 pt-4 bg-gray-50 border border-gray-300 rounded-lg"
+                    className="h-36 pt-4 bg-gray-50 border border-gray-300 rounded-sm"
                     placeholder="Mesaj"
                     {...field}
                   />
@@ -132,7 +135,8 @@ const ContactForm = () => {
           <div className="flex justify-center">
             <Button
               type="submit"
-              className="w-28 bg-primary text-white font-semibold text-lg py-6 rounded-lg cursor-pointer"
+              variant="outline"
+              className="text-lg font-semibold bg-black hover:bg-black/90 text-white hover:text-white p-7 cursor-pointer"
             >
               GÖNDER
             </Button>

@@ -51,7 +51,7 @@ const OrderList = () => {
               <Link href="/products">
                 <Button
                   variant="outline"
-                  className="text-sm bg-[#2126AB] hover:bg-[#2126AB]/90 text-white hover:text-white px-6 py-5 cursor-pointer"
+                  className="text-sm bg-black hover:bg-black/90 text-white hover:text-white px-6 py-5 cursor-pointer"
                 >
                   Yeni Sipariş Ver
                 </Button>

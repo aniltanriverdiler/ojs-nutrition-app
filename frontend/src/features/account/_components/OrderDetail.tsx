@@ -123,7 +123,7 @@ const OrderDetail = ({ orderId }: OrderDetailProps) => {
           <Link href="/products">
             <Button
               variant="outline"
-              className="w-full text-lg bg-[#2126AB] hover:bg-[#2126AB]/90 text-white hover:text-white px-7 py-6 cursor-pointer mt-3"
+              className="w-full text-lg bg-black hover:bg-black/90 text-white hover:text-white px-7 py-6 cursor-pointer mt-3"
             >
               Yeniden Sipariş Ver
             </Button>

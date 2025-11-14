@@ -13,6 +13,7 @@ export interface Address {
   name: string;
   surname: string;
   address: string;
+  apartment: string;
   city: string;
   district: string;
   phone?: string;
