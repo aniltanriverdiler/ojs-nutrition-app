@@ -1,4 +1,3 @@
-// frontend/src/app/checkout/layout.tsx
 import Link from "next/link";
 import Image from "next/image";
 import React from "react";
@@ -28,19 +27,23 @@ export default function CheckoutLayout({
             </Link>
             <div className="flex flex-col items-end gap-1">
               <p className="text-xl font-bold">Anıl Tanrıverdiler</p>
-              <p className="text-gray-400 font-semibold">tanriverdileranil@gmail.com</p>
+              <p className="text-gray-400 font-semibold">
+                tanriverdileranil@gmail.com
+              </p>
             </div>
           </div>
         </header>
 
         {/* Checkout Content */}
-        <main className="flex-1 py-4 lg:py-8 px-4 sm:px-6 lg:px-20">{children}</main>
+        <main className="flex-1 py-4 lg:py-8 px-4 sm:px-6 lg:px-20">
+          {children}
+        </main>
 
         {/* Minimal Footer - Links only */}
         <footer className="py-4 lg:py-6 px-4 sm:px-6 lg:px-20">
           <div className="flex flex-wrap gap-6 text-sm text-gray-600 items-center justify-center">
             <Link href="/faq" className="hover:text-gray-900">
-              Para İade Politikası 
+              Para İade Politikası
             </Link>
             <Link href="/faq" className="hover:text-gray-900">
               Gizlilik Politikası
@@ -54,7 +57,7 @@ export default function CheckoutLayout({
 
       {/* Right Side - Gray Area (Half of the page) */}
       <div className="hidden lg:block w-1/2 bg-gray-100">
-        <div className="w-full max-w-md mx-auto">
+        <div className="w-full mx-auto">
           <OrderSummary />
         </div>
       </div>
