@@ -1,12 +1,10 @@
-// frontend/src/features/checkout/_components/ShippingSelection.tsx
 "use client";
 
 import React, { useState } from "react";
 import { useCheckoutStore, type ShippingOption } from "@/store/checkoutStore";
 import { Button } from "@/components/ui/button";
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
-import { Truck, Zap } from "lucide-react";
+import { Checkbox } from "@/components/ui/checkbox";
 
 const shippingOptions: ShippingOption[] = [
   {
@@ -45,61 +43,50 @@ const ShippingSelection = () => {
   };
 
   return (
-    <div className="space-y-4">
-      <RadioGroup
-        value={localSelectedId}
-        onValueChange={setLocalSelectedId}
-        className="space-y-3"
-      >
-        {shippingOptions.map((option) => (
-          <div
-            key={option.id}
-            className={`border rounded-lg p-4 cursor-pointer transition-colors ${
-              localSelectedId === option.id
-                ? "border-blue-500 bg-blue-50"
-                : "border-gray-200 hover:bg-gray-50"
-            }`}
-            onClick={() => setLocalSelectedId(option.id)}
-          >
-            <div className="flex items-start gap-3">
-              <RadioGroupItem value={option.id} id={option.id} />
-              <Label
-                htmlFor={option.id}
-                className="flex-1 cursor-pointer space-y-1"
-              >
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-2">
-                    {option.id === "express" ? (
-                      <Zap className="w-5 h-5 text-yellow-500" />
-                    ) : (
-                      <Truck className="w-5 h-5 text-gray-500" />
-                    )}
-                    <span className="font-semibold text-gray-800">
-                      {option.name}
-                    </span>
-                  </div>
-                  <span className="font-semibold text-blue-600">
-                    {option.price === 0 ? "ÜCRETSİZ" : `₺${option.price}`}
-                  </span>
-                </div>
-                <p className="text-sm text-gray-600">{option.description}</p>
-                <p className="text-xs text-gray-500">
-                  Tahmini teslimat: {option.estimatedDays}
-                </p>
-              </Label>
-            </div>
+    /* Shipping Card Section */
+    <div className="space-y-4 flex flex-col gap-3 mt-5 ml-15">
+      {shippingOptions.map((option) => (
+        <Label
+          key={option.id}
+          className="hover:bg-accent/50 flex items-start gap-3 rounded-sm border p-5 has-aria-checked:border-2 has-aria-checked:border-black has-aria-checked:bg-gray-100 cursor-pointer"
+        >
+          <Checkbox
+            id={option.id}
+            checked={localSelectedId === option.id}
+            onCheckedChange={() => setLocalSelectedId(option.id)}
+            className="rounded-full size-5 data-[state=checked]:border-black data-[state=checked]:bg-black data-[state=checked]:text-white data-[state=checked]:rounded-full data-[state=checked]:size-5 cursor-pointer"
+          />
+          <div className="flex flex-col w-full gap-1">
+            <p className="text-lg leading-none font-medium">{option.name}</p>
+            <p className="mt-3 text-gray-500 text-base font-normal">
+              {option.description}
+            </p>
+            <p className="text-gray-500 text-base font-normal">
+              {option.estimatedDays}
+            </p>
+            <p className="text-gray-500 text-base font-normal">
+              {option.price} TL
+            </p>
           </div>
-        ))}
-      </RadioGroup>
+        </Label>
+      ))}
 
-      <div className="flex justify-between items-center pt-4">
-        <Button variant="outline" onClick={handleBack}>
+      {/* Back and Continue Button */}
+      <div className="flex flex-row gap-3 justify-center items-center w-full px-1.5">
+        <Button
+          variant="outline"
+          type="button"
+          onClick={handleBack}
+          className="bg-white font-semibold cursor-pointer w-1/2 px-5 py-7 text-base"
+        >
           Geri
         </Button>
         <Button
+          variant="default"
+          type="button"
           onClick={handleConfirm}
           disabled={!localSelectedId}
-          className="bg-blue-600 hover:bg-blue-700"
+          className="bg-black hover:bg-black/90 text-white font-semibold cursor-pointer w-1/2 px-5 py-7 text-base"
         >
           Devam Et
         </Button>
