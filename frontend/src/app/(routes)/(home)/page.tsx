@@ -8,7 +8,7 @@ const HomePage = () => {
     <>
     <HeroSection />
     <HomeContent />
-    <HomeSlider />
+    <HomeSlider productId="1" />
     </>
   )
 }

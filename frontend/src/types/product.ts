@@ -119,6 +119,7 @@ export interface ProductsDetailsResponse {
 export interface BestSellerProduct {
   name: string;
   short_explanation: string;
+  slug: string;
   price_info: PriceInfo;
   photo_src: string;
   comment_count: number;

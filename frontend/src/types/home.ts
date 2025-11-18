@@ -13,8 +13,8 @@ export interface ProductCardProps {
   imageSrc: string;
   name: string;
   description: string;
-  price: number;
-  previousPrice?: number;
+  price: string;
+  previousPrice?: string;
   commentCount?: number;
   badge?: { text: string; sub?: string };
   stars?: number;

@@ -1,12 +1,16 @@
 import Image from "next/image";
-import React from "react";
 import ProductCard from "../../../components/shared/ProductCard";
-import { getHomeBestSellers } from "@/lib/dummy/products";
 import CategoryCards from "./CategoryCards";
 import { HOME_CATEGORIES } from "@/lib/constants/homeCategories";
+import { getProductsListBestSellers } from "@/lib/api/products";
+import { BestSellerProduct } from "@/types/product";
 
-const HomeContent = () => {
-  const bestSellers = getHomeBestSellers();
+const HomeContent = async () => {
+  const BASE_URL = process.env.NEXT_PUBLIC_API_URL;
+  const MEDIA_BASE_URL =
+    BASE_URL?.replace(/\/api\/v1$/, "") ||
+    "https://fe1111.projects.academy.onlyjs.com";
+  const bestSellers = await getProductsListBestSellers();
 
   return (
     <>
@@ -28,19 +32,45 @@ const HomeContent = () => {
       <div>
         <h3 className="text-2xl font-bold text-center mb-5">ÇOK SATANLAR</h3>
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-3 xl:grid-cols-6 gap-5 my-10 mx-auto max-w-7xl">
-          {bestSellers.map((card) => (
-            <ProductCard
-              key={card.href}
-              href={card.href}
-              imageSrc={card.imageSrc}
-              name={card.name}
-              description={card.description}
-              price={card.price}
-              previousPrice={card.previousPrice}
-              commentCount={card.commentCount}
-              badge={card.badge}
-            />
-          ))}
+          {bestSellers.data.map((product: BestSellerProduct) => {
+            const hasDiscount = product.price_info.discounted_price !== null;
+            const currentPrice = hasDiscount
+              ? product.price_info.discounted_price
+              : product.price_info.total_price;
+            const oldPrice = hasDiscount
+              ? product.price_info.total_price
+              : undefined;
+
+            return (
+              <ProductCard
+                key={product.slug || product.name}
+                href={`/products/${product.slug || product.name}`}
+                imageSrc={
+                  product.photo_src
+                    ? product.photo_src.startsWith("http")
+                      ? product.photo_src
+                      : `${MEDIA_BASE_URL}${product.photo_src}`
+                    : "/images/5-htp.png"
+                }
+                name={product.name}
+                description={product.short_explanation}
+                price={currentPrice?.toLocaleString("tr-TR") || ""}
+                previousPrice={
+                  oldPrice ? oldPrice.toLocaleString("tr-TR") : undefined
+                }
+                commentCount={product.comment_count}
+                stars={Math.round(product.average_star)}
+                badge={
+                  product.price_info.discount_percentage
+                    ? {
+                        text: `%${product.price_info.discount_percentage}`,
+                        sub: "indirim",
+                      }
+                    : undefined
+                }
+              />
+            );
+          })}
         </div>
       </div>
 

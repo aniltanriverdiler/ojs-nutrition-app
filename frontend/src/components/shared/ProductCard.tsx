@@ -25,6 +25,7 @@ const ProductCard = ({
             height={168}
             className="justify-self-center"
             priority
+            unoptimized
           />
           {badge ? (
             <div className="absolute -top-6 -right-4 bg-red-500 text-white font-bold w-16 h-16 rounded-none flex flex-col items-center justify-center">
