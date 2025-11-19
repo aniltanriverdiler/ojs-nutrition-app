@@ -17,13 +17,13 @@ const ProductCard = ({
   return (
     <div className="flex flex-col items-center">
       <Link href={href} className="flex flex-col sm:gap-1 items-center">
-        <div className="relative justify-self-center">
+        <div className="relative w-44 h-44 flex items-center justify-center">
           <Image
             src={imageSrc}
             alt={name}
-            width={168}
-            height={168}
-            className="justify-self-center"
+            fill
+            sizes="168px"
+            className="object-cover"
             priority
             unoptimized
           />
@@ -40,11 +40,11 @@ const ProductCard = ({
         </div>
 
         <p className="text-lg font-bold text-center text-gray-800">{name}</p>
-        <p className="font-semibold text-center text-gray-400 text-sm">
+        <p className="font-semibold text-center text-gray-400 text-sm min-h-[36px]">
           {description}
         </p>
 
-        <div className="flex flex-row items-center justify-center">
+        <div className="flex flex-row items-center justify-center min-h-[24px]">
           {Array.from({ length: stars }).map((_, i) => (
             <Image
               key={i}
