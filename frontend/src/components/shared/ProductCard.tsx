@@ -1,4 +1,5 @@
 import { ProductCardProps } from "@/types/home";
+import { Star } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
@@ -13,22 +14,25 @@ const ProductCard = ({
   commentCount,
   badge,
   stars = 5,
+  imageContainerClassName = "w-[170px] h-[170px]",
 }: ProductCardProps) => {
   return (
-    <div className="flex flex-col items-center">
-      <Link href={href} className="flex flex-col sm:gap-1 items-center">
-        <div className="relative w-44 h-44 flex items-center justify-center">
+    <div className="flex flex-col items-center w-full">
+      <Link href={href} className="flex flex-col items-center w-full">
+        <div
+          className={`relative flex items-center justify-center ${imageContainerClassName} mb-2`}
+        >
           <Image
             src={imageSrc}
             alt={name}
             fill
-            sizes="168px"
+            sizes="175px"
             className="object-cover"
             priority
             unoptimized
           />
           {badge ? (
-            <div className="absolute -top-6 -right-4 bg-red-500 text-white font-bold w-16 h-16 rounded-none flex flex-col items-center justify-center">
+            <div className="absolute -top-6 -right-4 bg-red-500 text-white font-bold w-16 h-13 rounded-none flex flex-col items-center justify-center">
               <span className="text-xl leading-none">{badge.text}</span>
               {badge.sub ? (
                 <span className="text-xs font-medium leading-none uppercase">
@@ -39,39 +43,53 @@ const ProductCard = ({
           ) : null}
         </div>
 
-        <p className="text-lg font-bold text-center text-gray-800">{name}</p>
-        <p className="font-semibold text-center text-gray-400 text-sm min-h-[36px]">
-          {description}
-        </p>
-
-        <div className="flex flex-row items-center justify-center min-h-[24px]">
-          {Array.from({ length: stars }).map((_, i) => (
-            <Image
-              key={i}
-              src="/icons/star-v2.svg"
-              alt="Star"
-              width={24}
-              height={24}
-              priority
-            />
-          ))}
+        {/* Name and Description */}
+        <div className="flex flex-col items-center gap-1 w-full px-2">
+          <p className="text-lg font-bold text-center text-gray-800 leading-tight">
+            {name}
+          </p>
+          <p className="font-semibold text-center text-gray-400 text-sm min-h-[32px] leading-tight flex items-center justify-center">
+            {description}
+          </p>
         </div>
 
-        {commentCount !== undefined ? (
-          <p className="text-sm text-center font-semibold text-gray-700 mt-2">
-            {commentCount?.toLocaleString("tr-TR")} Yorum
-          </p>
-        ) : null}
+        {/* Stars, Comments and Price */}
+        <div className="flex flex-col items-center gap-1 mt-1 w-full">
+          <div className="flex flex-row items-center justify-center h-5">
+            {stars > 0 ? (
+              Array.from({ length: stars }).map((_, i) => (
+                <Image
+                  key={i}
+                  src="/icons/star-v2.svg"
+                  alt="Star"
+                  width={24}
+                  height={24}
+                  priority
+                />
+              ))
+            ) : (
+              Array.from({ length: 5 }).map((_, i) => (
+                <Star key={i} className="w-5 h-5 text-gray-300" />
+              ))
+            )}
+          </div>
 
-        <div className="flex items-center justify-center gap-2 mt-2">
-          <p className="text-center text-xl font-bold text-gray-800">
-            {price} TL
-          </p>
-          {previousPrice ? (
-            <p className="text-center font-bold text-red-500 line-through">
-              {previousPrice} TL
+          {commentCount !== undefined ? (
+            <p className="text-sm text-center font-semibold text-gray-700 leading-none">
+              {commentCount?.toLocaleString("tr-TR")} Yorum
             </p>
           ) : null}
+
+          <div className="flex items-center justify-center gap-2">
+            <p className="text-center text-xl font-bold text-gray-800 leading-none">
+              {price} TL
+            </p>
+            {previousPrice ? (
+              <p className="text-center font-bold text-red-500 line-through text-sm leading-none">
+                {previousPrice} TL
+              </p>
+            ) : null}
+          </div>
         </div>
       </Link>
     </div>

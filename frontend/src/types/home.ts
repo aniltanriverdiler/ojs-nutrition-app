@@ -18,4 +18,5 @@ export interface ProductCardProps {
   commentCount?: number;
   badge?: { text: string; sub?: string };
   stars?: number;
+  imageContainerClassName?: string;
 }

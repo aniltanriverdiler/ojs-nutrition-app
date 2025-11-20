@@ -2,7 +2,7 @@ import Image from "next/image";
 import ProductCard from "../../../components/shared/ProductCard";
 import CategoryCards from "./CategoryCards";
 import { HOME_CATEGORIES } from "@/lib/constants/homeCategories";
-import { getProductsListBestSellers } from "@/lib/api/products";
+import { getProductsListBestSellers } from "@/lib/api/server/products";
 import { BestSellerProduct } from "@/types/product";
 
 const HomeContent = async () => {
