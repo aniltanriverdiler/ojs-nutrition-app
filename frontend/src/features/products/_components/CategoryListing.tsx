@@ -1,31 +1,45 @@
 "use client";
-import React, { useState } from "react";
-import {
-  CATEGORY_NAMES,
-  CATEGORY_DESCRIPTIONS,
-  CATEGORIES,
-} from "@/lib/constants/categories";
-import { getCategoryBySlug } from "@/lib/dummy/categories";
-import { getProductsByCategoryId } from "@/lib/dummy/products";
+import React, { useState, useEffect, useCallback } from "react";
 import ProductCard from "@/components/shared/ProductCard";
 import { toTurkishUpperCase } from "@/lib/utils/text";
 import { Button } from "@/components/ui/button";
+import { Product } from "@/types/product";
+import Link from "next/link";
+import { getProductsByCategoryIdClient } from "@/lib/api/client/product";
 
-interface CategoryListingProps {
-  slug: keyof typeof CATEGORY_NAMES;
+interface SubCategory {
+  id: string;
+  name: string;
+  slug: string;
 }
 
-const CategoryListing = ({ slug }: CategoryListingProps) => {
-  const [showMore, setShowMore] = useState(false);
-  const title = CATEGORY_NAMES[slug];
-  const desc = CATEGORY_DESCRIPTIONS[slug];
+interface CategoryListingProps {
+  title: string;
+  initialProducts: Product[];
+  subCategories?: SubCategory[];
+  slug: string;
+  categoryId: string;
+}
 
-  // Find the category id
-  const category = getCategoryBySlug(slug);
-  const categoryId = category?.id;
+const CategoryListing = ({
+  title,
+  initialProducts = [],
+  subCategories = [],
+  slug,
+  categoryId,
+}: CategoryListingProps) => {
+  const [products, setProducts] = useState<Product[]>(initialProducts);
+  const [page, setPage] = useState(2);
+  const [loading, setLoading] = useState(false);
+  const [hasMore, setHasMore] = useState(initialProducts.length === 12); // If the first page is less than 12, there is no more
+  const [showMore, setShowMore] = useState(false);
+
+  // To fix the API URL for images
+  const MEDIA_BASE_URL =
+    process.env.NEXT_PUBLIC_API_URL?.replace(/\/api\/v1$/, "") || "";
 
   // Check if this is the protein category page
-  const isProteinPage = slug === CATEGORIES.PROTEIN;
+  const isProteinPage = slug === "protein";
 
   // Protein category information text
   const proteinInfoShort = `Vücudun tüm fonksiyonlarını sağlıklı bir şekilde yerine getirmesini sağlayan temel yapı taşlarından biri proteindir. Protein kısaca, bir veya daha fazla amino asit artık zincirini içeren büyük biyomoleküller ve makromoleküler olarak tanımlanır. Hayvansal ve bitkisel protein olarak farklı unsurlardan temin edilebileceği gibi takviye ediciler ile de protein ihtiyacının mutlaka karşılanması gereklidir. Özellikle spor yapanların çok daha fazla ihtiyaç duyduğu protein, bilhassa vücut gelişimi için sporcuların ihtiyaç duyduğu en önemli maddeler arasında yer almaktadır.`;
@@ -64,42 +78,82 @@ Protein Tozu İçindekileri ve İçeriği
 
 Protein tozlarının içeriği tamamen doğal ürünler ile desteklenmektedir. Birçok farklı çeşidi bulunan protein tozunun içeriğinde peynir altı suyu, yumurta, soya ve daha birçok farklı hayvansal veya bitkisel bazlı protein seçenekleri yer almaktadır. Her protein tozu ürünün içeriği farklıdır. Peynir altı suyu proteini (whey) tozu kapsamında örnek besin içeriği; whey protein konsantresi (süt), aroma verici, sukraloz, pancar kökü kırmızısı, sindirim enzimi karışımları, pridoksin HCL gibi unsurlar yer almaktadır. Marka ve tercih edilecek protein türüne göre içindekiler değişecektir. Whey protein tozu günümüzde en yayın tercih edilen türler arasında yer almaktadır. Buna ek olarak her birinin içeriği de değişmektedir.`;
 
-  //If the category is not found, return an empty state
-  if (!categoryId) {
-    return (
-      <div className="container mx-auto px-4 py-8">
-        <div className="mb-8">
-          <h1 className="text-4xl font-bold mb-2">{title}</h1>
-          <p className="text-gray-600 text-lg">{desc}</p>
-        </div>
-        <div className="text-gray-500">Bu kategori bulunamadı.</div>
-      </div>
-    );
-  }
+  //infinite scroll logic
+  const loadMoreProducts = useCallback(async () => {
+    if (loading || !hasMore) return;
+    setLoading(true);
 
-  // Get the products by category id
-  const productDetails = getProductsByCategoryId(categoryId);
+    try {
+      const newProducts = await getProductsByCategoryIdClient(
+        categoryId,
+        page,
+        12
+      );
+
+      if (newProducts.length === 0) {
+        setHasMore(false);
+      } else {
+        // Add by filtering according to the IDs of the incoming products
+        setProducts((prev) => {
+          const existingIds = new Set(prev.map((p) => p.id));
+          const uniqueNewProducts = newProducts.filter(
+            (p: Product) => !existingIds.has(p.id)
+          );
+
+          if (uniqueNewProducts.length === 0) {
+            setHasMore(false);
+            return prev;
+          }
+
+          return [...prev, ...uniqueNewProducts];
+        });
+
+        setPage((prev) => prev + 1);
+      }
+    } catch (error) {
+      console.error("Error loading products:", error);
+    } finally {
+      setLoading(false);
+    }
+  }, [loading, hasMore, page, categoryId]);
+
+  // Scroll to load more products
+  useEffect(() => {
+    function handleScroll() {
+      const nearBottom =
+        window.innerHeight + window.scrollY >= document.body.offsetHeight - 500;
+      if (nearBottom) {
+        loadMoreProducts();
+      }
+    }
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [loadMoreProducts, loading, hasMore]);
 
   // Normalize the product details for ProductCard
-  const products = productDetails.map((p) => {
-    const firstVariant = p.variants?.[0];
-    const price = firstVariant?.price?.total_price ?? 0;
-    const discountedPrice = firstVariant?.price?.discounted_price ?? null;
+  const formattedProducts = products.map((p) => {
+    const price = p.price_info.total_price;
+    const discountedPrice = p.price_info.discounted_price;
     const hasDiscount = Boolean(discountedPrice);
 
     return {
-      href: `/products/${p.slug || p.id}`,
-      imageSrc: "/images/5-htp.png", // for now, we are using a default image
+      href: `/products/${p.slug}`,
+      imageSrc: p.photo_src
+        ? p.photo_src.startsWith("http")
+          ? p.photo_src
+          : `${MEDIA_BASE_URL}${p.photo_src}`
+        : "/images/5-htp.png", // for now, we are using a default image
       name: p.name,
       description: p.short_explanation || "",
-      price: discountedPrice ?? price,
-      previousPrice: hasDiscount ? price : undefined,
+      price: (discountedPrice ?? price).toLocaleString("tr-TR"),
+      previousPrice: hasDiscount ? price.toLocaleString("tr-TR") : undefined,
       commentCount: p.comment_count ?? 0,
+      stars: Math.round(p.average_star),
       badge:
-        hasDiscount && firstVariant?.price?.discount_percentage
+        hasDiscount && p.price_info.discount_percentage
           ? {
-              text: `%${firstVariant.price.discount_percentage}`,
-              sub: "İNDİRİM",
+              text: `%${p.price_info.discount_percentage}`,
+              sub: "indirim",
             }
           : undefined,
     };
@@ -109,19 +163,19 @@ Protein tozlarının içeriği tamamen doğal ürünler ile desteklenmektedir. B
     <>
       <div className="container mx-auto px-4 py-8">
         <div className="mb-6">
-          <h1 className="text-4xl font-extrabold text-center uppercase mb-3">
+          <h1 className="text-4xl font-extrabold text-center uppercase pb-6">
             {toTurkishUpperCase(title)}
           </h1>
         </div>
 
-        {products.length === 0 ? (
+        {formattedProducts.length === 0 ? (
           <div className="text-gray-500 text-center">
             Bu kategoriye ait ürün bulunamadı.
           </div>
         ) : (
           <>
-            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-3 xl:grid-cols-6 gap-5 mb-4 mx-auto max-w-7xl">
-              {products.map((product) => (
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 mb-4 mx-auto max-w-7xl">
+              {formattedProducts.map((product) => (
                 <ProductCard
                   key={product.href}
                   href={product.href}
@@ -131,7 +185,9 @@ Protein tozlarının içeriği tamamen doğal ürünler ile desteklenmektedir. B
                   price={product.price}
                   previousPrice={product.previousPrice}
                   commentCount={product.commentCount}
+                  stars={product.stars}
                   badge={product.badge}
+                  imageContainerClassName="w-[260px] h-[260px] sm:w-[277px] sm:h-[277px] md:w-[230px] md:h-[230px] lg:w-[230px] lg:h-[230px] xl:w-[277px] xl:h-[277px]"
                 />
               ))}
             </div>
