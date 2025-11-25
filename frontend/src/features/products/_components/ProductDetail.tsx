@@ -1,6 +1,5 @@
 "use client";
 import { useState } from "react";
-import { getHomeBestSellers } from "@/lib/dummy/products";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -26,6 +25,12 @@ import RecentlyViewedProducts from "./RecentlyViewedProducts";
 import ProductReviews from "./ProductReviews";
 import ProductCard from "@/components/shared/ProductCard";
 import Link from "next/link";
+import {
+  BestSellerProduct,
+  ProductDetail as ProductDetailType,
+  ProductVariant,
+  Ingredient,
+} from "@/types/product";
 
 // Aromas Colors
 const AROMA_COLORS: Record<string, string> = {
@@ -41,11 +46,28 @@ const AROMA_COLORS: Record<string, string> = {
   default: "#E2E2E2",
 };
 
-interface ProductDetailProps {
-  product: any;
+// Rate statistics type for the API response
+interface RateStatistics {
+  rate_count: number;
+  one_star_count: number;
+  two_star_count: number;
+  three_star_count: number;
+  four_star_count: number;
+  five_star_count: number;
+  average_star: number;
 }
 
-export default function ProductDetail({ product }: ProductDetailProps) {
+interface ProductDetailProps {
+  product: ProductDetailType;
+  bestSellers?: BestSellerProduct[];
+  rateStatistics?: RateStatistics;
+}
+
+export default function ProductDetail({
+  product,
+  bestSellers: propBestSellers,
+  rateStatistics,
+}: ProductDetailProps) {
   // Base URL (To fix image paths)
   const BASE_URL =
     process.env.NEXT_PUBLIC_API_URL?.replace("/api/v1", "") || "";
@@ -94,7 +116,8 @@ export default function ProductDetail({ product }: ProductDetailProps) {
       ? selectedVariant?.price?.total_price
       : null;
 
-  const bestSellers = getHomeBestSellers();
+  // Use prop bestSellers if provided, otherwise fetch from API
+  const bestSellers = propBestSellers || [];
 
   // Helper function to get the image URL from the API response
   const getImageUrl = (path: string | undefined | null) => {
@@ -281,7 +304,7 @@ export default function ProductDetail({ product }: ProductDetailProps) {
 
                   // Find the variant for this size to get its discount
                   const currentVariant = product.variants.find(
-                    (v: any) =>
+                    (v: ProductVariant) =>
                       v.size.gram === size.gram &&
                       v.size.pieces === size.pieces &&
                       v.size.total_services === size.total_services
@@ -438,7 +461,7 @@ export default function ProductDetail({ product }: ProductDetailProps) {
                   </AccordionTrigger>
                   <AccordionContent className="flex flex-col gap-4 font-semibold text-balance">
                     {product.explanation?.nutritional_content?.ingredients?.map(
-                      (ingredient: any, index: number) => (
+                      (ingredient: Ingredient, index: number) => (
                         <div key={`${ingredient.aroma || "genel"}-${index}`}>
                           <p>
                             {ingredient.aroma ? `${ingredient.aroma} - ` : ""}
@@ -468,27 +491,56 @@ export default function ProductDetail({ product }: ProductDetailProps) {
       <RecentlyViewedProducts currentProductId={product.id} />
 
       {/* Product Reviews */}
-      <ProductReviews productSlug={product.slug} />
+      <ProductReviews
+        productSlug={product.slug}
+        rateStatistics={rateStatistics}
+      />
 
       {/* Best Sellers Section */}
-      <section className="mt-5">
+      <div>
         <h3 className="text-2xl font-bold text-center mb-5">ÇOK SATANLAR</h3>
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-3 xl:grid-cols-6 gap-5 my-10 mx-auto max-w-7xl">
-          {bestSellers.map((card) => (
-            <ProductCard
-              key={card.href}
-              href={card.href}
-              imageSrc={card.imageSrc}
-              name={card.name}
-              description={card.description}
-              price={card.price.toString()}
-              previousPrice={card.previousPrice?.toString()}
-              commentCount={card.commentCount}
-              badge={card.badge}
-            />
-          ))}
+          {bestSellers.map((product: BestSellerProduct) => {
+            const hasDiscount = product.price_info.discounted_price !== null;
+            const currentPrice = hasDiscount
+              ? product.price_info.discounted_price
+              : product.price_info.total_price;
+            const oldPrice = hasDiscount
+              ? product.price_info.total_price
+              : undefined;
+
+            return (
+              <ProductCard
+                key={product.slug || product.name}
+                href={`/products/${product.slug || product.name}`}
+                imageSrc={
+                  product.photo_src
+                    ? product.photo_src.startsWith("http")
+                      ? product.photo_src
+                      : `${BASE_URL}${product.photo_src}`
+                    : "/images/5-htp.png"
+                }
+                name={product.name}
+                description={product.short_explanation}
+                price={currentPrice?.toLocaleString("tr-TR") || ""}
+                previousPrice={
+                  oldPrice ? oldPrice.toLocaleString("tr-TR") : undefined
+                }
+                commentCount={product.comment_count}
+                stars={Math.round(product.average_star)}
+                badge={
+                  product.price_info.discount_percentage
+                    ? {
+                        text: `%${product.price_info.discount_percentage}`,
+                        sub: "indirim",
+                      }
+                    : undefined
+                }
+              />
+            );
+          })}
         </div>
-      </section>
+      </div>
 
       {/* All Products Button */}
       <div className="flex justify-center mb-5">

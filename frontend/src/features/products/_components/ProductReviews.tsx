@@ -3,7 +3,10 @@ import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import ReviewsList from "@/components/shared/ReviewsList";
-import { getProductCommentsBySlug } from "@/lib/api/server/products";
+import {
+  getProductCommentsBySlug,
+  getProductRateStatisticsBySlug,
+} from "@/lib/api/server/products";
 import { Review } from "@/types/reviews";
 
 // Comments type for the API response
@@ -18,16 +21,51 @@ interface CommentData {
   last_name: string;
 }
 
+// Rate statistics type for the API response (Raw data from the API)
+interface ApiRateStatistics {
+  rate_count: number;
+  one_star_count: number;
+  two_star_count: number;
+  three_star_count: number;
+  four_star_count: number;
+  five_star_count: number;
+  average_star: number;
+}
+
+// Rate statistics type for the API response (Transformed data)
+interface RateStatistics {
+  totalReviews: number;
+  averageRating: number;
+  ratingDistribution: {
+    [key: number]: number;
+  };
+}
+
 // Props Type
 interface ProductReviewsProps {
   productSlug: string;
+  rateStatistics?: ApiRateStatistics;
 }
 
-const ProductReviews = ({ productSlug }: ProductReviewsProps) => {
+const ProductReviews = ({
+  productSlug,
+  rateStatistics: propRateStatistics,
+}: ProductReviewsProps) => {
   const [currentPage, setCurrentPage] = useState(1);
   const [comments, setComments] = useState<CommentData[]>([]);
   const [totalCount, setTotalCount] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
+  const [rateStatistics, setRateStatistics] = useState<RateStatistics>({
+    totalReviews: 0,
+    averageRating: 0,
+    ratingDistribution: {
+      5: 0,
+      4: 0,
+      3: 0,
+      2: 0,
+      1: 0,
+    },
+  });
 
   const limit = 10;
 
@@ -58,14 +96,65 @@ const ProductReviews = ({ productSlug }: ProductReviewsProps) => {
     fetchComments();
   }, [productSlug, currentPage]);
 
-  // Calculate summary statistics
-  const averageRating = 5;
+  // Fetch rate statistics when the component mounts or the slug changes or the rate statistics prop changes
+  useEffect(() => {
+    if (propRateStatistics) {
+      // If the rate statistics prop is provided, transform it and use it
+      const transformedData: RateStatistics = {
+        totalReviews: propRateStatistics.rate_count || 0,
+        averageRating: propRateStatistics.average_star || 0,
+        ratingDistribution: {
+          5: propRateStatistics.five_star_count || 0,
+          4: propRateStatistics.four_star_count || 0,
+          3: propRateStatistics.three_star_count || 0,
+          2: propRateStatistics.two_star_count || 0,
+          1: propRateStatistics.one_star_count || 0,
+        },
+      };
+      setRateStatistics(transformedData);
+    } else {
+      // If the rate statistics prop is not provided, fetch it from the API
+      const fetchRateStatistics = async () => {
+        try {
+          const response = await getProductRateStatisticsBySlug(productSlug);
+          if (response && response.data) {
+            const transformedData: RateStatistics = {
+              totalReviews: response.data.rate_count || 0,
+              averageRating: response.data.average_star || 0,
+              ratingDistribution: {
+                5: response.data.five_star_count || 0,
+                4: response.data.four_star_count || 0,
+                3: response.data.three_star_count || 0,
+                2: response.data.two_star_count || 0,
+                1: response.data.one_star_count || 0,
+              },
+            };
+            setRateStatistics(transformedData);
+          }
+        } catch (error) {
+          console.error("Error fetching rate statistics:", error);
+        }
+      };
+
+      fetchRateStatistics();
+    }
+  }, [productSlug, propRateStatistics]);
+
+  // Calculate summary statistics - Safe access
+  const averageRating = rateStatistics?.averageRating || 0;
+  const totalReviews = rateStatistics?.totalReviews || 0;
 
   // Total number of pages
   const totalPages = Math.ceil(totalCount / limit);
 
-  // Star Distribution Calculation
-  const ratingDistribution = { 5: totalCount, 4: 0, 3: 0, 2: 0, 1: 0 };
+  // Star Distribution Calculation - Safe access
+  const ratingDistribution = rateStatistics?.ratingDistribution || {
+    5: 0,
+    4: 0,
+    3: 0,
+    2: 0,
+    1: 0,
+  };
 
   if (isLoading && comments.length === 0) {
     return <div className="text-center py-10">Yorumlar yükleniyor...</div>;
@@ -92,31 +181,27 @@ const ProductReviews = ({ productSlug }: ProductReviewsProps) => {
       {/* Overall Rating Summary */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
         {/*Left Side: Average Rating */}
-        <div className="flex flex-col gap-2 items-center md:items-start">
-          <p className="text-5xl font-semibold text-gray-800 items-center md:ml-21">
-            {averageRating}
-          </p>
-          <div className="flex flex-row items-center gap-1">
-            {Array.from({ length: 5 }).map((_, i) => (
-              <Image
-                key={i}
-                src="/icons/star-v2.svg"
-                alt="Star"
-                width={35}
-                height={35}
-                priority
-              />
-            ))}
+        <div className="flex justify-center md:justify-start ">
+          <div className="flex flex-col gap-2 items-center justify-center ">
+            <p className="text-5xl font-semibold text-gray-800 items-center justify-center">
+              {averageRating}
+            </p>
+            <div className="flex flex-row items-center gap-1">
+              {Array.from({ length: 5 }).map((_, i) => (
+                <Image
+                  key={i}
+                  src="/icons/star-v2.svg"
+                  alt="Star"
+                  width={35}
+                  height={35}
+                  priority
+                />
+              ))}
+            </div>
+            <p className="text-lg font-semibold text-gray-700 mb-6">
+              {rateStatistics.totalReviews.toLocaleString("tr-TR")} YORUM
+            </p>
           </div>
-          <p className="text-lg font-semibold text-gray-700 md:ml-14 mb-6">
-            {totalCount.toLocaleString("tr-TR")} YORUM
-          </p>
-          <Button
-            variant="outline"
-            className="bg-blue-800 hover:bg-blue-700 text-white hover:text-white px-8 py-5 rounded-full cursor-pointer"
-          >
-            YORUM {totalCount.toLocaleString("tr-TR")}
-          </Button>
         </div>
 
         {/* Right Side: Star Distribution */}
@@ -125,7 +210,10 @@ const ProductReviews = ({ productSlug }: ProductReviewsProps) => {
             const count =
               ratingDistribution[rating as keyof typeof ratingDistribution] ||
               0;
-            const percentage = totalCount > 0 ? (count / totalCount) * 100 : 0;
+            const percentage =
+              rateStatistics.totalReviews > 0
+                ? (count / rateStatistics.totalReviews) * 100
+                : 0;
 
             return (
               <div key={rating} className="flex items-center gap-3">
@@ -144,6 +232,16 @@ const ProductReviews = ({ productSlug }: ProductReviewsProps) => {
               </div>
             );
           })}
+        </div>
+
+        {/* Rate Statistics Button */}
+        <div className="flex justify-start">
+          <Button
+            variant="outline"
+            className="bg-blue-800 hover:bg-blue-700 text-white hover:text-white px-8 py-5 rounded-full cursor-pointer"
+          >
+            YORUM ({rateStatistics.totalReviews.toLocaleString("tr-TR")})
+          </Button>
         </div>
       </div>
 

@@ -82,11 +82,11 @@ const ProductCard = ({
 
           <div className="flex items-center justify-center gap-2">
             <p className="text-center text-xl font-bold text-gray-800 leading-none">
-              {price} TL
+              {Math.round(parseFloat(price)).toLocaleString("tr-TR")} TL
             </p>
             {previousPrice ? (
               <p className="text-center font-bold text-red-500 line-through text-sm leading-none">
-                {previousPrice} TL
+                {Math.round(parseFloat(previousPrice)).toLocaleString("tr-TR")} TL
               </p>
             ) : null}
           </div>
