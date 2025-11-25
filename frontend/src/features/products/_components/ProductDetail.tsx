@@ -1,8 +1,7 @@
 "use client";
-import React, { useState } from "react";
-import { getHomeBestSellers, getProductById } from "@/lib/dummy/products";
+import { useState } from "react";
+import { getHomeBestSellers } from "@/lib/dummy/products";
 import Image from "next/image";
-import { notFound } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Check, ShoppingCartIcon } from "lucide-react";
@@ -28,18 +27,28 @@ import ProductReviews from "./ProductReviews";
 import ProductCard from "@/components/shared/ProductCard";
 import Link from "next/link";
 
+// Aromas Colors
+const AROMA_COLORS: Record<string, string> = {
+  Bisküvi: "#E6BC79",
+  Çikolata: "#56321D",
+  Muz: "#F1D018",
+  "Salted Caramel": "#B64300",
+  "Choco Nut": "#7B3F00",
+  "Hindistan Cevizi": "#BA9051",
+  "Raspberry Cheesecake": "#CC1E5F",
+  Çilek: "#D61F33",
+  // Default aroma color
+  default: "#E2E2E2",
+};
+
 interface ProductDetailProps {
-  id: string;
+  product: any;
 }
 
-export default function ProductDetail({ id }: ProductDetailProps) {
-  // Fetch the product by ID from mock data
-  const product = getProductById(id);
-
-  // If the product is not found, redirect to 404 page
-  if (!product) {
-    notFound();
-  }
+export default function ProductDetail({ product }: ProductDetailProps) {
+  // Base URL (To fix image paths)
+  const BASE_URL =
+    process.env.NEXT_PUBLIC_API_URL?.replace("/api/v1", "") || "";
 
   // Get category information for breadcrumb
   const allCategories = getAllCategories();
@@ -79,11 +88,26 @@ export default function ProductDetail({ id }: ProductDetailProps) {
   const price =
     selectedVariant?.price?.discounted_price ??
     selectedVariant?.price?.total_price;
-  const crossed = selectedVariant?.price?.discounted_price
-    ? selectedVariant?.price?.total_price
-    : null;
+
+  const crossed =
+    selectedVariant?.price?.discounted_price != null
+      ? selectedVariant?.price?.total_price
+      : null;
 
   const bestSellers = getHomeBestSellers();
+
+  // Helper function to get the image URL from the API response
+  const getImageUrl = (path: string | undefined | null) => {
+    if (!path) return "/images/5-htp-lg.png";
+    if (path.startsWith("http")) return path;
+    // Prevent double slashes
+    const cleanBase = BASE_URL.endsWith("/") ? BASE_URL.slice(0, -1) : BASE_URL;
+    const cleanPath = path.startsWith("/") ? path : `/${path}`;
+    return `${cleanBase}${cleanPath}`;
+  };
+
+  // If the product is not loaded or the variants are not loaded, return loading or null
+  if (!product) return <div>Yükleniyor...</div>;
 
   return (
     <>
@@ -137,8 +161,10 @@ export default function ProductDetail({ id }: ProductDetailProps) {
         {/* Product Images */}
         <div className="mt-8">
           <Image
-            src="/images/5-htp-lg.png"
-            alt={product.name}
+            src={getImageUrl(
+              selectedVariant?.photo_src || product.variants?.[0]?.photo_src
+            )}
+            alt={product.name || "Ürün Görseli"}
             width={590}
             height={590}
             className="w-full object-contain"
@@ -171,24 +197,19 @@ export default function ProductDetail({ id }: ProductDetailProps) {
               </div>
             </div>
             {/* Tags */}
-            <div className="flex flex-row items-center gap-2 mt-5">
-              <Button
-                variant="outline"
-                className="bg-gray-100 text-black rounded-full cursor-pointer"
-              >
-                {product.tags.includes("VEJETARYEN")
-                  ? "VEJETARYEN"
-                  : "GLUTENSİZ"}
-              </Button>
-              <Button
-                variant="outline"
-                className="bg-gray-100 text-black rounded-full cursor-pointer"
-              >
-                {product.tags.includes("GLUTENSİZ")
-                  ? "GLUTENSİZ"
-                  : "VEJETARYEN"}
-              </Button>
-            </div>
+            {product.tags && product.tags.length > 0 && (
+              <div className="flex flex-row items-center gap-2 mt-5">
+                {product.tags.map((tag: string) => (
+                  <Button
+                    key={tag}
+                    variant="outline"
+                    className="bg-gray-100 text-black rounded-full cursor-pointer"
+                  >
+                    {tag}
+                  </Button>
+                ))}
+              </div>
+            )}
             <hr className="border-gray-300 border mt-5" />
           </div>
 
@@ -201,17 +222,31 @@ export default function ProductDetail({ id }: ProductDetailProps) {
                 return (
                   <div key={aroma} className="relative">
                     {active && (
-                      <Badge className="rounded-full bg-blue-800 text-white absolute -top-1.5 -right-1.5 px-0.5 py-0.5 flex items-center justify-center w-5 h-5">
+                      <Badge className="rounded-full bg-blue-800 text-white absolute -top-1.5 -right-1.5 px-0.5 py-0.5 flex items-center justify-center w-5 h-5 z-10">
                         <Check className="h-3 w-3" />
                       </Badge>
                     )}
                     <Button
                       onClick={() => selectAroma(aroma)}
-                      className={`rounded-none bg-gray-100 border-3 border-gray-300 text-black hover:bg-gray-50 cursor-pointer ${
-                        active ? "border-blue-800" : ""
+                      className={`rounded-sm p-0 overflow-hidden flex items-stretch h-10 min-w-[130px] bg-white border text-black hover:bg-gray-50 cursor-pointer transition-all ${
+                        active
+                          ? "border-blue-800 border-2 font-bold"
+                          : "border-gray-300 border-2 font-medium"
                       }`}
                     >
-                      {aroma}
+                      {/* Left side: Aroma Name */}
+                      <span className="flex-1 px-3 flex items-center justify-center text-sm">
+                        {aroma}
+                      </span>
+
+                      {/* Right side: Color Box */}
+                      <span
+                        className="w-9 h-full border-l border-gray-100"
+                        style={{
+                          backgroundColor:
+                            AROMA_COLORS[aroma] || AROMA_COLORS["default"],
+                        }}
+                      />
                     </Button>
                   </div>
                 );
@@ -220,7 +255,7 @@ export default function ProductDetail({ id }: ProductDetailProps) {
 
             {/* Product Sizes */}
             <div>
-              <h3 className="font-bold text-xl my-3">BOYUT:</h3>
+              <h3 className="font-bold text-xl my-3 pb-3">BOYUT:</h3>
               <div className="flex flex-wrap gap-2">
                 {productSizes.map((size, idx) => {
                   // Format size label: convert to kg if >= 1000g
@@ -246,7 +281,7 @@ export default function ProductDetail({ id }: ProductDetailProps) {
 
                   // Find the variant for this size to get its discount
                   const currentVariant = product.variants.find(
-                    (v) =>
+                    (v: any) =>
                       v.size.gram === size.gram &&
                       v.size.pieces === size.pieces &&
                       v.size.total_services === size.total_services
@@ -263,13 +298,13 @@ export default function ProductDetail({ id }: ProductDetailProps) {
                       )}
                       {/* Show discount badge if there's a discount - always visible */}
                       {discountPercentage && (
-                        <Badge className="rounded-none absolute -top-3 left-1/2 -translate-x-1/2 bg-red-600 text-white text-xs font-semibold px-2 py-0.5 whitespace-nowrap z-10">
+                        <Badge className="rounded-sm absolute -top-3 left-1/2 -translate-x-1/2 bg-red-600 text-white text-xs font-semibold px-2 py-0.5 whitespace-nowrap z-10">
                           %{discountPercentage} İNDİRİM
                         </Badge>
                       )}
                       <Button
                         onClick={() => selectSize(size)}
-                        className={`rounded-none px-4 py-4 min-w-[100px] min-h-[80px] bg-gray-100 border-3 border-gray-300 text-black hover:bg-gray-50 cursor-pointer ${
+                        className={`rounded-sm px-4 py-4 min-w-[141px] min-h-[64px] bg-gray-100 border-3 border-gray-300 text-black hover:bg-gray-50 cursor-pointer ${
                           active ? "border-blue-800" : ""
                         } ${disabled ? "opacity-50 cursor-not-allowed" : ""}`}
                       >
@@ -287,11 +322,11 @@ export default function ProductDetail({ id }: ProductDetailProps) {
               <div className="mt-8">
                 <div className="flex items-center gap-3">
                   <div className="text-4xl font-extrabold text-gray-900">
-                    {price} TL
+                    {Math.floor(price).toLocaleString()} TL
                   </div>
                   {crossed && (
                     <div className="text-xl text-red-500 font-bold line-through">
-                      {crossed} TL
+                      {Math.floor(crossed).toLocaleString()} TL
                     </div>
                   )}
                   {selectedVariant?.size?.total_services && (
@@ -305,7 +340,8 @@ export default function ProductDetail({ id }: ProductDetailProps) {
                   {crossed && (
                     <div className="bg-green-200 border border-green-600 rounded px-3 py-2">
                       <span className="text-green-800 font-semibold">
-                        Kazancınız: {crossed - price} TL
+                        Kazancınız:{" "}
+                        {Math.floor(crossed - price).toLocaleString()} TL
                       </span>
                     </div>
                   )}
@@ -392,7 +428,8 @@ export default function ProductDetail({ id }: ProductDetailProps) {
                     ÖZELLİKLER
                   </AccordionTrigger>
                   <AccordionContent className="flex flex-col gap-4 font-semibold text-balance">
-                    {product.explanation.features}
+                    {product.explanation?.features ||
+                      "Özellik bilgisi bulunamadı."}
                   </AccordionContent>
                 </AccordionItem>
                 <AccordionItem value="item-2">
@@ -400,8 +437,8 @@ export default function ProductDetail({ id }: ProductDetailProps) {
                     BESİN İÇERİĞİ
                   </AccordionTrigger>
                   <AccordionContent className="flex flex-col gap-4 font-semibold text-balance">
-                    {product.explanation.nutritional_content.ingredients.map(
-                      (ingredient, index) => (
+                    {product.explanation?.nutritional_content?.ingredients?.map(
+                      (ingredient: any, index: number) => (
                         <div key={`${ingredient.aroma || "genel"}-${index}`}>
                           <p>
                             {ingredient.aroma ? `${ingredient.aroma} - ` : ""}
@@ -417,7 +454,8 @@ export default function ProductDetail({ id }: ProductDetailProps) {
                     KULLANIM ŞEKLİ
                   </AccordionTrigger>
                   <AccordionContent className="flex flex-col gap-4 font-semibold text-balance">
-                    {product.explanation.usage}
+                    {product.explanation?.usage ||
+                      "Kullanım bilgisi bulunamadı."}
                   </AccordionContent>
                 </AccordionItem>
               </Accordion>
@@ -427,7 +465,7 @@ export default function ProductDetail({ id }: ProductDetailProps) {
       </div>
 
       {/* Recently Viewed Products */}
-      <RecentlyViewedProducts currentProductId={id} />
+      <RecentlyViewedProducts currentProductId={product.id} />
 
       {/* Product Reviews */}
       <ProductReviews productId={product.id} />
@@ -443,8 +481,8 @@ export default function ProductDetail({ id }: ProductDetailProps) {
               imageSrc={card.imageSrc}
               name={card.name}
               description={card.description}
-              price={card.price}
-              previousPrice={card.previousPrice}
+              price={card.price.toString()}
+              previousPrice={card.previousPrice?.toString()}
               commentCount={card.commentCount}
               badge={card.badge}
             />

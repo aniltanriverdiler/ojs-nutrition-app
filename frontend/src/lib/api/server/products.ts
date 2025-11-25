@@ -33,3 +33,18 @@ export async function getProductsByCategoryId(categoryId: string, limit = 12, of
 
   return [];
 }
+
+// Get product details by slug (Server Component)
+export default async function getProductDetailsBySlug(slug: string) {
+  const res = await fetch(`${BASE_URL}/products/${slug}`, {cache: "no-store"});
+  console.log("API Response Status:", res.status);
+
+  if (!res.ok) {
+    console.error("Failed to fetch product. Status:", res.status, "Slug:", slug);
+    throw new Error("Failed to fetch product details by slug");
+  }
+  
+  const json = await res.json();
+  console.log("Product Data:", json);
+  return json;
+};

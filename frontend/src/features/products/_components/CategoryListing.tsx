@@ -4,7 +4,6 @@ import ProductCard from "@/components/shared/ProductCard";
 import { toTurkishUpperCase } from "@/lib/utils/text";
 import { Button } from "@/components/ui/button";
 import { Product } from "@/types/product";
-import Link from "next/link";
 import { getProductsByCategoryIdClient } from "@/lib/api/client/product";
 
 interface SubCategory {
