@@ -48,3 +48,18 @@ export default async function getProductDetailsBySlug(slug: string) {
   console.log("Product Data:", json);
   return json;
 };
+
+// Get product comments by slug (Server Component)
+export async function getProductCommentsBySlug(slug: string, limit = 10, offset = 0) {
+  const res = await fetch(`${BASE_URL}/products/${slug}/comments?limit=${limit}&offset=${offset}`, {cache: "no-store"});
+  console.log("API Response Status for product comments:", res.status);
+
+  if (!res.ok) {
+    console.error("Failed to fetch product comments by slug:", res.statusText);
+    throw new Error("Failed to fetch product comments by slug");
+  }
+
+  const json = await res.json();
+  console.log("Product Comments Data:", json);
+  return json;
+}

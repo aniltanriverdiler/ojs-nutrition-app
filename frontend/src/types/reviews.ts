@@ -1,13 +1,11 @@
 export interface Review {
-  id: number;
+  id: string | number;
   rating: number;
   date: string;
   title: string;
   text: string;
   author: string;
-  productImage: string;
-  productId?: string;
-  readMoreHref?: string;
+  verified?: boolean;
 }
 
 export interface ReviewsResponse {

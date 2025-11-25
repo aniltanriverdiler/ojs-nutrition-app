@@ -468,7 +468,7 @@ export default function ProductDetail({ product }: ProductDetailProps) {
       <RecentlyViewedProducts currentProductId={product.id} />
 
       {/* Product Reviews */}
-      <ProductReviews productId={product.id} />
+      <ProductReviews productSlug={product.slug} />
 
       {/* Best Sellers Section */}
       <section className="mt-5">
