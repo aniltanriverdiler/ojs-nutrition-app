@@ -2,7 +2,7 @@
 
 import { useCallback, useEffect, useState } from "react";
 import { Product } from "@/types/product";
-import { getAllProducts } from "@/lib/api/client/product";
+import { getAllProducts } from "@/lib/api/products";
 import ProductCard from "@/components/shared/ProductCard";
 
 const ProductListPage = () => {

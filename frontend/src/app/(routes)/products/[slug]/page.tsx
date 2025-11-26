@@ -1,8 +1,12 @@
 import ProductDetail from "@/features/products/_components/ProductDetail";
 import CategoryListing from "@/features/products/_components/CategoryListing";
-import { getAllCategories } from "@/lib/api/server/categories";
-import { getProductsByCategoryId, getProductsListBestSellers, getProductRateStatisticsBySlug } from "@/lib/api/server/products";
-import getProductDetailsBySlug from "@/lib/api/server/products";
+import { getAllCategories } from "@/lib/api/categories";
+import {
+  getProductsByCategoryId,
+  getProductDetailsBySlug,
+  getProductsListBestSellers,
+  getProductRateStatisticsBySlug,
+} from "@/lib/api/products";
 
 interface ApiCategory {
   id: string;
@@ -67,6 +71,12 @@ export default async function ProductPage({
     // Fetch best sellers for the product detail page
     const bestSellers = await getProductsListBestSellers();
     const productRateStatistics = await getProductRateStatisticsBySlug(slug);
-    return <ProductDetail product={productResponse.data} bestSellers={bestSellers.data} rateStatistics={productRateStatistics.data} />;
+    return (
+      <ProductDetail
+        product={productResponse.data}
+        bestSellers={bestSellers.data}
+        rateStatistics={productRateStatistics.data}
+      />
+    );
   }
 }

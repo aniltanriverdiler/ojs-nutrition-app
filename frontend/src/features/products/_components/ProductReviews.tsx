@@ -6,7 +6,7 @@ import ReviewsList from "@/components/shared/ReviewsList";
 import {
   getProductCommentsBySlug,
   getProductRateStatisticsBySlug,
-} from "@/lib/api/server/products";
+} from "@/lib/api/products";
 import { Review } from "@/types/reviews";
 
 // Comments type for the API response

@@ -9,7 +9,7 @@ import {
 import Image from "next/image";
 import Link from "next/link";
 import { ChevronDown } from "lucide-react";
-import { getAllCategories } from "@/lib/api/server/categories";
+import { getAllCategories } from "@/lib/api/categories";
 import { Category } from "@/types/categories";
 
 // Constants
@@ -133,10 +133,10 @@ const MenuNavigation = async () => {
                                     />
                                   </div>
                                   <div className="flex flex-col justify-start items-start gap-1">
-                                    <p className="font-semibold text-sm">
+                                    <p className="font-bold text-sm">
                                       {seller.name}
                                     </p>
-                                    <p className="text-xs text-gray-800">
+                                    <p className="text-xs text-gray-800 font-semibold">
                                       {seller.description}
                                     </p>
                                     <div

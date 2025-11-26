@@ -4,7 +4,7 @@ import ProductCard from "@/components/shared/ProductCard";
 import { toTurkishUpperCase } from "@/lib/utils/text";
 import { Button } from "@/components/ui/button";
 import { Product } from "@/types/product";
-import { getProductsByCategoryIdClient } from "@/lib/api/client/product";
+import { getProductsByCategoryId } from "@/lib/api/products";
 
 interface SubCategory {
   id: string;
@@ -83,10 +83,10 @@ Protein tozlarının içeriği tamamen doğal ürünler ile desteklenmektedir. B
     setLoading(true);
 
     try {
-      const newProducts = await getProductsByCategoryIdClient(
+      const newProducts = await getProductsByCategoryId(
         categoryId,
-        page,
-        12
+        12,
+        (page - 1) * 12
       );
 
       if (newProducts.length === 0) {
