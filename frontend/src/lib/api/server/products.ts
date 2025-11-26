@@ -63,15 +63,12 @@ export async function getProductCommentsBySlug(slug: string, limit = 10, offset 
 // Get product rate statistics by slug (Server Component)
 export async function getProductRateStatisticsBySlug(slug: string) {
   const res = await fetch(`${BASE_URL}/products/${slug}/rate-statistics`, {cache: "no-store"});
-  console.log("API Response Status for product rate statistics:", res.status);
 
   if (!res.ok) {
-    console.error("Failed to fetch product rate statistics by slug:", res.statusText);
     throw new Error("Failed to fetch product rate statistics by slug");
   }
 
   const json = await res.json();
-  console.log("Product Rate Statistics Data:", json);
 
   return json;
 }

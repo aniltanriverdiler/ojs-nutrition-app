@@ -42,6 +42,15 @@ const AROMA_COLORS: Record<string, string> = {
   "Hindistan Cevizi": "#BA9051",
   "Raspberry Cheesecake": "#CC1E5F",
   Çilek: "#D61F33",
+  "Yeşil Elma": "#8DB600",
+  "Tigers Blood": "#D9381E",
+  Şeftali: "#FF9E80",
+  Limonata: "#FAEA05",
+  Karpuz: "#E55451",
+  "Fruit Fusion": "#FF7F50",
+  "Lemon Cheesecake": "#FAFAD2",
+  Muhallebi: "#FFF8DC",
+  Ahududu: "#D21F3C",
   // Default aroma color
   default: "#E2E2E2",
 };
