@@ -1,5 +1,4 @@
 "use client";
-
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
@@ -69,6 +68,7 @@ const LoginForm = () => {
               </FormItem>
             )}
           />
+
           {/* Password Section */}
           <FormField
             control={form.control}
@@ -88,6 +88,7 @@ const LoginForm = () => {
               </FormItem>
             )}
           />
+
           {/*Forgot Password Section */}
           <div className="flex justify-end">
             <Link

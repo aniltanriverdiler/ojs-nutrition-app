@@ -1,5 +1,4 @@
 "use client";
-
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
@@ -168,6 +167,7 @@ const RegisterForm = () => {
                 </FormItem>
               )}
             />
+
             {/* Surname Section */}
             <FormField
               control={form.control}
@@ -188,6 +188,7 @@ const RegisterForm = () => {
               )}
             />
           </div>
+
           {/* Email Section */}
           <FormField
             control={form.control}
@@ -207,6 +208,7 @@ const RegisterForm = () => {
               </FormItem>
             )}
           />
+
           {/* Password Section */}
           <FormField
             control={form.control}
