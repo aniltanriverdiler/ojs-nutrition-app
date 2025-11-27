@@ -2,7 +2,7 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-import React from "react";
+import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
 import {
   Form,
@@ -17,6 +17,8 @@ import Link from "next/link";
 import { ButtonGroup } from "@/components/ui/button-group";
 import Image from "next/image";
 import { Checkbox } from "@/components/ui/checkbox";
+import { toast } from "sonner";
+import { useRouter } from "next/navigation";
 
 const registerFormSchema = z.object({
   name: z.string().min(1, "İsim alanı boş bırakılamaz."),
@@ -25,12 +27,17 @@ const registerFormSchema = z.object({
     .string()
     .min(1, "Email alanı boş bırakılamaz.")
     .email("Lütfen geçerli bir email adresi giriniz."),
-  password: z.string().min(1, "Şifre alanı boş bırakılamaz."),
+  // Backend requires at least 8 characters
+  password: z.string().min(8, "Şifre en az 8 karakter olmalıdır."),
 });
 
 type RegisterFormValues = z.infer<typeof registerFormSchema>;
 
 const RegisterForm = () => {
+  const [error, setError] = useState<string | null>("");
+
+  const router = useRouter();
+
   // 1. Define your form.
   const form = useForm<RegisterFormValues>({
     resolver: zodResolver(registerFormSchema),
@@ -43,10 +50,41 @@ const RegisterForm = () => {
   });
 
   // 2. Define a submit handler.
-  function onSubmit(values: RegisterFormValues) {
-    // Do something with the form values.
-    // ✅ This will be type-safe and validated.
-    console.log(values);
+  async function onSubmit(values: RegisterFormValues) {
+    setError(null);
+
+    try {
+      const res = await fetch("/api/auth/register", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(values),
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        setError(data?.message || "Kayıt işlemi başarısız oldu.");
+        toast.error(data?.message || "Kayıt sırasında bir hata oluştu.");
+        return;
+      }
+
+      // Register successful, redirect to login page
+      toast.success("Kayıt işlemi başarılı oldu.");
+
+      // Clear form values
+      form.reset();
+
+      // Redirect to login page
+      setTimeout(() => {
+        router.push("/auth/login");
+      }, 1500);
+    } catch (error) {
+      setError("Sunuya ulasılamadı. Lütfen daha sonra tekrar deneyiniz.");
+      console.error(error);
+      toast.error("Sunuya ulasılamadı. Lütfen daha sonra tekrar deneyiniz.");
+    }
   }
 
   return (
@@ -143,6 +181,12 @@ const RegisterForm = () => {
           </Button>
         </ButtonGroup>
       </div>
+
+      {error && (
+        <div className="mb-4 p-4 text-red-700 bg-red-100 rounded-lg">
+          {error}
+        </div>
+      )}
 
       {/* Form Section */}
       <Form {...form}>
@@ -275,7 +319,7 @@ const RegisterForm = () => {
               </label>
             </div>
           </div>
-          
+
           {/* Submit Button */}
           <div className="flex justify-end mb-5">
             <Button

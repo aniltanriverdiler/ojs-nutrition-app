@@ -2,7 +2,7 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-import React from "react";
+import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
 import {
   Form,
@@ -16,6 +16,8 @@ import { Input } from "@/components/ui/input";
 import Link from "next/link";
 import Image from "next/image";
 import { ButtonGroup } from "@/components/ui/button-group";
+import { toast } from "sonner";
+import { useRouter } from "next/navigation";
 
 const loginFormSchema = z.object({
   email: z
@@ -28,6 +30,10 @@ const loginFormSchema = z.object({
 type LoginFormValues = z.infer<typeof loginFormSchema>;
 
 const LoginForm = () => {
+  const [error, setError] = useState<string | null>(null);
+
+  const router = useRouter();
+
   // 1. Define your form.
   const form = useForm<LoginFormValues>({
     resolver: zodResolver(loginFormSchema),
@@ -38,14 +44,51 @@ const LoginForm = () => {
   });
 
   // 2. Define a submit handler.
-  function onSubmit(values: LoginFormValues) {
-    // Do something with the form values.
-    // ✅ This will be type-safe and validated.
-    console.log(values);
+  async function onSubmit(values: LoginFormValues) {
+    setError(null);
+
+    try {
+      const res = await fetch("/api/auth/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(values),
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        setError(data?.message || "Giriş işlemi başarısız oldu.");
+        toast.error(data?.message || "Giriş sırasında bir hata oluştu.");
+        return;
+      }
+
+      // Login successful, redirect to home page
+      toast.success("Giriş işlemi başarılı oldu.");
+
+      // Clear form values
+      form.reset();
+
+      // Redirect to home page
+      setTimeout(() => {
+        router.push("/");
+      }, 1500);
+    } catch (error) {
+      setError("Sunuya ulasılamadı. Lütfen daha sonra tekrar deneyiniz.");
+      console.error(error);
+      toast.error("Sunuya ulasılamadı. Lütfen daha sonra tekrar deneyiniz.");
+    }
   }
 
   return (
     <>
+      {error && (
+        <div className="mb-4 p-4 text-red-700 bg-red-100 rounded-lg">
+          {error}
+        </div>
+      )}
+
       {/* Form Section */}
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-5">
