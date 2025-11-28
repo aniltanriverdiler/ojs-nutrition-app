@@ -129,8 +129,8 @@ const Navbar = () => {
                   {/* Logout */}
                   <DropdownMenuItem
                     className="cursor-pointer justify-center"
-                    onClick={() => {
-                      logout();
+                    onClick={async () => {
+                      await logout(); // Clears the cookie and state
                       router.push("/");
                     }}
                   >

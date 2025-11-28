@@ -65,9 +65,10 @@ const LoginForm = () => {
         return;
       }
 
+      // Token is now in the cookie, not in the response
       const userName = data?.user?.first_name || data?.first_name || values.email.split("@")[0];
 
-      login({ name: userName });
+      login({ name: userName, email: values.email });
 
       // Login successful, redirect to home page
       toast.success("Giriş işlemi başarılı oldu.");
