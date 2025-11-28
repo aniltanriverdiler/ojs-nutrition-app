@@ -24,6 +24,7 @@ import {
 import { Input } from "@/components/ui/input";
 import type { Address } from "@/types/account";
 import { X } from "lucide-react";
+import { toast } from "sonner";
 
 const addressFormSchema = z.object({
   title: z.string().min(1, "Adres başlığı boş bırakılamaz."),
@@ -60,9 +61,76 @@ const AddressForm = ({ address, onCancel, onSuccess }: AddressFormProps) => {
   });
 
   // 2. Define a submit handler.
-  function onSubmit(values: AddressFormValues) {
-    console.log(values);
-    onSuccess();
+  async function onSubmit(values: AddressFormValues) {
+    try {
+      // Format the phone number to E.164 before sending to the server
+      let rawPhone = values.phone.replace(/[^0-9]/g, "");
+
+      // Remove the '0' at the beginning
+      if (rawPhone.startsWith("0")) {
+        rawPhone = rawPhone.substring(1);
+      }
+
+      // If it doesn't start with '90', add it
+      if (!rawPhone.startsWith("90")) {
+        rawPhone = "90" + rawPhone;
+      }
+
+      // Finally add '+' at the beginning
+      const formattedPhone = "+" + rawPhone;
+
+      // We are creating the payload that the API expects
+      const payload = {
+        title: values.title,
+        first_name: values.name,
+        last_name: values.surname,
+        country_id: 226, // Turkey
+        region_id: 3495, // Istanbul
+        subregion_id: 39395, // Kadıkoy
+        full_address: `${values.address} ${values.apartment}`,
+        phone_number: formattedPhone,
+      };
+
+      console.log("Data sent to the server:", payload);
+
+      let res;
+
+      if (address?.id) {
+        // UPDATE (PUT) request
+        res = await fetch(`/api/account/addresses/${address.id}`, {
+          method: "PUT",
+          body: JSON.stringify(payload),
+        });
+      } else {
+        // NEW ADDRESS (POST)
+        res = await fetch("/api/account/addresses", {
+          method: "POST",
+          body: JSON.stringify(payload),
+        });
+      }
+
+      if (!res.ok) {
+        // Read the error message from the backend
+        const errorData = await res.json();
+        console.error("API Error Details:", errorData);
+
+        // Process the error message to display it to the user
+        if (errorData.reason) {
+          // Combine the detailed errors from the backend
+          const reasons = Object.entries(errorData.reason)
+            .map(([key, msgs]) => `${key}: ${(msgs as any[]).join(", ")}`)
+            .join(" | ");
+          throw new Error(reasons);
+        }
+        throw new Error(errorData.message || "İşlem başarısız.");
+      }
+
+      toast.success(address ? "Adres güncellendi" : "Adres eklendi");
+      onSuccess(); // Return to list and refresh
+    } catch (error) {
+      console.error("Submit Hatası:", error);
+      toast.error("Bir hata oluştu, lütfen tekrar deneyin.");
+    }
   }
 
   return (

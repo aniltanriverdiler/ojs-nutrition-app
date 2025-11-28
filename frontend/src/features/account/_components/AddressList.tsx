@@ -1,26 +1,85 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Pencil, Plus, Trash2 } from "lucide-react";
-import { getAllAddresses } from "@/lib/dummy/addresses";
 import AddressForm from "./AddressForm";
 import type { Address } from "@/types/account";
 import { Card, CardContent } from "@/components/ui/card";
+import { toast } from "sonner";
 
 const AddressList = () => {
-  const addresses = getAllAddresses();
+  const [addresses, setAddresses] = useState<Address[]>([]);
+  const [loading, setLoading] = useState(true);
   const [editingAddress, setEditingAddress] = useState<Address | null>(null);
   const [showForm, setShowForm] = useState(false);
+
+  // Fetch addresses
+  const fetchAddresses = async () => {
+    try {
+      // We are making a request to our custom API route
+      const res = await fetch("/api/account/addresses");
+      const json = await res.json();
+
+      console.log("Adres API Yanıtı:", json);
+
+      // Check possible data array paths in API response
+      const results = json.results || json.data?.results || json.data || [];
+
+      // According to the data structure returned from the API, we are setting the data
+      if (Array.isArray(results)) {
+        const mappedAddresses = results.map((item: any) => ({
+          id: item.id,
+          title: item.title,
+          // If the first_name and last_name are available from the backend, use them, otherwise use "User"
+          name: item.first_name || "Kullanıcı",
+          surname: item.last_name || "",
+          address: item.full_address,
+          city: "İstanbul", // For now, it is fixed
+          district: "Kadıköy", // For now, it is fixed
+          phone: item.phone_number,
+          phoneCountryCode: "",
+          originalData: item,
+        }));
+        setAddresses(mappedAddresses);
+      } else {
+        console.warn("Beklenen formatta adres verisi bulunamadı.", results);
+        setAddresses([]);
+      }
+    } catch (error) {
+      console.error("Adresler çekilemedi", error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  // When the page is opened, fetch the data
+  useEffect(() => {
+    fetchAddresses();
+  }, []);
 
   const handleEdit = (address: Address) => {
     setEditingAddress(address);
     setShowForm(true);
   };
 
-  const handleDelete = (id: string) => {
-    // API call will be placed here
-    console.log("Delete address:", id);
+  const handleDelete = async (id: string) => {
+    if (!confirm("Bu adresi silmek istediğinize emin misiniz?")) return;
+
+    try {
+      const res = await fetch(`/api/account/addresses/${id}`, {
+        method: "DELETE",
+      });
+
+      if (res.ok) {
+        toast.success("Adres başarıyla silindi");
+        fetchAddresses();
+      } else {
+        toast.error("Silme işlemi başarısız.");
+      }
+    } catch (error) {
+      toast.error("Bir hata oluştu");
+    }
   };
 
   const handleAddNew = () => {
@@ -39,10 +98,14 @@ const AddressList = () => {
         onSuccess={() => {
           setShowForm(false);
           setEditingAddress(null);
+          fetchAddresses(); // When the form is closed, refresh the list
         }}
       />
     );
   }
+
+  if (loading)
+    return <div className="text-center text-gray-500 py-8">Yükleniyor...</div>;
 
   return (
     <div>
