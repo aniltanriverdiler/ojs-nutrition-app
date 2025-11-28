@@ -11,13 +11,13 @@ import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
-  DropdownMenuGroup,
   DropdownMenuItem,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import {
   ChevronDownIcon,
+  LogOutIcon,
   SearchIcon,
   ShoppingCartIcon,
   UserIcon,
@@ -34,8 +34,15 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 import { Badge } from "../ui/badge";
+import { useUserStore } from "@/store/userStore";
+import { useRouter } from "next/navigation";
 
 const Navbar = () => {
+  const isAuthenticated = useUserStore((s) => s.isAuthenticated);
+  const logout = useUserStore((s) => s.logout);
+
+  const router = useRouter();
+
   return (
     <header className="hidden md:block bg-white my-5 px-4 sm:px-4 md:px-12 lg:px-24 xl:px-18 2xl:px-56">
       <div className="container flex items-center justify-between mx-auto max-w-7xl">
@@ -87,32 +94,76 @@ const Navbar = () => {
                 className="px-3 sm:px-4 lg:px-6 py-5 whitespace-nowrap cursor-pointer"
               >
                 <UserIcon className="w-4 h-4" />
-                <span className="hidden lg:inline">Hesap</span>
+                <span className="hidden lg:inline">
+                  {isAuthenticated ? "Hesap" : "Hesap"}
+                </span>
                 <ChevronDownIcon className="w-4 h-4" />
               </Button>
             </DropdownMenuTrigger>
-            <DropdownMenuContent className="w-36" align="center">
-              <DropdownMenuGroup>
-                <DropdownMenuItem asChild>
-                  <Link
-                    href="/auth/login"
-                    className="flex items-center gap-2 cursor-pointer"
+
+            <DropdownMenuContent className="w-28" align="center">
+              {isAuthenticated ? (
+                <>
+                  {/* Account */}
+                  <DropdownMenuItem asChild>
+                    <Link
+                      href="/account"
+                      className="flex items-center gap-2 cursor-pointer justify-center"
+                    >
+                      <UserIcon className="w-4 h-4" />
+                      Hesap
+                    </Link>
+                  </DropdownMenuItem>
+
+                  {/* Orders */}
+                  <DropdownMenuItem asChild>
+                    <Link
+                      href="/account/orders"
+                      className="flex items-center gap-2 cursor-pointer justify-center"
+                    >
+                      <UserIcon className="w-4 h-4" />
+                      Siparişlerim
+                    </Link>
+                  </DropdownMenuItem>
+
+                  {/* Logout */}
+                  <DropdownMenuItem
+                    className="cursor-pointer justify-center"
+                    onClick={() => {
+                      logout();
+                      router.push("/");
+                    }}
                   >
-                    <UserIcon className="w-4 h-4" />
-                    Üye Girişi
-                  </Link>
-                </DropdownMenuItem>
-              </DropdownMenuGroup>
-              <DropdownMenuSeparator />
-              <DropdownMenuItem asChild>
-                <Link
-                  href="/auth/register"
-                  className="flex items-center gap-2 cursor-pointer"
-                >
-                  <UserPlusIcon className="w-4 h-4" />
-                  Üye Ol
-                </Link>
-              </DropdownMenuItem>
+                    <LogOutIcon className="w-4 h-4" />
+                    Çıkış Yap
+                  </DropdownMenuItem>
+                </>
+              ) : (
+                <>
+                  {/* Login */}
+                  <DropdownMenuItem asChild>
+                    <Link
+                      href="/auth/login"
+                      className="flex items-center gap-2 cursor-pointer justify-center"
+                    >
+                      <UserIcon className="w-4 h-4" />
+                      Üye Girişi
+                    </Link>
+                  </DropdownMenuItem>
+                  <DropdownMenuSeparator />
+
+                  {/* Register */}
+                  <DropdownMenuItem asChild>
+                    <Link
+                      href="/auth/register"
+                      className="flex items-center gap-2 cursor-pointer justify-center"
+                    >
+                      <UserPlusIcon className="w-4 h-4" />
+                      Üye Ol
+                    </Link>
+                  </DropdownMenuItem>
+                </>
+              )}
             </DropdownMenuContent>
           </DropdownMenu>
 

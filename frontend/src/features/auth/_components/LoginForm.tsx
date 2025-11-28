@@ -18,6 +18,7 @@ import Image from "next/image";
 import { ButtonGroup } from "@/components/ui/button-group";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
+import { useUserStore } from "@/store/userStore";
 
 const loginFormSchema = z.object({
   email: z
@@ -31,8 +32,8 @@ type LoginFormValues = z.infer<typeof loginFormSchema>;
 
 const LoginForm = () => {
   const [error, setError] = useState<string | null>(null);
-
   const router = useRouter();
+  const login = useUserStore((s) => s.login); 
 
   // 1. Define your form.
   const form = useForm<LoginFormValues>({
@@ -63,6 +64,10 @@ const LoginForm = () => {
         toast.error(data?.message || "Giriş sırasında bir hata oluştu.");
         return;
       }
+
+      const userName = data?.user?.first_name || data?.first_name || values.email.split("@")[0];
+
+      login({ name: userName });
 
       // Login successful, redirect to home page
       toast.success("Giriş işlemi başarılı oldu.");
