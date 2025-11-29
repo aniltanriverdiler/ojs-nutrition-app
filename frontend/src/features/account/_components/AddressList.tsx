@@ -7,6 +7,16 @@ import AddressForm from "./AddressForm";
 import type { Address } from "@/types/account";
 import { Card, CardContent } from "@/components/ui/card";
 import { toast } from "sonner";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+} from "@/components/ui/alert-dialog";
 
 // API Address type
 interface ApiAddress {
@@ -25,6 +35,8 @@ const AddressList = () => {
   const [loading, setLoading] = useState(true);
   const [editingAddress, setEditingAddress] = useState<Address | null>(null);
   const [showForm, setShowForm] = useState(false);
+  const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
+  const [addressToDelete, setAddressToDelete] = useState<Address | null>(null);
 
   // Fetch addresses
   const fetchAddresses = async () => {
@@ -78,11 +90,16 @@ const AddressList = () => {
     setShowForm(true);
   };
 
-  const handleDelete = async (id: string) => {
-    if (!confirm("Bu adresi silmek istediğinize emin misiniz?")) return;
+  const handleDeleteClick = (address: Address) => {
+    setAddressToDelete(address);
+    setDeleteDialogOpen(true);
+  };
+
+  const handleDeleteConfirm = async () => {
+    if (!addressToDelete) return;
 
     try {
-      const res = await fetch(`/api/account/addresses/${id}`, {
+      const res = await fetch(`/api/account/addresses/${addressToDelete.id}`, {
         method: "DELETE",
       });
 
@@ -96,6 +113,9 @@ const AddressList = () => {
     } catch (error) {
       console.error("Adres silme hatası:", error);
       toast.error("Bir hata oluştu");
+    } finally {
+      setDeleteDialogOpen(false);
+      setAddressToDelete(null);
     }
   };
 
@@ -177,7 +197,7 @@ const AddressList = () => {
                 {/* Edit and Delete Buttons */}
                 <div className="flex flex-row justify-between gap-2">
                   <Button
-                    onClick={() => handleDelete(address.id)}
+                    onClick={() => handleDeleteClick(address)}
                     className="bg-white hover:bg-white text-red-600 hover:text-red-700 border-0 hover:underline cursor-pointer"
                   >
                     <Trash2 className="size-4 mr-1" /> Sil
@@ -194,6 +214,32 @@ const AddressList = () => {
           ))}
         </div>
       )}
+
+      {/* Delete Confirmation Dialog */}
+      <AlertDialog open={deleteDialogOpen} onOpenChange={setDeleteDialogOpen}>
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle>Adresi Silmek İstediğinize Emin Misiniz?</AlertDialogTitle>
+            <AlertDialogDescription>
+              {addressToDelete && (
+                <>
+                  <span className="font-semibold">&quot;{addressToDelete.title}&quot;</span> adlı adresi silmek üzeresiniz. 
+                  Bu işlem geri alınamaz.
+                </>
+              )}
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel className="cursor-pointer">İptal</AlertDialogCancel>
+            <AlertDialogAction
+              onClick={handleDeleteConfirm}
+              className="bg-red-600 hover:bg-red-700 text-white cursor-pointer"
+            >
+              Sil
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
     </div>
   );
 };
