@@ -8,6 +8,18 @@ import type { Address } from "@/types/account";
 import { Card, CardContent } from "@/components/ui/card";
 import { toast } from "sonner";
 
+// API Address type
+interface ApiAddress {
+  id: string;
+  title: string;
+  first_name?: string;
+  last_name?: string;
+  full_address: string;
+  city?: string;
+  district?: string;
+  phone_number: string;
+}
+
 const AddressList = () => {
   const [addresses, setAddresses] = useState<Address[]>([]);
   const [loading, setLoading] = useState(true);
@@ -16,44 +28,47 @@ const AddressList = () => {
 
   // Fetch addresses
   const fetchAddresses = async () => {
+    setLoading(true);
     try {
-      // We are making a request to our custom API route
       const res = await fetch("/api/account/addresses");
+      
+      if (!res.ok) {
+        throw new Error("Adresler yüklenemedi");
+      }
+
       const json = await res.json();
-
-      console.log("Adres API Yanıtı:", json);
-
-      // Check possible data array paths in API response
       const results = json.results || json.data?.results || json.data || [];
 
-      // According to the data structure returned from the API, we are setting the data
       if (Array.isArray(results)) {
-        const mappedAddresses = results.map((item: any) => ({
+        const mappedAddresses = results.map((item: ApiAddress) => ({
           id: item.id,
           title: item.title,
-          // If the first_name and last_name are available from the backend, use them, otherwise use "User"
           name: item.first_name || "Kullanıcı",
           surname: item.last_name || "",
           address: item.full_address,
-          city: "İstanbul", // For now, it is fixed
-          district: "Kadıköy", // For now, it is fixed
+          city: item.city || "İstanbul",
+          district: item.district || "Kadıköy",
           phone: item.phone_number,
-          phoneCountryCode: "",
+          phoneCountryCode: item.phone_number?.startsWith("+") 
+            ? item.phone_number.substring(0, 3) 
+            : "+90",
+          apartment: "", // API doesn't return apartment separately
           originalData: item,
         }));
         setAddresses(mappedAddresses);
       } else {
-        console.warn("Beklenen formatta adres verisi bulunamadı.", results);
+        console.warn("Beklenen formatta adres verisi bulunamadı.");
         setAddresses([]);
       }
     } catch (error) {
-      console.error("Adresler çekilemedi", error);
+      console.error("Adresler çekilemedi:", error);
+      toast.error("Adresler yüklenirken bir hata oluştu");
+      setAddresses([]);
     } finally {
       setLoading(false);
     }
   };
 
-  // When the page is opened, fetch the data
   useEffect(() => {
     fetchAddresses();
   }, []);
@@ -75,9 +90,11 @@ const AddressList = () => {
         toast.success("Adres başarıyla silindi");
         fetchAddresses();
       } else {
-        toast.error("Silme işlemi başarısız.");
+        const error = await res.json();
+        toast.error(error.message || "Silme işlemi başarısız");
       }
     } catch (error) {
+      console.error("Adres silme hatası:", error);
       toast.error("Bir hata oluştu");
     }
   };
@@ -98,14 +115,19 @@ const AddressList = () => {
         onSuccess={() => {
           setShowForm(false);
           setEditingAddress(null);
-          fetchAddresses(); // When the form is closed, refresh the list
+          fetchAddresses();
         }}
       />
     );
   }
 
-  if (loading)
-    return <div className="text-center text-gray-500 py-8">Yükleniyor...</div>;
+  if (loading) {
+    return (
+      <div className="text-center text-gray-500 py-8">
+        <div className="animate-pulse">Yükleniyor...</div>
+      </div>
+    );
+  }
 
   return (
     <div>
@@ -123,16 +145,22 @@ const AddressList = () => {
       {/* Address List Section */}
       {addresses.length === 0 ? (
         <div className="text-center text-gray-500 py-8">
-          Henüz bir adresiniz yok. Yeni adres ekleyiniz.
+          <p className="mb-4">Henüz bir adresiniz yok.</p>
+          <Button
+            onClick={handleAddNew}
+            className="bg-black hover:bg-black/90 text-white"
+          >
+            <Plus className="size-5 mr-2" /> İlk Adresinizi Ekleyin
+          </Button>
         </div>
       ) : (
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
           {addresses.map((address) => (
             <Card
               key={address.id}
-              className="border border-gray-400 shadow-sm rounded-sm"
+              className="border border-gray-400 shadow-sm rounded-sm hover:shadow-md transition-shadow"
             >
-              <CardContent>
+              <CardContent className="p-6">
                 <div className="flex flex-col gap-2">
                   <p className="text-lg font-bold mb-4">{address.title}</p>
                   <p className="text-sm font-medium">
@@ -150,15 +178,15 @@ const AddressList = () => {
                 <div className="flex flex-row justify-between gap-2">
                   <Button
                     onClick={() => handleDelete(address.id)}
-                    className="bg-white hover:bg-white text-black border-0 hover:underline cursor-pointer"
+                    className="bg-white hover:bg-white text-red-600 hover:text-red-700 border-0 hover:underline cursor-pointer"
                   >
-                    <Trash2 /> Sil
+                    <Trash2 className="size-4 mr-1" /> Sil
                   </Button>
                   <Button
                     onClick={() => handleEdit(address)}
                     className="bg-white hover:bg-white text-black border-0 hover:underline cursor-pointer"
                   >
-                    <Pencil /> Adresi Düzenle
+                    <Pencil className="size-4 mr-1" /> Adresi Düzenle
                   </Button>
                 </div>
               </CardContent>
