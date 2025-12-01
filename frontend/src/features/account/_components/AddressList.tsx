@@ -43,12 +43,13 @@ const AddressList = () => {
     setLoading(true);
     try {
       const res = await fetch("/api/account/addresses");
-      
+
       if (!res.ok) {
         throw new Error("Adresler yüklenemedi");
       }
 
       const json = await res.json();
+
       const results = json.results || json.data?.results || json.data || [];
 
       if (Array.isArray(results)) {
@@ -60,10 +61,9 @@ const AddressList = () => {
           address: item.full_address,
           city: item.city || "İstanbul",
           district: item.district || "Kadıköy",
-          phone: item.phone_number,
-          phoneCountryCode: item.phone_number?.startsWith("+") 
-            ? item.phone_number.substring(0, 3) 
-            : "+90",
+          // Phone display: remove country code for cleaner UI
+          phone: item.phone_number?.replace(/^\+90/, "0") || "",
+          phoneCountryCode: "",
           apartment: "", // API doesn't return apartment separately
           originalData: item,
         }));
@@ -190,9 +190,7 @@ const AddressList = () => {
                   <p className="text-sm font-medium">
                     {address.district}, {address.city}
                   </p>
-                  <p className="text-sm font-medium mb-4">
-                    {address.phoneCountryCode} {address.phone}
-                  </p>
+                  <p className="text-sm font-medium mb-4">{address.phone}</p>
                 </div>
                 {/* Edit and Delete Buttons */}
                 <div className="flex flex-row justify-between gap-2">
@@ -219,18 +217,24 @@ const AddressList = () => {
       <AlertDialog open={deleteDialogOpen} onOpenChange={setDeleteDialogOpen}>
         <AlertDialogContent>
           <AlertDialogHeader>
-            <AlertDialogTitle>Adresi Silmek İstediğinize Emin Misiniz?</AlertDialogTitle>
+            <AlertDialogTitle>
+              Adresi Silmek İstediğinize Emin Misiniz?
+            </AlertDialogTitle>
             <AlertDialogDescription>
               {addressToDelete && (
                 <>
-                  <span className="font-semibold">&quot;{addressToDelete.title}&quot;</span> adlı adresi silmek üzeresiniz. 
-                  Bu işlem geri alınamaz.
+                  <span className="font-semibold">
+                    &quot;{addressToDelete.title}&quot;
+                  </span>{" "}
+                  adlı adresi silmek üzeresiniz. Bu işlem geri alınamaz.
                 </>
               )}
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
-            <AlertDialogCancel className="cursor-pointer">İptal</AlertDialogCancel>
+            <AlertDialogCancel className="cursor-pointer">
+              İptal
+            </AlertDialogCancel>
             <AlertDialogAction
               onClick={handleDeleteConfirm}
               className="bg-red-600 hover:bg-red-700 text-white cursor-pointer"
