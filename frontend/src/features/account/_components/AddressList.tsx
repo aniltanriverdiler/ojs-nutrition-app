@@ -25,8 +25,22 @@ interface ApiAddress {
   first_name?: string;
   last_name?: string;
   full_address: string;
-  city?: string;
-  district?: string;
+  country?: {
+    id: number;
+    name: string;
+  };
+  region?: {
+    id: number;
+    name: string;
+  };
+  subregion?: {
+    id: number;
+    name: string;
+    region?: {
+      id: number;
+      name: string;
+    };
+  };
   phone_number: string;
 }
 
@@ -59,13 +73,12 @@ const AddressList = () => {
           name: item.first_name || "Kullanıcı",
           surname: item.last_name || "",
           address: item.full_address,
-          city: item.city || "İstanbul",
-          district: item.district || "Kadıköy",
+          city: item.region?.name || "İstanbul",
+          district: item.subregion?.name || "Kadıköy",
           // Phone display: remove country code for cleaner UI
           phone: item.phone_number?.replace(/^\+90/, "0") || "",
           phoneCountryCode: "",
           apartment: "", // API doesn't return apartment separately
-          originalData: item,
         }));
         setAddresses(mappedAddresses);
       } else {
@@ -168,9 +181,9 @@ const AddressList = () => {
           <p className="mb-4">Henüz bir adresiniz yok.</p>
           <Button
             onClick={handleAddNew}
-            className="bg-black hover:bg-black/90 text-white"
+            className="bg-black hover:bg-black/90 text-white cursor-pointer p-5 font-semibold"
           >
-            <Plus className="size-5 mr-2" /> İlk Adresinizi Ekleyin
+            <Plus className="size-5" /> İlk Adresinizi Ekleyin
           </Button>
         </div>
       ) : (

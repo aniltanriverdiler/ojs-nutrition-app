@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
@@ -25,6 +25,14 @@ import { Input } from "@/components/ui/input";
 import type { Address } from "@/types/account";
 import { X } from "lucide-react";
 import { toast } from "sonner";
+import {
+  Country,
+  getCountries,
+  getRegions,
+  getSubregions,
+  Region,
+  Subregion,
+} from "@/lib/api/location";
 
 const addressFormSchema = z.object({
   title: z.string().min(1, "Adres başlığı boş bırakılamaz."),
@@ -32,12 +40,16 @@ const addressFormSchema = z.object({
   surname: z.string().min(1, "Soyad alanı boş bırakılamaz."),
   address: z.string().min(1, "Adres alanı boş bırakılamaz."),
   apartment: z.string().optional(),
+  country: z.string().min(1, "Ülke seçimi zorunludur."),
   city: z.string().min(1, "Şehir alanı boş bırakılamaz."),
   district: z.string().min(1, "İlçe alanı boş bırakılamaz."),
   phone: z
     .string()
     .min(10, "Telefon numarası en az 10 haneli olmalıdır.")
-    .regex(/^0[0-9]{3}\s[0-9]{3}\s[0-9]{2}\s[0-9]{2}$/, "Geçerli bir telefon numarası giriniz."),
+    .regex(
+      /^0[0-9]{3}\s[0-9]{3}\s[0-9]{2}\s[0-9]{2}$/,
+      "Geçerli bir telefon numarası giriniz."
+    ),
 });
 
 type AddressFormValues = z.infer<typeof addressFormSchema>;
@@ -51,6 +63,14 @@ interface AddressFormProps {
 const AddressForm = ({ address, onCancel, onSuccess }: AddressFormProps) => {
   const [isSubmitting, setIsSubmitting] = useState(false);
 
+  // location states
+  const [countries, setCountries] = useState<Country[]>([]);
+  const [regions, setRegions] = useState<Region[]>([]);
+  const [subregions, setSubregions] = useState<Subregion[]>([]);
+
+  // Default Turkey values
+  const DEFAULT_COUNTRY_ID = "226";
+
   const form = useForm<AddressFormValues>({
     resolver: zodResolver(addressFormSchema),
     defaultValues: {
@@ -59,34 +79,85 @@ const AddressForm = ({ address, onCancel, onSuccess }: AddressFormProps) => {
       surname: address?.surname || "",
       address: address?.address || "",
       apartment: address?.apartment || "",
-      city: address?.city || "",
-      district: address?.district || "",
+      country: DEFAULT_COUNTRY_ID,
+      city: "",
+      district: "",
       phone: address?.phone || "",
     },
   });
 
+  // Fetch countries when component mounts
+  useEffect(() => {
+    async function initLocationData() {
+      try {
+        const countryList = await getCountries();
+        setCountries(countryList);
+
+        // By default, fetch Turkey's cities
+        const turkeyRegions = await getRegions("Turkey");
+        setRegions(turkeyRegions);
+
+        // IF EDIT MODE:
+        if (address) {
+          // 1. Find the current city's ID and set it to the form
+          const currentRegion = turkeyRegions.find(
+            (r) => r.name === address.city
+          );
+          if (currentRegion) {
+            form.setValue("city", currentRegion.id.toString());
+
+            // 2. Fetch the cities of the current city
+            const subregionList = await getSubregions(currentRegion.name);
+            setSubregions(subregionList);
+
+            // 3. Find the current subregion's ID and set it to the form
+            const currentSubregion = subregionList.find(
+              (s) => s.name === address.district
+            );
+            if (currentSubregion) {
+              form.setValue("district", currentSubregion.id.toString());
+            }
+          }
+        }
+      } catch (error) {
+        console.error("Lokasyon verileri yüklenemedi:", error);
+      }
+    }
+
+    initLocationData();
+  }, [address, form]);
+
+  // Handle city and district changes
+  const handleCityChange = async (regionId: string) => {
+    form.setValue("city", regionId);
+    form.setValue("district", "");
+
+    // Find the selected city's name (required for API request)
+    const selectedRegion = regions.find((r) => r.id.toString() === regionId);
+    if (selectedRegion) {
+      try {
+        const data = await getSubregions(selectedRegion.name);
+        setSubregions(data);
+      } catch (error) {
+        console.error("İlçe verileri yüklenemedi:", error);
+        setSubregions([]);
+      }
+    }
+  };
+
   // Format phone number to E.164 format
   const formatPhoneToE164 = (phone: string): string => {
     let rawPhone = phone.replace(/[^0-9]/g, "");
-
-    // Remove leading '0'
-    if (rawPhone.startsWith("0")) {
-      rawPhone = rawPhone.substring(1);
-    }
-
-    // Add country code if not present
-    if (!rawPhone.startsWith("90")) {
-      rawPhone = "90" + rawPhone;
-    }
-
+    if (rawPhone.startsWith("0")) rawPhone = rawPhone.substring(1);
+    if (!rawPhone.startsWith("90")) rawPhone = "90" + rawPhone;
     return "+" + rawPhone;
   };
 
   async function onSubmit(values: AddressFormValues) {
     if (isSubmitting) return;
-    
+
     setIsSubmitting(true);
-    
+
     try {
       const formattedPhone = formatPhoneToE164(values.phone);
 
@@ -99,9 +170,9 @@ const AddressForm = ({ address, onCancel, onSuccess }: AddressFormProps) => {
         title: values.title,
         first_name: values.name,
         last_name: values.surname,
-        country_id: 226, // Turkey
-        region_id: 3495, // Istanbul
-        subregion_id: 39395, // Kadikoy (will be dynamic in future)
+        country_id: Number(values.country),
+        region_id: Number(values.city),
+        subregion_id: Number(values.district),
         full_address: fullAddress,
         phone_number: formattedPhone,
       };
@@ -122,7 +193,7 @@ const AddressForm = ({ address, onCancel, onSuccess }: AddressFormProps) => {
 
       if (!res.ok) {
         const errorData = await res.json();
-        
+
         // Handle validation errors from backend
         if (errorData.reason && typeof errorData.reason === "object") {
           const errorMessages = Object.entries(errorData.reason)
@@ -133,7 +204,7 @@ const AddressForm = ({ address, onCancel, onSuccess }: AddressFormProps) => {
             .join(" | ");
           throw new Error(errorMessages);
         }
-        
+
         throw new Error(errorData.message || "İşlem başarısız");
       }
 
@@ -143,9 +214,10 @@ const AddressForm = ({ address, onCancel, onSuccess }: AddressFormProps) => {
       onSuccess();
     } catch (error) {
       console.error("Adres kaydetme hatası:", error);
-      const errorMessage = error instanceof Error 
-        ? error.message 
-        : "Bir hata oluştu, lütfen tekrar deneyin.";
+      const errorMessage =
+        error instanceof Error
+          ? error.message
+          : "Bir hata oluştu, lütfen tekrar deneyin.";
       toast.error(errorMessage);
     } finally {
       setIsSubmitting(false);
@@ -161,9 +233,15 @@ const AddressForm = ({ address, onCancel, onSuccess }: AddressFormProps) => {
     } else if (phoneNumber.length <= 7) {
       return `${phoneNumber.slice(0, 4)} ${phoneNumber.slice(4)}`;
     } else if (phoneNumber.length <= 9) {
-      return `${phoneNumber.slice(0, 4)} ${phoneNumber.slice(4, 7)} ${phoneNumber.slice(7)}`;
+      return `${phoneNumber.slice(0, 4)} ${phoneNumber.slice(
+        4,
+        7
+      )} ${phoneNumber.slice(7)}`;
     } else {
-      return `${phoneNumber.slice(0, 4)} ${phoneNumber.slice(4, 7)} ${phoneNumber.slice(7, 9)} ${phoneNumber.slice(9, 11)}`;
+      return `${phoneNumber.slice(0, 4)} ${phoneNumber.slice(
+        4,
+        7
+      )} ${phoneNumber.slice(7, 9)} ${phoneNumber.slice(9, 11)}`;
     }
   };
 
@@ -303,9 +381,9 @@ const AddressForm = ({ address, onCancel, onSuccess }: AddressFormProps) => {
                 <FormItem>
                   <FormLabel className="mb-1.5">*Şehir</FormLabel>
                   <Select
-                    onValueChange={field.onChange}
-                    defaultValue={field.value}
-                    disabled={isSubmitting}
+                    onValueChange={handleCityChange}
+                    value={field.value}
+                    disabled={isSubmitting || regions.length === 0}
                   >
                     <FormControl>
                       <SelectTrigger className="p-6 bg-gray-50 border border-gray-300 rounded-sm h-auto w-full">
@@ -314,12 +392,14 @@ const AddressForm = ({ address, onCancel, onSuccess }: AddressFormProps) => {
                     </FormControl>
                     <SelectContent>
                       <SelectGroup>
-                        <SelectItem value="istanbul">İstanbul</SelectItem>
-                        <SelectItem value="ankara">Ankara</SelectItem>
-                        <SelectItem value="izmir">İzmir</SelectItem>
-                        <SelectItem value="bursa">Bursa</SelectItem>
-                        <SelectItem value="antalya">Antalya</SelectItem>
-                        <SelectItem value="adana">Adana</SelectItem>
+                        {regions.map((region) => (
+                          <SelectItem
+                            key={region.id}
+                            value={region.id.toString()}
+                          >
+                            {region.name}
+                          </SelectItem>
+                        ))}
                       </SelectGroup>
                     </SelectContent>
                   </Select>
@@ -337,8 +417,8 @@ const AddressForm = ({ address, onCancel, onSuccess }: AddressFormProps) => {
                   <FormLabel className="mb-1.5">*İlçe</FormLabel>
                   <Select
                     onValueChange={field.onChange}
-                    defaultValue={field.value}
-                    disabled={isSubmitting}
+                    value={field.value}
+                    disabled={isSubmitting || subregions.length === 0}
                   >
                     <FormControl>
                       <SelectTrigger className="p-6 bg-gray-50 border border-gray-300 rounded-sm h-auto w-full">
@@ -347,12 +427,11 @@ const AddressForm = ({ address, onCancel, onSuccess }: AddressFormProps) => {
                     </FormControl>
                     <SelectContent>
                       <SelectGroup>
-                        <SelectItem value="kadikoy">Kadıköy</SelectItem>
-                        <SelectItem value="besiktas">Beşiktaş</SelectItem>
-                        <SelectItem value="sisli">Şişli</SelectItem>
-                        <SelectItem value="uskudar">Üsküdar</SelectItem>
-                        <SelectItem value="beyoglu">Beyoğlu</SelectItem>
-                        <SelectItem value="bakirkoy">Bakırköy</SelectItem>
+                        {subregions.map((sub) => (
+                          <SelectItem key={sub.id} value={sub.id.toString()}>
+                            {sub.name}
+                          </SelectItem>
+                        ))}
                       </SelectGroup>
                     </SelectContent>
                   </Select>
