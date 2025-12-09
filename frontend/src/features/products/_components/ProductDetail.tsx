@@ -31,6 +31,10 @@ import {
   ProductVariant,
   Ingredient,
 } from "@/types/product";
+import { useCartStore } from "@/store/cartStore";
+import { useUserStore } from "@/store/userStore";
+import { useRouter } from "next/navigation";
+import { toast } from "sonner";
 
 // Aromas Colors
 const AROMA_COLORS: Record<string, string> = {
@@ -77,6 +81,28 @@ export default function ProductDetail({
   bestSellers: propBestSellers,
   rateStatistics,
 }: ProductDetailProps) {
+  const router = useRouter();
+  const addItem = useCartStore((state) => state.addItem);
+  const isAuthenticated = useUserStore((state) => state.isAuthenticated);
+
+  // State management
+  const [quantity, setQuantity] = useState<number>(1);
+
+  const handleAddToCart = async () => {
+    // Authentication check
+    if (!isAuthenticated) {
+      toast.error("Sepete eklemek için giriş yapmalısınız");
+      router.push("/auth/login");
+      return;
+    }
+
+    await addItem({
+      productId: product.id,
+      variantId: selectedVariant.id,
+      quantity,
+    });
+  };
+
   // Base URL (To fix image paths)
   const BASE_URL =
     process.env.NEXT_PUBLIC_API_URL?.replace("/api/v1", "") || "";
@@ -89,9 +115,6 @@ export default function ProductDetail({
   const subCategory = mainCategory?.children?.find(
     (child) => child.id === product.sub_category_id
   );
-
-  // Quantity state management
-  const [quantity, setQuantity] = useState<number>(1);
 
   // Increment quantity
   const increaseQuantity = () => {
@@ -410,7 +433,10 @@ export default function ProductDetail({
 
                 {/* Add to Cart Button */}
                 <div className="flex-1">
-                  <Button className="w-full h-12 text-lg bg-black text-white hover:bg-gray-800 cursor-pointer rounded-md flex items-center justify-center gap-2">
+                  <Button
+                    onClick={handleAddToCart}
+                    className="w-full h-12 text-lg bg-black text-white hover:bg-gray-800 cursor-pointer rounded-md flex items-center justify-center gap-2"
+                  >
                     <ShoppingCartIcon strokeWidth={3} className="w-6 h-6" />
                     SEPETE EKLE
                   </Button>

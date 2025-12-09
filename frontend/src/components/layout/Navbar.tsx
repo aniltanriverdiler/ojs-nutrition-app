@@ -36,12 +36,22 @@ import {
 import { Badge } from "../ui/badge";
 import { useUserStore } from "@/store/userStore";
 import { useRouter } from "next/navigation";
+import { useEffect } from "react";
+import { useCartStore } from "@/store/cartStore";
 
 const Navbar = () => {
-  const isAuthenticated = useUserStore((s) => s.isAuthenticated);
-  const logout = useUserStore((s) => s.logout);
-
+  const initializeCart = useCartStore((state) => state.initializeCart);
+  const isAuthenticated = useUserStore((state) => state.isAuthenticated);
+  const logout = useUserStore((state) => state.logout);
+  
   const router = useRouter();
+
+  useEffect(() => {
+    // If user is authenticated, load the cart
+    if (isAuthenticated) {
+      initializeCart();
+    }
+  },[isAuthenticated, initializeCart]);
 
   return (
     <header className="hidden md:block bg-white my-5 px-4 sm:px-4 md:px-12 lg:px-24 xl:px-18 2xl:px-56">
