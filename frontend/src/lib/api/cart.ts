@@ -7,23 +7,19 @@ export interface CartItemApi {
   product_variant_id: string;
   pieces: number;
   product: string;
+  unit_price: number;
+  total_price: number;
+  discounted_unit_price?: number | null;
   product_variant_detail: {
-    id: string;
+    id?: string;
     size: {
       gram: number;
       pieces: number;
       total_services: number;
     };
     aroma: string;
-    price: {
-      profit: number | null;
-      total_price: number;
-      discounted_price: number | null;
-      price_per_servings: number | null;
-      discount_percentage: number | null;
-    };
     photo_src: string;
-    is_available: boolean;
+    is_available?: boolean;
   };
 }
 
@@ -104,14 +100,26 @@ export async function addToCart(payload: {
 export async function removeFromCart(payload: {
   product_id: string;
   product_variant_id: string;
+  pieces?: number;
 }): Promise<{ success: boolean; message?: string }> {
   try {
-    const res = await fetch("/api/cart", {
+    // Add data as query parameters
+    const params = new URLSearchParams();
+    params.append("product_id", payload.product_id);
+    params.append("product_variant_id", payload.product_variant_id);
+    // If pieces exists, add it, otherwise use default value of 1
+    params.append("pieces", (payload.pieces || 1).toString());
+
+    if (payload.product_variant_id) {
+      params.append("product_variant_id", payload.product_variant_id);
+    }
+
+    // Add parameters to URL and make the request
+    const res = await fetch(`/api/cart?${params.toString()}`, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(payload),
     });
 
     if (!res.ok) {
@@ -128,7 +136,7 @@ export async function removeFromCart(payload: {
   }
 }
 
-// 4. Update product quantity in cart (remove and re-add if no direct update endpoint).
+// 4. Update product quantity in cart (remove and re-add if no direct update endpoint)
 export async function updateCartItemQuantity(
   productId: string,
   variantId: string,

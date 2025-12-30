@@ -9,15 +9,16 @@ import { CartDrawer } from "./CartDrawer";
 
 export function CartButton() {
   const [isOpen, setIsOpen] = useState(false);
-  const getTotalItems = useCartStore((state) => state.getTotalItems);
-  const totalItems = getTotalItems();
+
+  const items = useCartStore((state) => state.items);
+  const totalItems = items.reduce((total, item) => total + item.quantity, 0);
 
   return (
     <>
       <Button
-        variant="ghost"
+        variant="outline"
         size="icon"
-        className="relative"
+        className="relative w-20 h-10.5 bg-gray-500 text-white font-semibold cursor-pointer"
         onClick={() => setIsOpen(true)}
         aria-label="Sepeti Aç"
       >
@@ -30,6 +31,7 @@ export function CartButton() {
             {totalItems > 9 ? "9+" : totalItems}
           </Badge>
         )}
+        SEPET
       </Button>
 
       <CartDrawer isOpen={isOpen} onClose={() => setIsOpen(false)} />

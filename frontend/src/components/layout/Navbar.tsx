@@ -38,12 +38,13 @@ import { useUserStore } from "@/store/userStore";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 import { useCartStore } from "@/store/cartStore";
+import { CartButton } from "@/features/cart/_components/CartButton";
 
 const Navbar = () => {
   const initializeCart = useCartStore((state) => state.initializeCart);
   const isAuthenticated = useUserStore((state) => state.isAuthenticated);
   const logout = useUserStore((state) => state.logout);
-  
+
   const router = useRouter();
 
   useEffect(() => {
@@ -51,7 +52,7 @@ const Navbar = () => {
     if (isAuthenticated) {
       initializeCart();
     }
-  },[isAuthenticated, initializeCart]);
+  }, [isAuthenticated, initializeCart]);
 
   return (
     <header className="hidden md:block bg-white my-5 px-4 sm:px-4 md:px-12 lg:px-24 xl:px-18 2xl:px-56">
@@ -178,60 +179,7 @@ const Navbar = () => {
           </DropdownMenu>
 
           {/* Shopping Cart Section */}
-          <Sheet>
-            <SheetTrigger asChild>
-              <Button
-                variant="outline"
-                className="bg-gray-500 text-white px-3 sm:px-4 lg:px-6 py-5 relative cursor-pointer"
-              >
-                <ShoppingCartIcon className="w-4 h-4" />
-                <span className="hidden sm:inline">Sepet</span>
-                <Badge
-                  variant="destructive"
-                  className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full flex items-center justify-center"
-                >
-                  0
-                </Badge>
-              </Button>
-            </SheetTrigger>
-            <SheetContent side="right" className="w-full lg:max-w-lg">
-              <SheetHeader>
-                <SheetTitle className="text-2xl text-center font-bold">
-                  Sepetim
-                </SheetTitle>
-                <SheetDescription className="text-center">
-                  Sepetinizdeki ürünleri görüntüleyebilirsiniz.
-                </SheetDescription>
-              </SheetHeader>
-
-              <div className="flex flex-col h-full">
-                {/* Cart Content */}
-                <div className="flex-1 py-6">
-                  <div className="flex flex-col items-center justify-center h-full text-center">
-                    <ShoppingCartIcon className="w-16 h-16 text-gray-500 mb-4" />
-                    <p className="text-gray-500 text-lg">
-                      Sepetinizde ürün bulunmamaktadır.
-                    </p>
-                  </div>
-                </div>
-              </div>
-
-              {/* Cart Footer */}
-              <SheetFooter className="flex-col gap-2">
-                <SheetClose asChild>
-                  <Button
-                    variant="outline"
-                    className="w-full border-gray-500 text-gray-600 hover:bg-gray-50 hover:text-gray-600 cursor-pointer"
-                  >
-                    Alışverişe Devam Et
-                  </Button>
-                </SheetClose>
-                <Button className="w-full bg-gray-500 text-white hover:bg-gray-600 cursor-pointer">
-                  Sepete Git
-                </Button>
-              </SheetFooter>
-            </SheetContent>
-          </Sheet>
+          <CartButton />
         </nav>
       </div>
     </header>
