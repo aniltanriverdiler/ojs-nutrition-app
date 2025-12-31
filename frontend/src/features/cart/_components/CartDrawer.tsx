@@ -62,7 +62,7 @@ export function CartDrawer({ isOpen, onClose }: CartDrawerProps) {
     <Sheet open={isOpen} onOpenChange={onClose}>
       <SheetContent className="w-full sm:max-w-md flex flex-col p-0 gap-0 border-l border-gray-200">
         {/* Cart Header */}
-        <SheetHeader className="p-4 border-b border-gray-100 flex flex-row items-center justify-between space-y-0">
+        <SheetHeader className="p-4 border-b border-gray-200 flex flex-row items-center justify-between space-y-0">
           <SheetTitle className="text-base font-bold text-center w-full uppercase tracking-wider">
             SEPETİM
           </SheetTitle>
@@ -94,7 +94,7 @@ export function CartDrawer({ isOpen, onClose }: CartDrawerProps) {
           </div>
         ) : (
           <>
-            <ScrollArea className="flex-1 px-4 py-2 bg-gray-50/30">
+            <ScrollArea className="flex-1 px-4 py-2 bg-gray-50">
               {isLoading && (
                 <div className="text-center text-xs text-gray-400 py-2">
                   Güncelleniyor...
@@ -111,7 +111,7 @@ export function CartDrawer({ isOpen, onClose }: CartDrawerProps) {
             </ScrollArea>
 
             {/* Cart Footer */}
-            <div className="p-4 bg-white border-t border-gray-100 shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.05)]">
+            <div className="p-4 bg-white border-t border-gray-200 shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.05)]">
               <div className="flex items-center justify-between mb-4">
                 <span className="text-sm font-bold text-gray-900">TOPLAM</span>
                 {/* Only total price - no discount display */}
