@@ -30,8 +30,8 @@ const RecentlyViewedProducts = ({
             imageSrc={product.imageSrc}
             name={product.name}
             description={product.description}
-            price={product.price}
-            previousPrice={product.previousPrice}
+            price={product.price.toString()}
+            previousPrice={product.previousPrice?.toString()}
             commentCount={product.commentCount}
             badge={product.badge}
           />

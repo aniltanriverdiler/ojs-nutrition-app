@@ -6,6 +6,8 @@ export interface Review {
   text: string;
   author: string;
   verified?: boolean;
+  productImage?: string;
+  readMoreHref?: string;
 }
 
 export interface ReviewsResponse {

@@ -1448,6 +1448,7 @@ export const mockProductsBestSellers: ProductsBestSellersResponse = {
   data: [
     {
       name: "WHEY PROTEIN",
+      slug: "whey-protein",
       short_explanation: "EN ÇOK TERCİH EDİLEN PROTEİN TAKVİYESİ",
       price_info: {
         profit: null,
@@ -1463,6 +1464,7 @@ export const mockProductsBestSellers: ProductsBestSellersResponse = {
     },
     {
       name: "CREATINE",
+      slug: "creatine",
       short_explanation: "EN POPÜLER SPORCU TAKVİYESİ",
       price_info: {
         profit: null,
@@ -1478,6 +1480,7 @@ export const mockProductsBestSellers: ProductsBestSellersResponse = {
     },
     {
       name: "FITNESS PAKETİ",
+      slug: "fitness-paketi",
       short_explanation: "EN POPÜLER ÜRÜNLER BİR ARADA",
       price_info: {
         profit: 700,
@@ -1493,6 +1496,7 @@ export const mockProductsBestSellers: ProductsBestSellersResponse = {
     },
     {
       name: "GÜNLÜK VİTAMİN PAKETİ",
+      slug: "gunluk-vitamin-paketi",
       short_explanation: "EN SIK TÜKETİLEN TAKVİYELER",
       price_info: {
         profit: 168,
@@ -1508,6 +1512,7 @@ export const mockProductsBestSellers: ProductsBestSellersResponse = {
     },
     {
       name: "PRE-WORKOUT SUPREME",
+      slug: "pre-workout-supreme",
       short_explanation: "ANTRENMAN ÖNCESİ TAKVİYESİ",
       price_info: {
         profit: null,
@@ -1523,6 +1528,7 @@ export const mockProductsBestSellers: ProductsBestSellersResponse = {
     },
     {
       name: "CREAM OF RICE",
+      slug: "cream-of-rice",
       short_explanation: "EN LEZZETLİ PİRİNÇ KREMASI",
       price_info: {
         profit: null,
