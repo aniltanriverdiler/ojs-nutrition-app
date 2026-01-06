@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import { useCheckoutStore } from "@/store/checkoutStore";
-import { getAllAddresses } from "@/lib/dummy/addresses";
+import { useUserStore } from "@/store/userStore";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { Checkbox } from "@/components/ui/checkbox";
@@ -67,9 +67,30 @@ const AddressSelection = () => {
     )} ${phoneNumber.slice(7, 9)} ${phoneNumber.slice(9, 11)}`;
   };
 
+  const fetchAddresses = useUserStore((state) => state.fetchAddresses);
+  const userAddresses = useUserStore((state) => state.addresses);
+  const [isLoadingAddresses, setIsLoadingAddresses] = React.useState(false);
+
   useEffect(() => {
-    setAddresses(getAllAddresses());
-  }, [setAddresses]);
+    // Fetch addresses from backend on component mount
+    const loadAddresses = async () => {
+      setIsLoadingAddresses(true);
+      try {
+        await fetchAddresses();
+      } catch (error) {
+        console.error("Failed to load addresses:", error);
+      } finally {
+        setIsLoadingAddresses(false);
+      }
+    };
+    loadAddresses();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []); // Only run once on mount
+
+  // Sync userStore addresses to checkoutStore whenever they change
+  useEffect(() => {
+    setAddresses(userAddresses);
+  }, [userAddresses, setAddresses]);
 
   const handleConfirm = () => {
     // If adding a new address, save it first

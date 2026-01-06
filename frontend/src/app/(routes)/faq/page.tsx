@@ -1,10 +1,7 @@
-import React from 'react'
-import FaqContent from '@/features/faq/_components/FaqContent';
+import FaqContent from "@/features/faq/_components/FaqContent";
 
 const FaqPage = () => {
-  return (
-    <FaqContent />
-  )
-}
+  return <FaqContent />;
+};
 
 export default FaqPage;

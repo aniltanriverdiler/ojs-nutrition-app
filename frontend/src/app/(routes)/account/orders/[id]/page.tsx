@@ -1,4 +1,4 @@
-import OrderDetail from "@/features/account/_components/OrderDetail";
+import { OrderDetail } from "@/features/account/_components/OrderDetail";
 
 interface OrderDetailPageProps {
   params: Promise<{ id: string }>;
@@ -6,7 +6,7 @@ interface OrderDetailPageProps {
 
 const OrderDetailPage = async ({ params }: OrderDetailPageProps) => {
   const { id } = await params;
-  
+
   return <OrderDetail orderId={id} />;
 };
 

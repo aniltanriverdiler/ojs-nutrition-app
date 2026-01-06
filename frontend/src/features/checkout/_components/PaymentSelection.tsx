@@ -7,13 +7,28 @@ import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Checkbox } from "@/components/ui/checkbox";
 import { LockKeyhole } from "lucide-react";
+import { completeOrder, type CompleteOrderPayload } from "@/lib/api/order";
+import { useCartStore } from "@/store/cartStore";
+import { toast } from "sonner";
+import { useRouter } from "next/navigation";
 
 const PaymentSelection = () => {
-  const { selectedPayment, setSelectedPayment, setActiveStep } =
-    useCheckoutStore();
+  const router = useRouter();
+  const {
+    selectedPayment,
+    setSelectedPayment,
+    setActiveStep,
+    selectedAddress,
+    resetCheckout,
+  } = useCheckoutStore();
+  const clearCart = useCartStore((state) => state.clearCart);
+
   const [paymentType, setPaymentType] = useState<PaymentMethod["type"]>(
     selectedPayment?.type || "credit_card"
   );
+  const [isProcessing, setIsProcessing] = useState(false);
+  const [billingConsentChecked, setBillingConsentChecked] = useState(false);
+  const [termsConsentChecked, setTermsConsentChecked] = useState(false);
 
   const [cardDetails, setCardDetails] = useState({
     cardNumber: "",
@@ -22,15 +37,109 @@ const PaymentSelection = () => {
     cvv: "",
   });
 
-  const handleConfirmOrder = () => {
-    const payment: PaymentMethod = {
-      type: paymentType,
-      ...(paymentType === "credit_card" && { cardDetails }),
-    };
-    setSelectedPayment(payment);
+  const handleConfirmOrder = async (e: React.SyntheticEvent) => {
+    e.preventDefault();
 
-    // TODO: Process payment and create order
-    alert("Sipariş tamamlanıyor...");
+    if (!selectedAddress?.id) {
+      toast.error("Lütfen bir teslimat adresi seçin");
+      return;
+    }
+
+    // Consent validations
+    if (!billingConsentChecked) {
+      toast.error("Lütfen fatura adresi onayını işaretleyiniz");
+      return;
+    }
+
+    if (!termsConsentChecked) {
+      toast.error("Lütfen sözleşmeleri okuyup onaylayınız");
+      return;
+    }
+
+    if (paymentType === "credit_card") {
+      const cleanCardNumber = cardDetails.cardNumber.replace(/\D/g, "");
+      if (!cleanCardNumber || cleanCardNumber.length < 16) {
+        toast.error("Lütfen geçerli bir kart numarası giriniz");
+        return;
+      }
+      if (!cardDetails.cvv || cardDetails.cvv.length < 3) {
+        toast.error("Lütfen CVV kodunu giriniz");
+        return;
+      }
+    }
+
+    setIsProcessing(true);
+
+    try {
+      let payload: CompleteOrderPayload;
+
+      // Payment type specific payloads
+      if (paymentType === "credit_card") {
+        payload = {
+          address_id: selectedAddress.id,
+          payment_type: "credit_cart",
+          card_digits: "1234567891234567",
+          card_expiration_date: "09-24",
+          card_security_code: "123",
+          card_type: "VISA",
+        };
+      } else if (paymentType === "bank_transfer") {
+        payload = {
+          address_id: selectedAddress.id,
+          payment_type: "bank_transfer",
+          card_digits: "0000000000000000",
+          card_expiration_date: "01-30",
+          card_security_code: "000",
+          card_type: "NONE",
+        };
+      } else if (paymentType === "cash_on_delivery") {
+        payload = {
+          address_id: selectedAddress.id,
+          payment_type: "cash_on_delivery",
+          card_digits: "0000000000000000",
+          card_expiration_date: "01-30",
+          card_security_code: "000",
+          card_type: "NONE",
+        };
+      } else {
+        toast.error("Geçersiz ödeme yöntemi");
+        setIsProcessing(false);
+        return;
+      }
+
+      console.log("📦 Gönderilen payload:", JSON.stringify(payload, null, 2));
+
+      const result = await completeOrder(payload);
+
+      console.log("📨 Backend yanıtı:", result);
+
+      await new Promise((resolve) => setTimeout(resolve, 7000));
+
+      if (result.success) {
+        toast.success("Siparişiniz başarıyla tamamlandı! 🎉");
+        clearCart();
+        resetCheckout();
+        router.push("/account/orders");
+      } else {
+        console.error("❌ Sipariş başarısız:", result);
+
+        if (result.validationErrors) {
+          console.error("🔍 Validation hataları:", result.validationErrors);
+
+          // Show detailed error messages
+          Object.entries(result.validationErrors).forEach(([field, errors]) => {
+            console.error(`🔍 ${field} hatası:`, errors);
+          });
+        }
+
+        toast.error(result.message || "Sipariş oluşturulamadı");
+      }
+    } catch (error) {
+      console.error("❌ Sipariş hatası (catch):", error);
+      toast.error("Bir hata oluştu");
+    } finally {
+      setIsProcessing(false);
+    }
   };
 
   const handleBack = () => {
@@ -241,26 +350,50 @@ const PaymentSelection = () => {
 
       {/* Consent Checkboxes */}
       <div className="space-y-4 mt-6">
-        <div className="flex items-start gap-3">
+        <div
+          className={`flex items-start gap-3 p-4 rounded-md border-2 transition-all duration-300 ${
+            billingConsentChecked
+              ? "border-black bg-gray-50"
+              : "border-gray-300 bg-white hover:border-gray-400"
+          }`}
+        >
           <Checkbox
             id="billing-consent"
-            className="bg-white mt-1 data-[state=checked]:bg-black data-[state=checked]:black"
+            checked={billingConsentChecked}
+            onCheckedChange={(checked) =>
+              setBillingConsentChecked(checked as boolean)
+            }
+            className="bg-white mt-1 data-[state=checked]:bg-black data-[state=checked]:black border-2"
           />
           <label
             htmlFor="billing-consent"
-            className="text-gray-500 cursor-pointer"
+            className={`cursor-pointer transition-colors ${
+              billingConsentChecked ? "text-black font-medium" : "text-gray-600"
+            }`}
           >
             Fatura adresim teslimat adresimle aynı
           </label>
         </div>
-        <div className="flex items-start gap-3">
+        <div
+          className={`flex items-start gap-3 p-4 rounded-md border-2 transition-all duration-300 ${
+            termsConsentChecked
+              ? "border-black bg-gray-50"
+              : "border-gray-300 bg-white hover:border-gray-400"
+          }`}
+        >
           <Checkbox
             id="terms-consent"
-            className="bg-white mt-1 data-[state=checked]:bg-black data-[state=checked]:black"
+            checked={termsConsentChecked}
+            onCheckedChange={(checked) =>
+              setTermsConsentChecked(checked as boolean)
+            }
+            className="bg-white mt-1 data-[state=checked]:bg-black data-[state=checked]:black border-2"
           />
           <label
             htmlFor="terms-consent"
-            className="text-gray-500 cursor-pointer"
+            className={`cursor-pointer transition-colors ${
+              termsConsentChecked ? "text-black" : "text-gray-600"
+            }`}
           >
             <span className="font-bold text-black hover:underline">
               Gizlilik Sözleşmesini
@@ -270,6 +403,9 @@ const PaymentSelection = () => {
               Satış Sözleşmesini
             </span>{" "}
             okudum, onaylıyorum.
+            {!termsConsentChecked && (
+              <span className="text-red-500 ml-1">*</span>
+            )}
           </label>
         </div>
       </div>
@@ -288,10 +424,26 @@ const PaymentSelection = () => {
           variant="default"
           type="button"
           onClick={handleConfirmOrder}
-          disabled={!paymentType}
-          className="bg-black hover:bg-black/90 text-white font-semibold cursor-pointer w-1/2 px-5 py-7 text-base"
+          disabled={
+            !paymentType ||
+            isProcessing ||
+            !billingConsentChecked ||
+            !termsConsentChecked
+          }
+          className={`text-white font-semibold w-1/2 px-5 py-7 text-base transition-all duration-300 ${
+            billingConsentChecked && termsConsentChecked && !isProcessing
+              ? "bg-black hover:bg-black/90 cursor-pointer"
+              : "bg-gray-400 cursor-not-allowed"
+          }`}
         >
-          Siparişi Tamamla
+          {isProcessing ? (
+            <div className="flex items-center gap-2">
+              <div className="h-4 w-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
+              Ödeme Yapılıyor...
+            </div>
+          ) : (
+            "Siparişi Tamamla"
+          )}
         </Button>
       </div>
 

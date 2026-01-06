@@ -1,8 +1,5 @@
 "use client";
-import React from "react";
 import ProductCard from "@/components/shared/ProductCard";
-import { useRecentlyViewed } from "../hooks/use-recently-viewed";
-import { getProductById } from "@/lib/dummy/products";
 import { getHomeBestSellers } from "@/lib/dummy/products";
 
 interface RecentlyViewedProductsProps {

@@ -3,7 +3,7 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { toast } from "sonner";
 
 import { Button } from "@/components/ui/button";
@@ -52,10 +52,13 @@ const AccountForm = () => {
     // Backend format: +905XXXXXXXXX -> UI format: 0XXX XXX XX XX
     const digits = phone.replace(/\D/g, "");
     const localPhone = digits.startsWith("90") ? "0" + digits.slice(2) : digits;
-    
+
     // Format: 0XXX XXX XX XX
     if (localPhone.length === 11) {
-      return `${localPhone.slice(0, 4)} ${localPhone.slice(4, 7)} ${localPhone.slice(7, 9)} ${localPhone.slice(9, 11)}`;
+      return `${localPhone.slice(0, 4)} ${localPhone.slice(
+        4,
+        7
+      )} ${localPhone.slice(7, 9)} ${localPhone.slice(9, 11)}`;
     }
     return localPhone;
   };
@@ -67,7 +70,7 @@ const AccountForm = () => {
       const json = await res.json();
 
       // Ensure response shape matches form field names
-      const userData = json.data || json; 
+      const userData = json.data || json;
 
       if (userData) {
         form.reset({
@@ -95,8 +98,17 @@ const AccountForm = () => {
     try {
       // Format phone number as (+905...)
       let rawPhone = values.phone.replace(/[^0-9]/g, "");
-      if (rawPhone.startsWith("0")) rawPhone = rawPhone.substring(1);
-      else if (!rawPhone.startsWith("90")) rawPhone = "90" + rawPhone;
+
+      // Step 1: Remove leading '0' if present
+      if (rawPhone.startsWith("0")) {
+        rawPhone = rawPhone.substring(1);
+      }
+
+      // Step 2: Add '90' if not present
+      if (!rawPhone.startsWith("90")) {
+        rawPhone = "90" + rawPhone;
+      }
+
       const formattedPhone = "+" + rawPhone;
 
       // Expected format by backend
@@ -112,25 +124,26 @@ const AccountForm = () => {
         body: JSON.stringify(payload),
       });
 
-      const data = await res.json(); // Yanıtı oku
+      const data = await res.json(); // Read response
 
       if (!res.ok) {
-        console.error("Profil Güncelleme Hatası:", data); // Detayı konsola bas
+        console.error("Profil Güncelleme Hatası:", data); // Log detailed error
 
-        // Varsa detaylı hata mesajlarını yakala
+        // If detailed error messages are available, capture them
         if (data.reason) {
-            const reasons = Object.entries(data.reason)
-                .map(([key, msgs]) => `${key}: ${(msgs as any[]).join(", ")}`)
-                .join(" | ");
-            throw new Error(reasons);
+          const reasons = Object.entries(data.reason)
+            .map(([key, msgs]) => `${key}: ${(msgs as string[]).join(", ")}`)
+            .join(" | ");
+          throw new Error(reasons);
         }
-        
+
         throw new Error(data.error || data.message || "Güncelleme başarısız");
       }
 
       toast.success("Bilgileriniz güncellendi.");
     } catch (error) {
-      const errorMessage = error instanceof Error ? error.message : "Bir hata oluştu.";
+      const errorMessage =
+        error instanceof Error ? error.message : "Bir hata oluştu.";
       toast.error(errorMessage);
     } finally {
       setLoading(false);
@@ -197,12 +210,20 @@ const AccountForm = () => {
             control={form.control}
             name="phone"
             render={({ field }) => {
-                const formatPhoneNumber = (value: string) => {
+              const formatPhoneNumber = (value: string) => {
                 const phoneNumber = value.replace(/\D/g, "");
                 if (phoneNumber.length <= 4) return phoneNumber;
-                if (phoneNumber.length <= 7) return `${phoneNumber.slice(0, 4)} ${phoneNumber.slice(4)}`;
-                if (phoneNumber.length <= 9) return `${phoneNumber.slice(0, 4)} ${phoneNumber.slice(4, 7)} ${phoneNumber.slice(7)}`;
-                return `${phoneNumber.slice(0, 4)} ${phoneNumber.slice(4, 7)} ${phoneNumber.slice(7, 9)} ${phoneNumber.slice(9, 11)}`;
+                if (phoneNumber.length <= 7)
+                  return `${phoneNumber.slice(0, 4)} ${phoneNumber.slice(4)}`;
+                if (phoneNumber.length <= 9)
+                  return `${phoneNumber.slice(0, 4)} ${phoneNumber.slice(
+                    4,
+                    7
+                  )} ${phoneNumber.slice(7)}`;
+                return `${phoneNumber.slice(0, 4)} ${phoneNumber.slice(
+                  4,
+                  7
+                )} ${phoneNumber.slice(7, 9)} ${phoneNumber.slice(9, 11)}`;
               };
 
               return (

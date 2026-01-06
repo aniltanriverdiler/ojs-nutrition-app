@@ -24,6 +24,7 @@ export async function GET() {
     const data = await res.json();
     return NextResponse.json(data, { status: res.status });
   } catch (error) {
+    console.error("Profile fetch error:", error);
     return NextResponse.json(
       { error: "Profil bilgileri alınamadı" },
       { status: 500 }
@@ -54,6 +55,7 @@ export async function PUT(request: Request) {
     const data = await res.json();
     return NextResponse.json(data, { status: res.status });
   } catch (error) {
+    console.error("Profile update error:", error);
     return NextResponse.json(
       { error: "Profil bilgileri güncellenemedi" },
       { status: 500 }

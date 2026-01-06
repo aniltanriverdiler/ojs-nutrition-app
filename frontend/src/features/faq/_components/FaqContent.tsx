@@ -1,6 +1,5 @@
 "use client";
 
-import React from "react";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import {
   Accordion,
@@ -13,9 +12,9 @@ import { getFaqByCategory } from "@/lib/dummy/faqs";
 import ContactForm from "@/components/shared/ContactForm";
 
 const FaqContent = () => {
-  const genelFaqs = getFaqByCategory("genel");
-  const urunlerFaqs = getFaqByCategory("urunler");
-  const kargoFaqs = getFaqByCategory("kargo");
+  const generalFaqs = getFaqByCategory("general");
+  const productsFaqs = getFaqByCategory("products");
+  const shippingFaqs = getFaqByCategory("shipping");
 
   return (
     <div className="container mx-auto max-w-5xl px-4 py-12">
@@ -26,21 +25,21 @@ const FaqContent = () => {
       <Tabs defaultValue="genel" className="w-full">
         <TabsList className="grid w-full lg:w-[800px] mx-auto grid-cols-3 mb-6 bg-gray-100 h-10">
           <TabsTrigger
-            value="genel"
+            value="general"
             className="data-[state=active]:bg-gray-200 data-[state=active]:text-black cursor-pointer"
           >
             <FileTextIcon className="w-6 h-6" />
             Genel
           </TabsTrigger>
           <TabsTrigger
-            value="urunler"
+            value="products"
             className="data-[state=active]:bg-gray-200 data-[state=active]:text-black cursor-pointer"
           >
             <PackageIcon className="w-6 h-6" />
             Ürünler
           </TabsTrigger>
           <TabsTrigger
-            value="kargo"
+            value="shipping"
             className="data-[state=active]:bg-gray-200 data-[state=active]:text-black cursor-pointer"
           >
             <TruckIcon className="w-6 h-6" />
@@ -48,13 +47,13 @@ const FaqContent = () => {
           </TabsTrigger>
         </TabsList>
 
-        <TabsContent value="genel" className="mt-6">
+        <TabsContent value="general" className="mt-6">
           <div className="flex items-center gap-2 mb-6">
             <FileTextIcon className="w-6 h-6" />
             <h2 className="text-2xl font-bold uppercase">GENEL</h2>
           </div>
           <Accordion type="single" collapsible className="w-full space-y-2">
-            {genelFaqs.map((faq) => (
+            {generalFaqs.map((faq) => (
               <AccordionItem
                 key={faq.id}
                 value={faq.id}
@@ -71,13 +70,13 @@ const FaqContent = () => {
           </Accordion>
         </TabsContent>
 
-        <TabsContent value="urunler" className="mt-6">
+        <TabsContent value="products" className="mt-6">
           <div className="flex items-center gap-2 mb-6">
             <PackageIcon className="w-6 h-6" />
             <h2 className="text-2xl font-bold uppercase">ÜRÜNLER</h2>
           </div>
           <Accordion type="single" collapsible className="w-full space-y-2">
-            {urunlerFaqs.map((faq) => (
+            {productsFaqs.map((faq) => (
               <AccordionItem
                 key={faq.id}
                 value={faq.id}
@@ -94,13 +93,13 @@ const FaqContent = () => {
           </Accordion>
         </TabsContent>
 
-        <TabsContent value="kargo" className="mt-6">
+        <TabsContent value="shipping" className="mt-6">
           <div className="flex items-center gap-2 mb-6">
             <TruckIcon className="w-6 h-6" />
             <h2 className="text-2xl font-bold uppercase">KARGO</h2>
           </div>
           <Accordion type="single" collapsible className="w-full space-y-2">
-            {kargoFaqs.map((faq) => (
+            {shippingFaqs.map((faq) => (
               <AccordionItem
                 key={faq.id}
                 value={faq.id}

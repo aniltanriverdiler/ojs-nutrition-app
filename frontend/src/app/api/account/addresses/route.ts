@@ -27,7 +27,10 @@ export async function GET() {
     if (!res.ok) {
       const errorData = await res.json().catch(() => ({}));
       return NextResponse.json(
-        { error: "Fetch failed", message: errorData.message || "Adresler yüklenemedi" },
+        {
+          error: "Fetch failed",
+          message: errorData.message || "Adresler yüklenemedi",
+        },
         { status: res.status }
       );
     }
@@ -37,7 +40,10 @@ export async function GET() {
   } catch (error) {
     console.error("Address fetch error:", error);
     return NextResponse.json(
-      { error: "Internal server error", message: "Adresler yüklenirken bir hata oluştu" },
+      {
+        error: "Internal server error",
+        message: "Adresler yüklenirken bir hata oluştu",
+      },
       { status: 500 }
     );
   }
@@ -59,9 +65,18 @@ export async function POST(request: Request) {
     const body = await request.json();
 
     // Validate required fields
-    if (!body.title || !body.first_name || !body.last_name || !body.full_address || !body.phone_number) {
+    if (
+      !body.title ||
+      !body.first_name ||
+      !body.last_name ||
+      !body.full_address ||
+      !body.phone_number
+    ) {
       return NextResponse.json(
-        { error: "Validation error", message: "Tüm gerekli alanları doldurunuz" },
+        {
+          error: "Validation error",
+          message: "Tüm gerekli alanları doldurunuz",
+        },
         { status: 400 }
       );
     }
@@ -85,7 +100,10 @@ export async function POST(request: Request) {
   } catch (error) {
     console.error("Create address error:", error);
     return NextResponse.json(
-      { error: "Internal server error", message: "Adres eklenirken bir hata oluştu" },
+      {
+        error: "Internal server error",
+        message: "Adres eklenirken bir hata oluştu",
+      },
       { status: 500 }
     );
   }

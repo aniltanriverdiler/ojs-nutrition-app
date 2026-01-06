@@ -86,7 +86,7 @@ export function CartDrawer({ isOpen, onClose }: CartDrawerProps) {
             </p>
             <Button
               onClick={onClose}
-              className="bg-black hover:bg-gray-800 text-white px-8 py-2 h-auto rounded-none"
+              className="bg-black hover:bg-gray-800 text-white px-8 py-3 h-auto rounded-md"
               asChild
             >
               <Link href="/products">ALIŞVERİŞE BAŞLA</Link>
@@ -121,7 +121,7 @@ export function CartDrawer({ isOpen, onClose }: CartDrawerProps) {
               </div>
 
               <Button
-                className="w-full h-12 bg-black hover:bg-gray-800 text-white text-base font-bold rounded-md flex items-center justify-center gap-2 uppercase tracking-wide"
+                className="w-full h-12 bg-black hover:bg-gray-800 text-white text-base font-bold rounded-md flex items-center justify-center gap-2 uppercase tracking-wide cursor-pointer"
                 onClick={handleCheckout}
                 disabled={isLoading}
               >

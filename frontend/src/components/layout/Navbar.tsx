@@ -19,21 +19,9 @@ import {
   ChevronDownIcon,
   LogOutIcon,
   SearchIcon,
-  ShoppingCartIcon,
   UserIcon,
   UserPlusIcon,
 } from "lucide-react";
-import {
-  Sheet,
-  SheetClose,
-  SheetContent,
-  SheetDescription,
-  SheetFooter,
-  SheetHeader,
-  SheetTitle,
-  SheetTrigger,
-} from "@/components/ui/sheet";
-import { Badge } from "../ui/badge";
 import { useUserStore } from "@/store/userStore";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";

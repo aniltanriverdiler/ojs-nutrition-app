@@ -1,9 +1,7 @@
-import { OrderList } from '@/features/account/_components/OrderList';
+import { OrderList } from "@/features/account/_components/OrderList";
 
 const OrdersPage = () => {
-  return (
-      <OrderList />
-  )
-}
+  return <OrderList />;
+};
 
 export default OrdersPage;

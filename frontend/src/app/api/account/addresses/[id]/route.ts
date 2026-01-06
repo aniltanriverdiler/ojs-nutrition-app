@@ -45,13 +45,19 @@ export async function DELETE(
     // Handle error responses
     const errorData = await res.json().catch(() => ({}));
     return NextResponse.json(
-      { error: "Delete failed", message: errorData.message || "Adres silinemedi" },
+      {
+        error: "Delete failed",
+        message: errorData.message || "Adres silinemedi",
+      },
       { status: res.status }
     );
   } catch (error) {
     console.error("Delete address error:", error);
     return NextResponse.json(
-      { error: "Internal server error", message: "Adres silinirken bir hata oluştu" },
+      {
+        error: "Internal server error",
+        message: "Adres silinirken bir hata oluştu",
+      },
       { status: 500 }
     );
   }
@@ -77,9 +83,18 @@ export async function PUT(
     const body = await request.json();
 
     // Validate required fields
-    if (!body.title || !body.first_name || !body.last_name || !body.full_address || !body.phone_number) {
+    if (
+      !body.title ||
+      !body.first_name ||
+      !body.last_name ||
+      !body.full_address ||
+      !body.phone_number
+    ) {
       return NextResponse.json(
-        { error: "Validation error", message: "Tüm gerekli alanları doldurunuz" },
+        {
+          error: "Validation error",
+          message: "Tüm gerekli alanları doldurunuz",
+        },
         { status: 400 }
       );
     }
@@ -103,7 +118,10 @@ export async function PUT(
   } catch (error) {
     console.error("Update address error:", error);
     return NextResponse.json(
-      { error: "Internal server error", message: "Adres güncellenirken bir hata oluştu" },
+      {
+        error: "Internal server error",
+        message: "Adres güncellenirken bir hata oluştu",
+      },
       { status: 500 }
     );
   }

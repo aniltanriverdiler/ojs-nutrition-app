@@ -1,10 +1,7 @@
-import AccountForm from '@/features/account/_components/AccountForm';
-import React from 'react'
+import AccountForm from "@/features/account/_components/AccountForm";
 
 const AccountPage = () => {
-  return (
-    <AccountForm />
-  )
-}
+  return <AccountForm />;
+};
 
 export default AccountPage;

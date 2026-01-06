@@ -1,12 +1,13 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Pencil, Plus, Trash2 } from "lucide-react";
 import AddressForm from "./AddressForm";
 import type { Address } from "@/types/account";
 import { Card, CardContent } from "@/components/ui/card";
 import { toast } from "sonner";
+import { useUserStore } from "@/store/userStore";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -52,11 +53,16 @@ const AddressList = () => {
   const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
   const [addressToDelete, setAddressToDelete] = useState<Address | null>(null);
 
+  // Get userStore function to sync addresses
+  const fetchUserAddresses = useUserStore((state) => state.fetchAddresses);
+
   // Fetch addresses
   const fetchAddresses = async () => {
     setLoading(true);
     try {
-      const res = await fetch("/api/account/addresses");
+      const res = await fetch("/api/account/addresses", {
+        cache: "no-store",
+      });
 
       if (!res.ok) {
         throw new Error("Adresler yüklenemedi");
@@ -74,13 +80,16 @@ const AddressList = () => {
           surname: item.last_name || "",
           address: item.full_address,
           city: item.region?.name || "İstanbul",
-          district: item.subregion?.name || "Kadıköy",
+          district: item.subregion?.name || "",
           // Phone display: remove country code for cleaner UI
           phone: item.phone_number?.replace(/^\+90/, "0") || "",
-          phoneCountryCode: "",
+          phoneCountryCode: "+90",
           apartment: "", // API doesn't return apartment separately
         }));
         setAddresses(mappedAddresses);
+
+        // Also update userStore so addresses are available in checkout
+        await fetchUserAddresses();
       } else {
         console.warn("Beklenen formatta adres verisi bulunamadı.");
         setAddresses([]);

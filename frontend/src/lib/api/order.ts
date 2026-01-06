@@ -1,5 +1,3 @@
-const BASE_URL = process.env.NEXT_PUBLIC_API_URL;
-
 // Order List Item Type
 export interface OrderListItem {
   id: string;
@@ -48,10 +46,11 @@ export interface PaymentSettings {
 }
 
 // Complete Order Payload Type
+// Note: Backend uses "credit_cart" (typo in backend API)
 export interface CompleteOrderPayload {
   address_id: string;
-  payment_type: "credit_card" | "bank_transfer";
-  card_digits: string;
+  payment_type: "credit_cart" | "bank_transfer" | "cash_on_delivery";
+  card_digits: string | number;
   card_expiration_date?: string;
   card_security_code?: string;
   card_type?: string;
@@ -146,11 +145,13 @@ export async function completeOrder(payload: CompleteOrderPayload) {
       return {
         success: false,
         message: json.message || "Sipariş oluşturulamadı",
+        validationErrors: json.reason,
       };
     }
 
     return { success: true, data: json.data };
   } catch (error) {
+    console.error("completeOrder error:", error);
     return { success: false, message: "Bir hata oluştu." };
   }
 }

@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback } from "react";
 import ProductCard from "@/components/shared/ProductCard";
 import { toTurkishUpperCase } from "@/lib/utils/text";
 import { Button } from "@/components/ui/button";

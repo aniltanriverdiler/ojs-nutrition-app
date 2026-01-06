@@ -1,13 +1,18 @@
+"use client";
+
 import Link from "next/link";
 import Image from "next/image";
 import React from "react";
 import OrderSummary from "@/features/checkout/_components/OrderSummary";
+import { useUserStore } from "@/store/userStore";
 
 export default function CheckoutLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  const user = useUserStore((state) => state.user);
+  
   return (
     <div className="min-h-screen flex">
       {/* Left Side - Header, Content, Footer (Half of the page) */}
@@ -25,12 +30,16 @@ export default function CheckoutLayout({
                 className="cursor-pointer"
               />
             </Link>
-            <div className="flex flex-col items-end gap-1">
-              <p className="text-xl font-bold">Anıl Tanrıverdiler</p>
-              <p className="text-gray-400 font-semibold">
-                tanriverdileranil@gmail.com
-              </p>
-            </div>
+            {user && (
+              <div className="flex flex-col items-end gap-1">
+                <p className="text-xl font-bold">{user.name}</p>
+                {user.email && (
+                  <p className="text-gray-400 font-semibold">
+                    {user.email}
+                  </p>
+                )}
+              </div>
+            )}
           </div>
         </header>
 

@@ -1,6 +1,5 @@
-import React from 'react'
-import AboutPageText from '@/features/about/_components/AboutPageText';
-import AboutPageReviews from '@/features/about/_components/AboutPageReviews';
+import AboutPageText from "@/features/about/_components/AboutPageText";
+import AboutPageReviews from "@/features/about/_components/AboutPageReviews";
 
 const AboutPage = () => {
   return (
@@ -8,7 +7,7 @@ const AboutPage = () => {
       <AboutPageText />
       <AboutPageReviews />
     </>
-  )
-}
+  );
+};
 
 export default AboutPage;

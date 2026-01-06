@@ -1,6 +1,5 @@
 "use client";
 
-import React from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { UserIcon, MapPinIcon, Package2Icon } from "lucide-react";

@@ -1,4 +1,4 @@
-import { NextRequest, NextResponse } from "next/server";
+import { NextResponse } from "next/server";
 import { cookies } from "next/headers";
 
 const BASE_URL = process.env.NEXT_PUBLIC_API_URL;
@@ -28,6 +28,7 @@ export async function GET() {
     const data = await response.json();
     return NextResponse.json(data, { status: response.status });
   } catch (error) {
+    console.error("Payment settings error:", error);
     return NextResponse.json(
       { status: "error", message: "Server error" },
       { status: 500 }

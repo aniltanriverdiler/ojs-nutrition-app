@@ -1,34 +1,74 @@
 "use client";
 
-import React, { useState } from "react";
+import { useState, useEffect } from "react";
 import { useCheckoutStore, type ShippingOption } from "@/store/checkoutStore";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { Checkbox } from "@/components/ui/checkbox";
-
-const shippingOptions: ShippingOption[] = [
-  {
-    id: "standard",
-    name: "Standart Kargo",
-    description: "150 TL ve üzeri siparişlerde ücretsiz",
-    price: 0,
-    estimatedDays: "3-5 iş günü",
-  },
-  {
-    id: "express",
-    name: "Hızlı Kargo",
-    description: "Aynı gün kargo",
-    price: 29.99,
-    estimatedDays: "1 iş günü",
-  },
-];
+import { calculateShipmentFee } from "@/lib/api/order";
+import { useCartStore } from "@/store/cartStore";
 
 const ShippingSelection = () => {
-  const { selectedShipping, setSelectedShipping, completeStep, setActiveStep } =
-    useCheckoutStore();
+  const {
+    selectedShipping,
+    setSelectedShipping,
+    completeStep,
+    setActiveStep,
+    selectedAddress,
+  } = useCheckoutStore();
+
+  const getTotalPrice = useCartStore((state) => state.getTotalPrice);
+  const totalCartPrice = getTotalPrice();
+
   const [localSelectedId, setLocalSelectedId] = useState<string>(
     selectedShipping?.id || ""
   );
+  const [calculatedShipmentFee, setCalculatedShipmentFee] = useState<
+    number | null
+  >(null);
+  const [isCalculating, setIsCalculating] = useState(false);
+
+  // Calculate shipment fee when component mounts
+  useEffect(() => {
+    const fetchShipmentFee = async () => {
+      if (!selectedAddress?.id) {
+        // Don't show error, just use default
+        console.warn("No address selected for shipping calculation");
+        return;
+      }
+
+      setIsCalculating(true);
+      try {
+        const fee = await calculateShipmentFee(selectedAddress.id);
+        setCalculatedShipmentFee(fee);
+      } catch (error) {
+        console.error(
+          "Kargo ücreti hesaplanamadı, varsayılan ücret kullanılıyor:",
+          error
+        );
+        // Use default fee if calculation fails (0 TL as default)
+        setCalculatedShipmentFee(0);
+      } finally {
+        setIsCalculating(false);
+      }
+    };
+
+    fetchShipmentFee();
+  }, [selectedAddress]);
+
+  // Determine if shipping is free based on cart total
+  const isFreeShipping = totalCartPrice >= 150;
+  const finalShipmentFee = isFreeShipping ? 0 : calculatedShipmentFee || 0;
+
+  const shippingOptions: ShippingOption[] = [
+    {
+      id: "standard",
+      name: "Standart Kargo",
+      description: "150 TL ve üzeri siparişlerde ücretsiz",
+      price: finalShipmentFee,
+      estimatedDays: "3-5 iş günü",
+    },
+  ];
 
   const handleConfirm = () => {
     const shipping = shippingOptions.find((opt) => opt.id === localSelectedId);
@@ -45,6 +85,11 @@ const ShippingSelection = () => {
   return (
     /* Shipping Card Section */
     <div className="space-y-4 flex flex-col gap-3 mt-5 ml-15">
+      {isCalculating && (
+        <div className="text-center text-gray-500 py-4">
+          Kargo ücreti hesaplanıyor...
+        </div>
+      )}
       {shippingOptions.map((option) => (
         <Label
           key={option.id}
@@ -65,7 +110,7 @@ const ShippingSelection = () => {
               {option.estimatedDays}
             </p>
             <p className="text-gray-500 text-base font-normal">
-              {option.price} TL
+              {option.price === 0 ? "Ücretsiz" : `${option.price} TL`}
             </p>
           </div>
         </Label>

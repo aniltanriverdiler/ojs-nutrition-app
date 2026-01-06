@@ -1,5 +1,3 @@
-// frontend/src/app/(routes)/account/layout.tsx
-
 import React from "react";
 import AccountSidebar from "@/features/account/_components/AccountSidebar";
 

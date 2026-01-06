@@ -2,7 +2,7 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-import React, { useState } from "react";
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import {
   Form,
@@ -33,7 +33,7 @@ type LoginFormValues = z.infer<typeof loginFormSchema>;
 const LoginForm = () => {
   const [error, setError] = useState<string | null>(null);
   const router = useRouter();
-  const login = useUserStore((s) => s.login); 
+  const login = useUserStore((s) => s.login);
 
   // 1. Define your form.
   const form = useForm<LoginFormValues>({
@@ -66,7 +66,10 @@ const LoginForm = () => {
       }
 
       // Token is now in the cookie, not in the response
-      const userName = data?.user?.first_name || data?.first_name || values.email.split("@")[0];
+      const userName =
+        data?.user?.first_name ||
+        data?.first_name ||
+        values.email.split("@")[0];
 
       login({ name: userName, email: values.email });
 

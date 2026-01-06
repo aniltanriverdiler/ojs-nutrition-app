@@ -3,7 +3,7 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-import React, { useState } from "react";
+import { useState } from "react";
 import { toast } from "sonner";
 
 import { Button } from "@/components/ui/button";
@@ -20,9 +20,7 @@ import { Input } from "@/components/ui/input";
 // Password validation schema
 const passwordFormSchema = z
   .object({
-    oldPassword: z
-      .string()
-      .min(1, "Mevcut şifre alanı boş bırakılamaz."),
+    oldPassword: z.string().min(1, "Mevcut şifre alanı boş bırakılamaz."),
     newPassword: z
       .string()
       .min(8, "Yeni şifre en az 8 karakter olmalıdır.")
@@ -69,10 +67,10 @@ const PasswordForm = () => {
       const data = await res.json();
 
       if (!res.ok) {
-        // Backend'den gelen detaylı hatayı göster
+        // If detailed error messages are available, capture them
         if (data.reason) {
           const reasons = Object.entries(data.reason)
-            .map(([key, msgs]) => `${key}: ${(msgs as any[]).join(", ")}`)
+            .map(([key, msgs]) => `${key}: ${(msgs as string[]).join(", ")}`)
             .join(" | ");
           throw new Error(reasons);
         }
@@ -80,10 +78,12 @@ const PasswordForm = () => {
       }
 
       toast.success("Şifreniz başarıyla değiştirildi.");
-      form.reset(); // Formu temizle
-    } catch (error: any) {
+      form.reset(); // Clear form
+    } catch (error) {
+      const errorMessage =
+        error instanceof Error ? error.message : "Bir hata oluştu.";
       console.error("Şifre değiştirme hatası:", error);
-      toast.error(error.message || "Bir hata oluştu.");
+      toast.error(errorMessage);
     } finally {
       setLoading(false);
     }
@@ -180,4 +180,3 @@ const PasswordForm = () => {
 };
 
 export default PasswordForm;
-
