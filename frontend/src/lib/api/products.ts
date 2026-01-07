@@ -97,3 +97,18 @@ export async function getProductRateStatisticsBySlug(slug: string) {
   const json = await res.json();
   return json;
 }
+
+// Get products by search query with pagination from API
+export async function searchProducts(query: string, limit = 20, offset = 0) {
+  const res = await fetch(
+    `${BASE_URL}/products?limit=${limit}&offset=${offset}&search=${query}`,
+    { cache: "no-store" }
+  );
+
+  if (!res.ok) {
+    return [];
+  }
+
+  const json = await res.json();
+  return json.data.results || [];
+}

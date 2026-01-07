@@ -1,12 +1,6 @@
 "use client";
 import Image from "next/image";
 import Link from "next/link";
-import {
-  InputGroup,
-  InputGroupAddon,
-  InputGroupButton,
-  InputGroupInput,
-} from "@/components/ui/input-group";
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
@@ -27,6 +21,7 @@ import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 import { useCartStore } from "@/store/cartStore";
 import { CartButton } from "@/features/cart/_components/CartButton";
+import SearchBar from "./SearchBar";
 
 const Navbar = () => {
   const initializeCart = useCartStore((state) => state.initializeCart);
@@ -45,7 +40,8 @@ const Navbar = () => {
   return (
     <header className="hidden md:block bg-white my-5 px-4 sm:px-4 md:px-12 lg:px-24 xl:px-18 2xl:px-56">
       <div className="container flex items-center justify-between mx-auto max-w-7xl">
-        <Link href="/">
+        {/* Logo - Left Side */}
+        <Link href="/" className="shrink-0">
           <Image
             src="/icons/logo-black-svg.svg"
             alt="OJS Nutrition Logo"
@@ -56,26 +52,14 @@ const Navbar = () => {
           />
         </Link>
 
-        <nav className="flex items-center gap-2 sm:gap-4 lg:gap-5">
-          {/* SearchBar */}
-          <div className="hidden md:block">
-            <InputGroup className="h-10">
-              <InputGroupInput
-                placeholder="Aradığınız ürünü yazınız."
-                className="rounded-r-none"
-              />
-              <InputGroupAddon align="inline-end" className="pr-0">
-                <InputGroupButton
-                  variant="outline"
-                  className="bg-gray-500 text-white px-4 lg:px-6 py-5 cursor-pointer rounded-l-none ml-12"
-                >
-                  <SearchIcon className="w-4 h-4" />
-                  <span className="hidden lg:inline">Ara</span>
-                </InputGroupButton>
-              </InputGroupAddon>
-            </InputGroup>
-          </div>
+        {/* SearchBar Section */}
+        <div className="flex-1 flex justify-center max-w-2xl px-4">
+          <SearchBar />
+        </div>
 
+        {/* Right Side - Navigation, Account, Cart */}
+        <nav className="flex items-center gap-2 sm:gap-4 lg:gap-5 shrink-0">
+          {/* Mobile Search Button */}
           <Button
             variant="ghost"
             size="icon"
