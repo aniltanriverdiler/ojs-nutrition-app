@@ -68,14 +68,17 @@ export default async function ProductPage({
   const productResponse = await getProductDetailsBySlug(slug);
 
   if (productResponse && productResponse.data) {
-    // Fetch best sellers for the product detail page
+    // Fetch best sellers and categories for the product detail page
     const bestSellers = await getProductsListBestSellers();
     const productRateStatistics = await getProductRateStatisticsBySlug(slug);
+    const categories: ApiCategory[] = await getAllCategories();
+    
     return (
       <ProductDetail
         product={productResponse.data}
         bestSellers={bestSellers.data}
         rateStatistics={productRateStatistics.data}
+        categories={categories}
       />
     );
   }

@@ -112,3 +112,27 @@ export async function searchProducts(query: string, limit = 20, offset = 0) {
   const json = await res.json();
   return json.data.results || [];
 }
+
+// Get multiple products by their slugs
+export async function getProductsBySlugs(slugs: string[]) {
+  if (!slugs || slugs.length === 0) return [];
+
+  try {
+    // Fetch all products in parallel
+    const promises = slugs.map((slug) =>
+      fetch(`${BASE_URL}/products/${slug}`, { cache: "no-store" })
+        .then((res) => (res.ok ? res.json() : null))
+        .catch(() => null)
+    );
+
+    const results = await Promise.all(promises);
+    
+    // Filter out failed requests and extract product data
+    return results
+      .filter((result) => result && result.data)
+      .map((result) => result.data);
+  } catch (error) {
+    console.error("Error fetching products by slugs:", error);
+    return [];
+  }
+}

@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -20,7 +20,6 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
-import { getAllCategories } from "@/lib/dummy/categories";
 import RecentlyViewedProducts from "./RecentlyViewedProducts";
 import ProductReviews from "./ProductReviews";
 import ProductCard from "@/components/shared/ProductCard";
@@ -35,6 +34,7 @@ import { useCartStore } from "@/store/cartStore";
 import { useUserStore } from "@/store/userStore";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
+import { addToRecentlyViewed } from "../hooks/use-recently-viewed";
 
 // Aromas Colors
 const AROMA_COLORS: Record<string, string> = {
@@ -70,16 +70,26 @@ interface RateStatistics {
   average_star: number;
 }
 
+// Category type
+interface Category {
+  id: string;
+  name: string;
+  slug: string;
+  children?: Category[];
+}
+
 interface ProductDetailProps {
   product: ProductDetailType;
   bestSellers?: BestSellerProduct[];
   rateStatistics?: RateStatistics;
+  categories?: Category[];
 }
 
 export default function ProductDetail({
   product,
   bestSellers: propBestSellers,
   rateStatistics,
+  categories = [],
 }: ProductDetailProps) {
   const router = useRouter();
   const addItem = useCartStore((state) => state.addItem);
@@ -87,6 +97,13 @@ export default function ProductDetail({
 
   // State management
   const [quantity, setQuantity] = useState<number>(1);
+
+  // Add product to recently viewed when component mounts
+  useEffect(() => {
+    if (product?.slug) {
+      addToRecentlyViewed(product.slug);
+    }
+  }, [product?.slug]);
 
   const handleAddToCart = async () => {
     // Authentication check
@@ -108,8 +125,7 @@ export default function ProductDetail({
     process.env.NEXT_PUBLIC_API_URL?.replace("/api/v1", "") || "";
 
   // Get category information for breadcrumb
-  const allCategories = getAllCategories();
-  const mainCategory = allCategories.find(
+  const mainCategory = categories.find(
     (cat) => cat.id === product.main_category_id
   );
   const subCategory = mainCategory?.children?.find(
@@ -523,7 +539,7 @@ export default function ProductDetail({
       </div>
 
       {/* Recently Viewed Products */}
-      <RecentlyViewedProducts currentProductId={product.id} />
+      <RecentlyViewedProducts currentProductSlug={product.slug} />
 
       {/* Product Reviews */}
       <ProductReviews
