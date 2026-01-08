@@ -65,7 +65,8 @@ const RecentlyViewedProducts = ({
           let badge = undefined;
           if (firstVariant.price.discount_percentage) {
             badge = {
-              text: `%${Math.round(firstVariant.price.discount_percentage)} İndirim`,
+              text: `%${Math.round(firstVariant.price.discount_percentage)}`,
+              sub: "İNDİRİM",
             };
           }
 
