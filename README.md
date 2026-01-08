@@ -1,7 +1,7 @@
 # 🥤 OJS Nutrition App
 
 OJS Nutrition is a modern **Next.js + TypeScript** powered e-commerce platform designed for selling high-quality nutrition and supplement products.  
-The project features **product catalog**, shopping cart, user authentication, order management, product reviews, and comprehensive account management — all built with a modern, responsive design using **Shadcn/UI** components.
+The project features **product catalog**, shopping cart, user authentication, order management, product reviews, and comprehensive account management all built with a modern, responsive design using **Shadcn/UI** components.
 
 ---
 
