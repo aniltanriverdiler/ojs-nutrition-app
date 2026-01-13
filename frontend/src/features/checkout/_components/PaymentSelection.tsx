@@ -75,13 +75,16 @@ const PaymentSelection = () => {
 
       // Payment type specific payloads
       if (paymentType === "credit_card") {
+        const formattedDate = cardDetails.expiryDate.replace(/\s/g, "").replace("/", "-");
+        
         payload = {
-          address_id: selectedAddress.id,
+          // Postman test data 
+          address_id: selectedAddress?.id || "", 
           payment_type: "credit_cart",
-          card_digits: "1234567891234567",
-          card_expiration_date: "09-24",
-          card_security_code: "123",
-          card_type: "VISA",
+          card_digits: "1234567891234567", 
+          card_expiration_date: "06-26",   
+          card_security_code: "123",       
+          card_type: "VISA",           
         };
       } else if (paymentType === "bank_transfer") {
         payload = {

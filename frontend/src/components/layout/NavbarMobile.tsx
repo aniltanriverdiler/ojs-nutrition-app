@@ -1,14 +1,9 @@
 "use client";
 import Image from "next/image";
 import Link from "next/link";
-import { SearchIcon } from "lucide-react";
-import {
-  InputGroup,
-  InputGroupAddon,
-  InputGroupInput,
-} from "@/components/ui/input-group";
 import MobileMenuNavigation from "./MobileMenuNavigation";
 import MobileCart from "./MobileCart";
+import SearchBarMobile from "./SearchBarMobile";
 
 const NavbarMobile = () => {
   return (
@@ -40,18 +35,7 @@ const NavbarMobile = () => {
 
       {/* Mobile Search Bar */}
       <div className="px-4 py-2">
-        <InputGroup className="bg-gray-100">
-          <InputGroupInput
-            placeholder="Aradığınız ürünü yazınız."
-            className="placeholder:text-black"
-          />
-          <InputGroupAddon>
-            <SearchIcon className="text-black" />
-          </InputGroupAddon>
-          <InputGroupAddon align="inline-end" className="text-black">
-            12 sonuç
-          </InputGroupAddon>
-        </InputGroup>
+        <SearchBarMobile />
       </div>
     </>
   );
