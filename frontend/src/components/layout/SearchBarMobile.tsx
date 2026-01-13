@@ -67,8 +67,8 @@ const SearchBarMobile = () => {
     <div ref={searchRef} className="relative w-full">
       <InputGroup className="bg-gray-100">
         <InputGroupInput
-          placeholder="Aradığınız ürünü yazınız."
-          className="placeholder:text-black"
+          placeholder="200+'den fazla üründen ara"
+          className="placeholder:text-black placeholder:text-sm placeholder:font-medium"
           value={query}
           onChange={(e) => {
             setQuery(e.target.value);
@@ -86,7 +86,9 @@ const SearchBarMobile = () => {
           )}
         </InputGroupAddon>
         <InputGroupAddon align="inline-end" className="text-black">
-          {results.length > 0 ? `${results.length} sonuç` : "12 sonuç"}
+          {results.length > 0
+            ? `${results.length} sonuç`
+            : "200+'den fazla sonuç"}
         </InputGroupAddon>
       </InputGroup>
 
