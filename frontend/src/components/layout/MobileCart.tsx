@@ -25,7 +25,9 @@ const MobileCart = () => {
   const initializeCart = useCartStore((state) => state.initializeCart);
   const isLoading = useCartStore((state) => state.isLoading);
   const isAuthenticated = useUserStore((state) => state.isAuthenticated);
-  const getTotalItems = useCartStore((state) => state.getTotalItems);
+
+  // Calculate total items reactively from items array
+  const totalItems = items.reduce((total, item) => total + item.quantity, 0);
 
   // Total price calculation
   const totalPrice = items.reduce((total, item) => {
@@ -64,12 +66,14 @@ const MobileCart = () => {
           <SheetTrigger asChild>
             <button className="relative inline-flex items-center justify-center cursor-pointer">
               <ShoppingCartIcon className="w-7 h-7" />
-              <Badge
-                variant="destructive"
-                className="absolute -top-1 -right-1 bg-red-500 text-white rounded-full min-w-[18px] h-[18px] px-1 flex items-center justify-center text-xs font-semibold"
-              >
-                {getTotalItems()}
-              </Badge>
+              {totalItems > 0 && (
+                <Badge
+                  variant="destructive"
+                  className="absolute -top-1 -right-1 bg-red-500 text-white rounded-full min-w-[18px] h-[18px] px-1 flex items-center justify-center text-xs font-semibold"
+                >
+                  {totalItems}
+                </Badge>
+              )}
             </button>
           </SheetTrigger>
           <SheetContent
